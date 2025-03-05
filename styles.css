@@ -245,9 +245,28 @@
     background: none;
 }
 
-.home-section {
+body{
     position: relative;
     background: #e4e9f7;
+    min-height: 100vh;
+    top: 0;
+    left: 78px;
+    width: calc(100% - 78px);
+    transition: all 0.5s ease;
+}
+
+.home-section {
+    z-index: 100;
+    position: relative;
+    min-height: 100vh;
+    top: 0;
+    left: 78px;
+    width: calc(100% - 78px);
+    transition: all 0.5s ease;
+}
+.home-section h1 h2 button {
+    z-index: 100;
+    position: relative;
     min-height: 100vh;
     top: 0;
     left: 78px;
@@ -273,4 +292,113 @@
     flex-wrap: wrap;
     gap: 20px;
     padding: 20px;
+}
+
+
+/********************************************/
+/********************************************/
+/* Please ❤ this if you like it! */
+/* Follow Me https://codepen.io/designfenix */
+/********************************************/
+/********************************************/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+/**/
+:root {
+	--duration: 15s;
+}
+
+body {
+    background: #131520;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.wrapper-images {
+	display: flex;
+	flex-direction: column;
+	height: 150vh;
+	justify-content: center;
+	left: 50%;
+	position: absolute;
+	top: 50%;
+	opacity: 0.8;
+	transform: translate3d(-50%, -50%, 0) perspective(800px) rotatey(10deg)
+		rotateX(-10deg);
+}
+.images-line {
+	animation: runner var(--duration) linear infinite;
+	display: flex;
+	transform: translateX(23%);
+	&:nth-child(even) {
+		animation-duration: calc(var(--duration) * 1.5);
+	}
+	.line {
+		background-position: 50% 50%;
+		background-size: cover;
+		flex: none;
+		height: 29vh;
+		margin: clamp(10px, 2vw, 20px);
+		width: 20vh;
+		position: relative;
+		transition: ease-in-out all 0.3s;
+		border-radius: 1rem;
+		.img {
+			position: absolute;
+			z-index: 2;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			background-position: 50% 50%;
+			background-size: cover;
+			transition: ease-in-out all 0.3s;
+			overflow: hidden;
+			border-radius: 1rem;
+		}
+	}
+}
+
+@keyframes runner {
+	to {
+		transform: translateX(-10.4%);
+	}
+}
+
+/*Dev*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital@1&display=swap");
+.dev {
+	font-family: "Poppins", sans-serif;
+	position: fixed;
+	font-size: clamp(8px, 3vw, 14px);
+	bottom: 1vw;
+	left: 1vw;
+	padding: 1em;
+	color: #111;
+	background-color: white;
+	border-radius: 25px;
+	cursor: pointer;
+	z-index: 100;
+	a {
+		text-decoration: none;
+		font-weight: bold;
+		color: #111;
+		transition: ease all 0.3s;
+		&:hover {
+			color: #ef5350;
+			text-decoration: underline;
+		}
+	}
+	span {
+		display: inline-block;
+		transition: ease all 0.3s;
+		color: #ef5350;
+		&:hover {
+			transform: scale(1.2);
+		}
+	}
 }
