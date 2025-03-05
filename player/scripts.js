@@ -312,3 +312,4 @@ document.getElementById("searchInput").addEventListener("keypress", (event) => {
         console.error("Erro ao inicializar a aplicação:", error);
     }
 })();
+
