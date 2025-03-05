@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Metrônomo</title>
+</head>
+
+<body>
+    <div class="dark-mode-toggle">
+        <span>Modo Escuro</span>
+        <input type="checkbox" id="dark-mode-checkbox">
+    </div>
+
+    <div class="container">
+        <div class="metronome">
+            <div class="bpm-display">
+                <span class="tempo">140</span>
+                <span class="bpm">BPM</span>
+            </div>
+            <div class="tempo-text">Ritmo constante</div>
+            <div class="tempo-settings">
+                <div class="adjust-tempo-btn decrease-tempo">-</div>
+                <input type="range" min="20" max="280" step="1" class="slider">
+                <div class="adjust-tempo-btn increase-tempo">+</div>
+            </div>
+            <div class="start-stop">INICIAR</div>
+            <div class="measures">
+                <div class="subtract-beats stepper">-</div>
+                <div class="measure-count">4</div>
+                <div class="add-beats stepper">+</div>
+            </div>
+            <span class="beats-per-measure-text">Batidas por compasso</span>
+        </div>
+    </div>
+    <script>
+        const darkModeCheckbox = document.getElementById("dark-mode-checkbox");
+
+        darkModeCheckbox.addEventListener("change", function () {
+            document.body.classList.toggle("dark-mode", darkModeCheckbox.checked);
+            document.querySelector(".metronome").classList.toggle("dark-mode", darkModeCheckbox.checked);
+        });
+
+    </script>
+    <script src="./app.js" type="module"></script>
+</body>
+
+</html>
