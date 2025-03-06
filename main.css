@@ -1,0 +1,490 @@
+.hero {
+    width: 100%;
+    /* height: 100%; */
+    min-height: 450px;
+    position: relative;
+    top: 0;
+    left: 0;
+    background-color: #0f2130;
+    overflow: hidden;
+    
+}
+
+.logo {
+    margin: 70px auto;
+    top: -50px;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+}
+
+.logo img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+@media (max-width: 700px) {
+    .logo img {
+        max-width: 90%;
+    }
+}
+
+nav {
+    background-color: #12212f;
+    overflow: hidden;
+}
+
+nav ul {
+    list-style: none;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+nav li {
+    padding: 10px 20px;
+}
+
+@media (max-width: 700px) {
+    nav li {
+        width: 50%;
+        text-align: center;
+    }
+}
+
+nav a {
+    font-weight: 700;
+    font-size: 1.25em;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+}
+
+.dark-bg {
+    background-color: #12212f;
+    padding: 50px 50px;
+}
+
+.dark-bg img {
+    display: block;
+    margin: 0 auto;
+    width: auto;
+    max-width: 100%;
+}
+
+.light-bg {
+    background-color: #fff;
+    padding: 50px 50px;
+}
+
+.light-bg img {
+    display: block;
+    margin: 0 auto;
+    width: auto;
+    max-width: 100%;
+}
+
+.extra {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 18px;
+    color: #12202f;
+    letter-spacing: 0px;
+    line-height: 27px;
+}
+
+
+:root {
+    --duration: 15s;
+}
+
+.wrapper-images {
+    display: flex;
+    flex-direction: column;
+    height: 150vh;
+    justify-content: center;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    opacity: 0.8;
+    transform: translate3d(-50%, -50%, 0) perspective(800px) rotatey(10deg) rotateX(-10deg);
+}
+
+.images-line {
+    animation: runner var(--duration) linear infinite;
+    display: flex;
+    transform: translateX(23%);
+
+    &:nth-child(even) {
+        animation-duration: calc(var(--duration) * 1.5);
+    }
+
+    .line {
+        background-position: 50% 50%;
+        background-size: cover;
+        flex: none;
+        height: 25vh;
+        margin: clamp(10px, 2vw, 20px);
+        width: 20vh;
+        position: relative;
+        transition: ease-in-out all 0.3s;
+        border-radius: 1rem;
+
+        .img {
+            position: absolute;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-position: 50% 50%;
+            background-size: cover;
+            transition: ease-in-out all 0.3s;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+    }
+}
+
+@keyframes runner {
+    to {
+        transform: translateX(-10.4%);
+    }
+}
+
+.conteudo1 {
+    text-align: center;
+    padding: 40px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.conteudo2 {
+    text-align: center;
+    padding: 40px;
+    background: #0f2130;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.top-text {
+    font-size: 20px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    color: #333;
+}
+
+.date {
+    font-size: 60px;
+    font-weight: 800;
+    margin: 10px 0;
+    color: #111;
+}
+
+.divider {
+    width: 100%;
+    height: 2px;
+    background: #111;
+    margin: 20px 0;
+}
+
+.jubilee {
+    font-size: 40px;
+    font-weight: 600;
+    color: #111;
+}
+
+.bottom-text {
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: #666;
+}
+
+
+
+
+@import url("https://fonts.googleapis.com/css?family=Pirata+One|Rubik:900");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 78px;
+    background: #11101D;
+    padding: 6px 14px;
+    z-index: 999;
+    transition: all 0.5s ease;
+}
+
+.sidebar.open {
+    width: 250px;
+}
+
+.sidebar .logo-details {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.sidebar .logo-details .logo_name {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.sidebar.open .logo-details,
+.sidebar.open .logo-details .logo_name {
+    opacity: 1;
+}
+
+.sidebar .logo-details #btn {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    font-size: 22px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.sidebar.open .logo-details #btn {
+    text-align: center;
+}
+
+.sidebar i {
+    color: #fff;
+    height: 60px;
+    min-width: 50px;
+    font-size: 28px;
+    text-align: center;
+    line-height: 60px;
+}
+
+.sidebar .nav-list {
+    margin-top: 20px;
+    height: 100%;
+}
+
+.sidebar li {
+    position: relative;
+    margin: 8px 0;
+    list-style: none;
+}
+
+.sidebar input {
+    font-size: 15px;
+    color: #fff;
+    font-weight: 400;
+    outline: none;
+    height: 50px;
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    transition: all 0.5s ease;
+    background: #1d1b31;
+}
+
+.sidebar.open input {
+    padding: 0 20px 0 50px;
+    width: 100%;
+}
+
+.sidebar .bx-search {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    font-size: 22px;
+    background: #1d1b31;
+    color: #fff;
+}
+
+.sidebar .bx-search:hover {
+    background: #fff;
+    color: #11101D;
+}
+
+.sidebar.open .bx-search:hover {
+    background: #1d1b31;
+    color: #fff;
+}
+
+.sidebar li i {
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    border-radius: 12px;
+}
+
+.sidebar li a {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    background: #11101D;
+}
+
+.sidebar li a:hover {
+    background: #fff;
+}
+
+.sidebar li a .links_name {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 400;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.4s;
+}
+
+.sidebar.open li a .links_name {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sidebar li a:hover .links_name,
+.sidebar li a:hover i {
+    transition: all 0.5s ease;
+    color: #11101D;
+}
+
+.sidebar li .tooltip {
+    position: absolute;
+    top: -20px;
+    left: calc(100% + 15px);
+    background: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 400;
+    opacity: 0;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: 0s;
+}
+
+.sidebar li:hover .tooltip {
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 0.4s ease;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.sidebar.open li .tooltip {
+    display: none;
+}
+
+.sidebar li.profile {
+    position: fixed;
+    height: 60px;
+    width: 78px;
+    left: 0;
+    bottom: -8px;
+    padding: 10px 14px;
+    background: #1d1b31;
+    transition: all 0.5s ease;
+    overflow: hidden;
+}
+
+.sidebar.open li.profile {
+    width: 250px;
+}
+
+.sidebar li .profile-details {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.sidebar li img {
+    height: 45px;
+    width: 45px;
+    object-fit: contain;
+    border-radius: 6px;
+    margin-right: 10px;
+}
+
+.sidebar li.profile .name,
+.sidebar li.profile .job {
+    font-size: 15px;
+    font-weight: 400;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.sidebar li.profile .job {
+    font-size: 12px;
+}
+
+.sidebar .profile #log_out {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    background: #1d1b31;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    transition: all 0.5s ease;
+}
+
+.sidebar.open .profile #log_out {
+    width: 50px;
+    background: none;
+}
+
+
+
+.home-section {
+    z-index: 100;
+    position: relative;
+    min-height: 100vh;
+    top: 0;
+    left: 78px;
+    width: calc(100% - 78px);
+    transition: all 0.5s ease;
+}
+
+.home-section h1 h2 button {
+    z-index: 100;
+    position: relative;
+    min-height: 100vh;
+    top: 0;
+    left: 78px;
+    width: calc(100% - 78px);
+    transition: all 0.5s ease;
+}
+
+.sidebar.open~.home-section {
+    left: 250px;
+    width: calc(100% - 250px);
+}
+
+.home-section .text {
+    display: inline-block;
+    color: #11101D;
+    font-size: 25px;
+    font-weight: 500;
+    margin: 18px;
+}
