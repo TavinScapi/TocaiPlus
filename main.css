@@ -1,4 +1,8 @@
-body{
+@import url("https://fonts.googleapis.com/css?family=Pirata+One|Rubik:900");
+
+
+
+body {
     overflow-x: hidden;
     position: relative;
 }
@@ -12,7 +16,7 @@ body{
     left: 0;
     background-color: #0f2130;
     overflow: hidden;
-    
+
 }
 
 .logo {
@@ -101,7 +105,7 @@ nav a {
     line-height: 27px;
 }
 
-
+/*linhas de banda*/
 :root {
     --duration: 15s;
 }
@@ -160,6 +164,10 @@ nav a {
     }
 }
 
+/*linhas de banda*/
+
+
+/*container de conteudo*/
 .conteudo1 {
     text-align: center;
     padding: 40px;
@@ -207,11 +215,11 @@ nav a {
     color: #666;
 }
 
+/*container de conteudo*/
 
 
 
-@import url("https://fonts.googleapis.com/css?family=Pirata+One|Rubik:900");
-
+/*sidebar*/
 * {
     margin: 0;
     padding: 0;
@@ -459,7 +467,11 @@ nav a {
     background: none;
 }
 
+/*sidebar*/
 
+
+
+/*home section*/
 
 .home-section {
     z-index: 100;
@@ -493,3 +505,41 @@ nav a {
     font-weight: 500;
     margin: 18px;
 }
+/*home section*/
+
+
+
+/*span para mobile*/
+.aviso-mobile {
+    display: none;
+    background-color: #f7522d;
+    color: #000;
+    padding: 10px;
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.btn-confirmar {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+@media (max-width: 767px) {
+    .aviso-mobile {
+        display: flex;
+    }
+}
+/*span para mobile*/

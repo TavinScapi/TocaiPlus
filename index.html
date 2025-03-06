@@ -696,10 +696,39 @@
             <p class="extra">Nosso objetivo é criar um espaço dedicado à música, conectando fãs e artistas.
                 Acompanhe-nos
                 para mais novidades!</p>
-        </div> 
+        </div>
     </div>
 
+
+    <span class="aviso-mobile">
+        <h1>AVISO!</h1>
+        <p>A versão mobile/responsiva está em desenvolvimento e pode haver erros.</p>
+        <button class="btn-confirmar" onclick="fecharAviso()">Ok</button>
+    </span>
+
     <script>
+        // Função para fechar o aviso
+        function fecharAviso() {
+            document.querySelector('.aviso-mobile').style.display = 'none';
+        }
+
+        // Verifica o tamanho da tela quando a página carrega
+        window.addEventListener('resize', function () {
+            // Atualiza a visibilidade do aviso conforme o tamanho da tela
+            if (window.innerWidth > 767) {
+                document.querySelector('.aviso-mobile').style.display = 'none';
+            } else {
+                document.querySelector('.aviso-mobile').style.display = 'flex';
+            }
+        });
+
+        // Inicia com o comportamento certo ao carregar
+        if (window.innerWidth <= 767) {
+            document.querySelector('.aviso-mobile').style.display = 'flex';
+        } else {
+            document.querySelector('.aviso-mobile').style.display = 'none';
+        }
+
         WebFontConfig = {
             google: { families: ['Lato:400,300,300italic,400italic,700,700italic,900,900italic:latin'] }
         };
