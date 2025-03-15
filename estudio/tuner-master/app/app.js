@@ -32,10 +32,10 @@ Application.prototype.start = function () {
     }
   };
 
-  swal.fire("Welcome to online tuner!").then(function () {
+  swal.fire("Bem-vindo ao afinador!").then(function () {
     self.tuner.init();
     self.frequencyData = new Uint8Array(self.tuner.analyser.frequencyBinCount);
-  });
+});
 
   this.$a4.addEventListener("click", function () {
     swal
