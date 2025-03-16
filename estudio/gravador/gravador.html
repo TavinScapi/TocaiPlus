@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Tocaí | Gravador</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src='main.js' defer></script>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+            <div class="logo_name">Tocaí</div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <ul class="nav-list">
+            <li>
+                <i class='bx bx-search'></i>
+                <input type="text" placeholder="Pesquisar músicas...">
+                <span class="tooltip">Pesquisar</span>
+            </li>
+            <li>
+                <a href="../../index.html">
+                    <i class='bx bx-home'></i>
+                    <span class="links_name">Início</span>
+                </a>
+                <span class="tooltip">Início</span>
+            </li>
+            <li>
+                <a href="">
+                    <i class='bx bx-music'></i>
+                    <span class="links_name">Cifras & Acordes</span>
+                </a>
+                <span class="tooltip">Cifras & Acordes</span>
+            </li>
+            <li>
+                <a href="">
+                    <i class='bx bx-play-circle'></i>
+                    <span class="links_name">Vídeos & Tutoriais</span>
+                </a>
+                <span class="tooltip">Vídeos & Tutoriais</span>
+            </li>
+            <li>
+                <a href="../estudio.html">
+                    <i class='bx bx-headphone'></i>
+                    <span class="links_name">Estúdio Virtual</span>
+                </a>
+                <span class="tooltip">Estúdio Virtual</span>
+            </li>
+            <li>
+                <a href="../../player/player.html">
+                    <i class='bx bx-group'></i>
+                    <span class="links_name">Artistas & Bandas</span>
+                </a>
+                <span class="tooltip">Artistas & Bandas</span>
+            </li>
+            <li>
+                <a href="">
+                    <i class='bx bx-book-open'></i>
+                    <span class="links_name">Teoria Musical</span>
+                </a>
+                <span class="tooltip">Teoria Musical</span>
+            </li>
+            <li>
+                <a href="">
+                    <i class='bx bx-cog'></i>
+                    <span class="links_name">Configurações</span>
+                </a>
+                <span class="tooltip">Configurações</span>
+            </li>
+            <li class="profile">
+                <div class="profile-details">
+                    <img src="./images/profile.png" alt="Imagem de perfil">
+                    <div class="name_job">
+                        <div class="name">Tocaí</div>
+                        <div class="job">Dev & Tester</div>
+                    </div>
+                </div>
+                <i class='bx bx-log-out' id="log_out"></i>
+            </li>
+        </ul>
+    </div>
+
+    <div class="app">
+        <select name="" id="micSelect"></select>
+
+        <select id="visSelect">
+            <option value="frequencybars">Bar</option>
+            <option value="sinewave">Wave</option>
+            <option value="circle">Circle</option>
+        </select>
+
+        <a id="download">Download</a>
+
+        <div class="audio-controls">
+            <button id="record">Record</button>
+            <button id="stop">Stop</button>
+            <audio id="audio" controls></audio>
+        </div>
+
+        <div id="msg">Recording...</div>
+        <canvas width="500" height="300"></canvas>
+        <div>
+</body>
+
+</html>
