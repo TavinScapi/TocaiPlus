@@ -10,6 +10,7 @@
     <script src='script.js' defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="artista/artista.js"></script>
 </head>
 
 <body>
@@ -665,7 +666,7 @@
                 </div>
             </div>
             <div class="logo">
-                <img src="lgbanner.png" alt="" />
+                <img src="imagens/lgbanner.png" alt="" />
             </div>
         </div>
 
@@ -799,7 +800,8 @@
                     <div class="image-content">
                         <span class="overlay"></span>
                         <div class="card-image">
-                            <img src="https://skatesantander.wordpress.com/wp-content/uploads/2014/12/charlie-brown-jr-desktop-wallpaper.jpg" alt="image" class="card-img">
+                            <img src="https://skatesantander.wordpress.com/wp-content/uploads/2014/12/charlie-brown-jr-desktop-wallpaper.jpg"
+                                alt="image" class="card-img">
                         </div>
                     </div>
                     <div class="card-content">
@@ -807,63 +809,67 @@
                         <p class="description">Charlie Brown Jr. é uma das bandas mais importantes do cenário de rock
                             brasileiro,
                             conhecida por suas influências de hardcore e punk.</p>
-                        <button class="button">Ver Mais</button>
+                        <button class="button" onclick="selectArtist('charliebrownjr')">Ver Mais</button>
                     </div>
                 </div>
                 <div class="card swiper-slide" data-genre="pop">
                     <div class="image-content">
                         <span class="overlay"></span>
                         <div class="card-image">
-                            <img src="https://i.pinimg.com/736x/61/7e/f8/617ef8a7b1fa50ade50aa1e8e0c4a3c9.jpg" alt="image" class="card-img">
+                            <img src="https://i.pinimg.com/736x/61/7e/f8/617ef8a7b1fa50ade50aa1e8e0c4a3c9.jpg"
+                                alt="image" class="card-img">
                         </div>
                     </div>
                     <div class="card-content">
                         <h3 class="name">Michael Jackson</h3>
                         <p class="description">Michael Jackson, o Rei do Pop, revolucionou a música e a dança, com uma
                             carreira lendária marcada por sucessos inesquecíveis como "Thriller" e "Billie Jean".</p>
-                        <button class="button">Ver Mais</button>
+                        <button class="button" onclick="selectArtist('michaeljackson')">Ver Mais</button>
                     </div>
                 </div>
                 <div class="card swiper-slide" data-genre="sertanejo">
                     <div class="image-content">
                         <span class="overlay"></span>
                         <div class="card-image">
-                            <img src="https://i.pinimg.com/736x/9b/83/e9/9b83e9490e9a8e3a7a93e3139127a079.jpg" alt="image" class="card-img">
+                            <img src="https://i.pinimg.com/736x/9b/83/e9/9b83e9490e9a8e3a7a93e3139127a079.jpg"
+                                alt="image" class="card-img">
                         </div>
                     </div>
                     <div class="card-content">
                         <h3 class="name">Jorge & Mateus</h3>
                         <p class="description">Jorge & Mateus são uma das duplas sertanejas mais populares do Brasil,
                             conhecidos por suas baladas românticas e performances vibrantes.</p>
-                        <button class="button">Ver Mais</button>
+                        <button class="button" onclick="selectArtist('jorgemateus')">Ver Mais</button>
                     </div>
                 </div>
                 <div class="card swiper-slide" data-genre="jazz">
                     <div class="image-content">
                         <span class="overlay"></span>
                         <div class="card-image">
-                            <img src="https://i.pinimg.com/736x/cf/ca/01/cfca01bcc292c3c6724c4e4cde0d860e.jpg" alt="image" class="card-img">
+                            <img src="https://i.pinimg.com/736x/cf/ca/01/cfca01bcc292c3c6724c4e4cde0d860e.jpg"
+                                alt="image" class="card-img">
                         </div>
                     </div>
                     <div class="card-content">
                         <h3 class="name">John Coltrane</h3>
                         <p class="description">John Coltrane foi um dos maiores saxofonistas de jazz da história,
                             revolucionando o gênero com sua técnica e inovação.</p>
-                        <button class="button">Ver Mais</button>
+                        <button class="button" onclick="selectArtist('johncoltrane')">Ver Mais</button>
                     </div>
                 </div>
                 <div class="card swiper-slide" data-genre="mpb">
                     <div class="image-content">
                         <span class="overlay"></span>
                         <div class="card-image">
-                            <img src="https://i.pinimg.com/736x/5d/84/e7/5d84e7dd8fee98f0d2fc375b2f62acac.jpg" alt="image" class="card-img">
+                            <img src="https://i.pinimg.com/736x/5d/84/e7/5d84e7dd8fee98f0d2fc375b2f62acac.jpg"
+                                alt="image" class="card-img">
                         </div>
                     </div>
                     <div class="card-content">
                         <h3 class="name">Caetano Veloso</h3>
                         <p class="description">Caetano Veloso é um dos maiores ícones da música popular brasileira, com
                             uma carreira que atravessa várias décadas de inovações artísticas.</p>
-                        <button class="button">Ver Mais</button>
+                        <button class="button" onclick="selectArtist('caetanoveloso')">Ver Mais</button>
                     </div>
                 </div>
                 <!-- Adicione mais artistas com o atributo data-genre -->
@@ -871,8 +877,6 @@
         </section>
 
     </div>
-
-
 
     <span class="aviso-mobile">
         <h1>AVISO!</h1>
