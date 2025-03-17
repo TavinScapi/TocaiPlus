@@ -256,9 +256,9 @@ A|--9/11--x--9-x-7-x-x--------------------------------|
 E|--------x----x---x-x--------------------------------|
 ↓     ↓  ↑ ↓  ↑ ↓ ↑</span></span></pre>
 `,
-videoUrl: "/imagens/Charlie Brown Jr. - Só Os Loucos Sabem (Video Clipe).webm",
+videoUrl: "../imagens/Charlie Brown Jr. - Só Os Loucos Sabem (Video Clipe).webm",
 artist: "Charlie Brown Jr.",
-artistImage: "/imagens/cbjr.avif", // URL da imagem do artista
+artistImage: "../imagens/cbjr.avif", // URL da imagem do artista
 
 
 },
@@ -419,7 +419,7 @@ Tão natural quanto a luz do dia</pre>
 `,
 videoUrl: "https://www.youtube.com/embed/0dLX40UMUKo?",
 artist: "Charlie Brown Jr.",
-artistImage: "/imagens/cbjr.avif", // URL da imagem do artista
+artistImage: "../imagens/cbjr.avif", // URL da imagem do artista
 
 
 },

@@ -8,7 +8,7 @@ function selectArtist(artist) {
 const artistsData = {
     charliebrownjr: {
         name: "Charlie Brown Jr.",
-        image: "/imagens/cbjr.avif",
+        image: "../imagens/cbjr.avif",
         views: "155.059.496 exibições",
         history: "Charlie Brown Jr. foi uma banda brasileira de rock formada em 1992. Misturava skate punk, hardcore e reggae.",
         songs: [
@@ -32,7 +32,7 @@ const artistsData = {
     },
     michaeljackson: {
         name: "Michael Jackson",
-        image: "/imagens/michael.avif",
+        image: "../imagens/michael.avif",
         views: "800.452.123 exibições",
         history: "Michael Jackson foi um cantor, compositor e dançarino, conhecido como o Rei do Pop.",
         songs: [
@@ -42,9 +42,9 @@ const artistsData = {
         ],
         members: ["Michael Jackson - Vocal"],
         gallery: [
-            "/imagens/michael1.avif",
-            "/imagens/michael2.avif",
-            "/imagens/michael3.avif"
+            "../imagens/michael1.avif",
+            "../imagens/michael2.avif",
+            "../imagens/michael3.avif"
         ],
         awards: [
             "Grammy de Melhor Artista Masculino - 1984",
@@ -53,7 +53,7 @@ const artistsData = {
     },
     jorgemateus: {
         name: "Jorge & Mateus",
-        image: "/imagens/JM.avif",
+        image: "../imagens/JM.avif",
         views: "600.325.789 exibições",
         history: "Jorge & Mateus é uma dupla sertaneja brasileira, muito popular nos anos 2000.",
         songs: [
@@ -62,8 +62,8 @@ const artistsData = {
         ],
         members: ["Jorge - Vocal", "Mateus - Vocal"],
         gallery: [
-            "/imagens/JM1.avif",
-            "/imagens/JM2.avif"
+            "../imagens/JM1.avif",
+            "../imagens/JM2.avif"
         ],
         awards: [
             "Melhor Dupla Sertaneja - Prêmio Multishow 2011",
@@ -72,7 +72,7 @@ const artistsData = {
     },
     johncoltrane: {
         name: "John Coltrane",
-        image: "/imagens/john.avif",
+        image: "../imagens/john.avif",
         views: "250.654.321 exibições",
         history: "John Coltrane foi um dos maiores saxofonistas da história do jazz.",
         songs: [
@@ -91,7 +91,7 @@ const artistsData = {
     },
     caetanoveloso: {
         name: "Caetano Veloso",
-        image: "/imagens/caetano.avif",
+        image: "../imagens/caetano.avif",
         views: "350.123.654 exibições",
         history: "Caetano Veloso é um cantor e compositor brasileiro, um dos fundadores do movimento Tropicalista.",
         songs: [
