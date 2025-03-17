@@ -129,8 +129,16 @@ if (window.location.pathname.includes("artista.html")) {
         artist.songs.forEach(song => {
             const li = document.createElement("li");
             li.innerHTML = `${song.name} <span class="music-icons">${song.icons}</span>`;
+
+            // Adicionar evento de clique para redirecionar para a página da música
+            li.addEventListener("click", () => {
+                localStorage.setItem("selectedSong", song.name);
+                window.location.href = "../musica/musica.html"; // Redireciona para a página de aprendizado
+            });
+
             songsList.appendChild(li);
         });
+
 
         // Integrantes
         const membersList = document.getElementById("artist-members");
