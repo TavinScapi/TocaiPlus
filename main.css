@@ -1330,7 +1330,6 @@ footer .bottom-details .bottom_text {
         left: 0;
         width: 100%;
         margin: 0;
-        /* Adiciona um espaçamento nas laterais para que o conteúdo não fique colado nas bordas */
         transition: all 0.5s ease;
     }
 }
@@ -1339,13 +1338,11 @@ footer .bottom-details .bottom_text {
     .nav {
         display: none;
     }
+
+    .seila{
+        display: none;
+    }
 }
-
-
-
-
-
-
 
 
 /*=============== manu mobile ===============*/
