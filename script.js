@@ -245,4 +245,3 @@ if (window.location.pathname.includes("artista.html")) {
         });
     }
 }
-
