@@ -6,11 +6,11 @@
 }
 
 ::-webkit-scrollbar-track {
-    background-color: #0f2130
+    background-color: #0D0D0D
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #4d2d98;
+    background-color: #989CA6;
     border-radius: 8px
 }
 
@@ -93,6 +93,7 @@ nav li {
     nav li {
         width: 50%;
         text-align: center;
+        font-size: 10px;
     }
 }
 
@@ -352,7 +353,7 @@ nav a {
     border: none;
     border-radius: 12px;
     transition: all 0.5s ease;
-    background: #1d1b31;
+    background: #989CA6;
 }
 
 .sidebar.open input {
@@ -366,18 +367,18 @@ nav a {
     left: 0;
     transform: translateY(-50%);
     font-size: 22px;
-    background: #1d1b31;
-    color: #fff;
+    background: #989CA6;
+    color: #ffffff;
 }
 
 .sidebar .bx-search:hover {
-    background: #fff;
+    background: #ffffff;
     color: #0D0D0D;
 }
 
 .sidebar.open .bx-search:hover {
-    background: #1d1b31;
-    color: #fff;
+    background: #989CA6;
+    color: #ffffff;
 }
 
 .sidebar li i {
@@ -399,7 +400,7 @@ nav a {
 }
 
 .sidebar li a:hover {
-    background: #fff;
+    background: #ffffff;
 }
 
 .sidebar li a .links_name {
@@ -453,12 +454,12 @@ nav a {
 
 .sidebar li.profile {
     position: fixed;
-    height: 60px;
+    height: 57.1px;
     width: 78px;
     left: 0;
     bottom: -8px;
     padding: 10px 14px;
-    background: #1d1b31;
+    background: #989CA6;
     transition: all 0.5s ease;
     overflow: hidden;
 }
@@ -498,7 +499,7 @@ nav a {
     top: 50%;
     right: 0;
     transform: translateY(-50%);
-    background: #1d1b31;
+    background: #989CA6;
     width: 100%;
     height: 60px;
     line-height: 60px;
@@ -820,7 +821,7 @@ nav a {
 #artistas h3 {
     text-align: center;
     color: #000000;
-    font-size: 2rem;
+    font-size: 22px;
     margin-bottom: 20px;
 }
 

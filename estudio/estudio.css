@@ -1170,3 +1170,19 @@ article:has(:hover, :focus) {
     white-space: nowrap;
     width: 1px;
 }
+
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+
+    .home-section {
+        top: 0;
+        left: 0;
+        width: 100%;
+        margin: 0;
+        /* Adiciona um espaçamento nas laterais para que o conteúdo não fique colado nas bordas */
+        transition: all 0.5s ease;
+    }
+}
