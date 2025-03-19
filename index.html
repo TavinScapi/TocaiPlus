@@ -7,10 +7,9 @@
     <title>Tocaí | Início</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='script.js' defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script src="artista/artista.js"></script>
+    <script src='script.js' defer></script>
 </head>
 
 <body>
@@ -26,7 +25,7 @@
                 <span class="tooltip">Pesquisar</span>
             </li>
             <li>
-                <a href="index.html">
+                <a href="/../index.html">
                     <i class='bx bx-home'></i>
                     <span class="links_name">Início</span>
                 </a>
@@ -764,13 +763,16 @@
         </div>
 
         <div class="light-bg">
+            <div class="divider"></div>
+
             <p class="extra">Nosso objetivo é criar um espaço dedicado à música, conectando fãs e artistas.
                 Acompanhe-nos
                 para mais novidades!</p>
+            <div class="divider"></div>
         </div>
 
         <section id="artistas">
-            <h2>Artistas&Gêneros</h2>
+            <h2>Artistas & Gêneros</h2>
 
             <div class="filtros">
                 <button class="genre-button" onclick="filterByGenre('todos')">Todos</button>
@@ -778,7 +780,7 @@
                 <button class="genre-button" onclick="filterByGenre('pop')">Pop</button>
                 <button class="genre-button" onclick="filterByGenre('jazz')">Jazz</button>
                 <button class="genre-button" onclick="filterByGenre('sertanejo')">Sertanejo</button>
-                <button class="genre-button" onclick="filterByGenre('classica')">MPB</button>
+                <button class="genre-button" onclick="filterByGenre('mpb')">MPB</button>
                 <div class="filtro-container">
                     <div class="filtro-generos">
                         <button class="dropdown-button" onclick="toggleDropdown()">Mais</button>
@@ -788,8 +790,8 @@
                             <div class="dropdown-item" onclick="selectGenre('rock')">Rock</div>
                             <div class="dropdown-item" onclick="selectGenre('pop')">Pop</div>
                             <div class="dropdown-item" onclick="selectGenre('jazz')">Jazz</div>
-                            <div class="dropdown-item" onclick="selectGenre('hiphop')">Hip-Hop</div>
-                            <div class="dropdown-item" onclick="selectGenre('classica')">Clássica</div>
+                            <div class="dropdown-item" onclick="selectGenre('sertanejo')">Sertanejo</div>
+                            <div class="dropdown-item" onclick="selectGenre('mpb')">MPB</div>
                         </div>
                     </div>
                 </div>
@@ -875,6 +877,77 @@
                 <!-- Adicione mais artistas com o atributo data-genre -->
             </div>
         </section>
+
+
+
+
+
+
+
+
+
+        
+        <footer>
+            <div class="content1">
+                <div class="top">
+                    <div class="logo-details">
+                        <i class="fab fa-slack"></i>
+                        <span class="logo_name">Logo</span>
+                    </div>
+                    <div class="media-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="link-boxes">
+                    <ul class="box">
+                        <li class="link_name">Company</li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Contact us</a></li>
+                        <li><a href="#">About us</a></li>
+                        <li><a href="#">Get started</a></li>
+                    </ul>
+                    <ul class="box">
+                        <li class="link_name">Services</li>
+                        <li><a href="#">App design</a></li>
+                        <li><a href="#">Web design</a></li>
+                        <li><a href="#">Logo design</a></li>
+                        <li><a href="#">Banner design</a></li>
+                    </ul>
+                    <ul class="box">
+                        <li class="link_name">Account</li>
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">My account</a></li>
+                        <li><a href="#">Prefrences</a></li>
+                        <li><a href="#">Purchase</a></li>
+                    </ul>
+                    <ul class="box">
+                        <li class="link_name">Courses</li>
+                        <li><a href="#">HTML & CSS</a></li>
+                        <li><a href="#">JavaScript</a></li>
+                        <li><a href="#">Photography</a></li>
+                        <li><a href="#">Photoshop</a></li>
+                    </ul>
+                    <ul class="box input-box">
+                        <li class="link_name">Subscribe</li>
+                        <li><input type="text" placeholder="Enter your email"></li>
+                        <li><input type="button" value="Subscribe"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bottom-details">
+                <div class="bottom_text">
+                    <span class="copyright_text">Copyright © 2021 <a href="#">Logo.</a>All rights reserved</span>
+                    <span class="policy_terms">
+                        <a href="#">Privacy policy</a>
+                        <a href="#">Terms & condition</a>
+                    </span>
+                </div>
+            </div>
+        </footer>
 
     </div>
 

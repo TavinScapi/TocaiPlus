@@ -10,12 +10,39 @@
 
 <body>
     <div class="artist-header">
+        <button id="back-button">← Voltar</button>
         <img id="artist-image" src="" alt="Foto do Artista">
         <div class="header-text">
             <h1 id="song-title">Nome da Música</h1>
             <h2 id="artist-name">Nome do Artista</h2>
         </div>
     </div>
+
+    <style>
+        /* Estilo do botão de voltar */
+        #back-button {
+            background-color: #ddd;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: background-color 0.3s;
+            margin-right: 15px;
+        }
+
+        #back-button:hover {
+            background-color: #bbb;
+        }
+    </style>
+
+    <script>
+        // Função para voltar à página anterior
+        document.getElementById("back-button").addEventListener("click", function () {
+            window.history.back();
+        });
+    </script>
+
 
     <div class="main-content">
         <div class="music-section">

@@ -16,8 +16,8 @@ const instrumentTuningPresets = {
   'Guitarra/Violão (6 Cordas)': [4, 11, 7, 2, 9, 4],
   'Guitarra/Violão (7 Cordas)': [4, 11, 7, 2, 9, 4, 11],
   'Guitarra/Violão (8 Cordas)': [4, 11, 7, 2, 9, 4, 11, 6],
-  'Bass (4 Cordas)': [7, 2, 9, 4],
-  'Bass (5 Cordas)': [7, 2, 9, 4, 11],
+  'Baixo (4 Cordas)': [7, 2, 9, 4],
+  'Baixo (5 Cordas)': [7, 2, 9, 4, 11],
   'Ukulele': [9, 4, 0, 7]
 };
 

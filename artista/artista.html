@@ -1,48 +1,125 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artista</title>
+    <title>Tocaí | Artista</title>
     <link rel="stylesheet" href="artista.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
+
 <body>
-
-    <div class="artist-container">
-        <!-- Cabeçalho -->
-        <div class="artist-header">
-            <img id="artist-image" src="" alt="Imagem do Artista">
-            <div>
-                <h1 id="artist-name"></h1>
-                <button id="fan-button">🤍 Virar fã</button>
-                <p id="artist-views"></p>
-            </div>
+    <div class="sidebar">
+        <div class="logo-details">
+            <div class="logo_name">Tocaí</div>
+            <i class='bx bx-menu' id="btn"></i>
         </div>
+        <ul class="nav-list">
+            <li>
+                <i class='bx bx-search'></i>
+                <input type="text" placeholder="Pesquisar músicas...">
+                <span class="tooltip">Pesquisar</span>
+            </li>
+            <li>
+                <a href="../index.html">
+                    <i class='bx bx-home'></i>
+                    <span class="links_name">Início</span>
+                </a>
+                <span class="tooltip">Início</span>
+            </li>
+            <li>
+                <a href="">
+                    <i class='bx bx-music'></i>
+                    <span class="links_name">Cifras & Acordes</span>
+                </a>
+                <span class="tooltip">Cifras & Acordes</span>
+            </li>
+            <li>
+                <a href="">
+                    <i class='bx bx-play-circle'></i>
+                    <span class="links_name">Vídeos & Tutoriais</span>
+                </a>
+                <span class="tooltip">Vídeos & Tutoriais</span>
+            </li>
+            <li>
+                <a href="../estudio/estudio.html">
+                    <i class='bx bx-headphone'></i>
+                    <span class="links_name">Estúdio Virtual</span>
+                </a>
+                <span class="tooltip">Estúdio Virtual</span>
+            </li>
+            <li>
+                <a href="../player/player.html">
+                    <i class='bx bx-group'></i>
+                    <span class="links_name">Artistas & Bandas</span>
+                </a>
+                <span class="tooltip">Artistas & Bandas</span>
+            </li>
+            <li>
+                <a href="">
+                    <i class='bx bx-book-open'></i>
+                    <span class="links_name">Teoria Musical</span>
+                </a>
+                <span class="tooltip">Teoria Musical</span>
+            </li>
+            <li>
+                <a href="">
+                    <i class='bx bx-cog'></i>
+                    <span class="links_name">Configurações</span>
+                </a>
+                <span class="tooltip">Configurações</span>
+            </li>
+            <li class="profile">
+                <div class="profile-details">
+                    <img src="./images/profile.png" alt="Imagem de perfil">
+                    <div class="name_job">
+                        <div class="name">Tocaí</div>
+                        <div class="job">Dev & Tester</div>
+                    </div>
+                </div>
+                <i class='bx bx-log-out' id="log_out"></i>
+            </li>
+        </ul>
+    </div>
 
-        <!-- Conteúdo Principal -->
-        <div class="main-content">
-            <!-- Lista de Músicas -->
-            <div class="music-section">
-                <h2>Músicas Mais Acessadas</h2>
-                <ul id="artist-songs"></ul>
+    <div class="home-section">
+        <div class="artist-container">
+            <!-- Cabeçalho -->
+            <div class="artist-header">
+                <img id="artist-image" src="" alt="Imagem do Artista">
+                <div>
+                    <h1 id="artist-name"></h1>
+                    <button id="fan-button">🤍 Virar fã</button>
+                    <p id="artist-views"></p>
+                </div>
             </div>
 
-            <!-- Sidebar -->
-            <div class="sidebar">               
-                <h3>História</h3>
-                <p id="artist-history"></p>
+            <!-- Conteúdo Principal -->
+            <div class="main-content">
+                <!-- Lista de Músicas -->
+                <div class="music-section">
+                    <h2>Músicas Mais Acessadas</h2>
+                    <ul id="artist-songs"></ul>
+                </div>
 
-                <h3>Integrantes</h3>
-                <ul id="artist-members"></ul>
-
-                <h3>Prêmios</h3>
-                <ul id="artist-awards">
-                    <!-- Os prêmios serão inseridos aqui dinamicamente -->
-                </ul>
-
-                <h3>Galeria</h3>
-                <div id="artist-gallery">
-                    <!-- As imagens serão inseridas aqui dinamicamente -->
+                <!-- Sidebar -->
+                <div class="sidebar2">
+                    <h3>História</h3>
+                    <p id="artist-history"></p>
+                    <br>
+                    <h3>Integrantes</h3>
+                    <ul id="artist-members"></ul>
+                    <br>
+                    <h3>Prêmios</h3>
+                    <ul id="artist-awards">
+                        <!-- Os prêmios serão inseridos aqui dinamicamente -->
+                    </ul>
+                    <br>
+                    <h3>Galeria</h3>
+                    <div id="artist-gallery">
+                        <!-- As imagens serão inseridas aqui dinamicamente -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -50,4 +127,5 @@
 
     <script src="artista.js"></script>
 </body>
+
 </html>
