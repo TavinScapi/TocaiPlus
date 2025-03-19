@@ -2,16 +2,34 @@
 <html>
 
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <!-- Meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Title -->
     <title>Tocaí | Início</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy" rel="stylesheet">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- Favicon (opcional) -->
+    <!-- <link rel="icon" href="caminho/para/favicon.ico" type="image/x-icon"> -->
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+
+    <!-- Icon Libraries -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <script src='script.js' defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="main.css">
+
+    <!-- Scripts -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js" defer></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js" defer></script>
+    <script src="script.js" defer></script>
 </head>
+
 
 <body>
     <div class="sidebar">
@@ -674,7 +692,7 @@
             <ul>
                 <li><a href="#">Página Inicial</a></li>
                 <li><a href="#confira">Confira</a></li>
-                <li><a href="#artistas">Artistas&Gêneros</a></li>
+                <li><a href="#artistas">Artistas & Bandas</a></li>
                 <li><a href="#eventos">Eventos</a></li>
             </ul>
         </nav>
@@ -773,7 +791,7 @@
         </div>
 
         <section id="artistas">
-            <h2>Artistas & Gêneros</h2>
+            <h2>Artistas & Bandas</h2>
 
             <div class="filtros">
                 <button class="genre-button" onclick="filterByGenre('todos')">Todos</button>
@@ -879,14 +897,6 @@
             </div>
         </section>
 
-
-
-
-
-
-
-
-
         <footer>
             <div class="content1">
                 <div class="top">
@@ -953,51 +963,67 @@
                 </div>
             </div>
         </footer>
+
+        <div class="nav">
+            <ul class="nav__list">
+                <li>
+                    <a href="index.html" class="nav__link active-link">
+                        <i class="ri-home-2-line"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/estudio/estudio.html" class="nav__link">
+                        <i class="ri-headphone-line"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#projects" class="nav__link">
+                        <i class="ri-search-line"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#contact" class="nav__link">
+                        <i class="ri-play-circle-line"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <button class="nav__expand" id="nav-expand">
+                        <i class="ri-book-line nav__expand-icon" id="nav-expand-icon"></i>
+                    </button>
+
+                    <ul class="nav__expand-list" id="nav-expand-list">
+                        <li>
+                            <a href="#" class="nav__expand-link">
+                                <i class="ri-music-line"></i> <!-- Ícone de acorde musical -->
+                                <span>Cifras & Acordes</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="nav__expand-link">
+                                <i class="ri-video-line"></i>
+                                <span>Vídeos & Tutoriais</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="nav__expand-link">
+                                <i class="ri-music-2-line"></i>
+                                <span>Teoria Musical</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </div>
 
-    <span class="aviso-mobile">
-        <h1>AVISO!</h1>
-        <p>A versão mobile/responsiva está em desenvolvimento e pode haver erros.</p>
-        <button class="btn-confirmar" onclick="fecharAviso()">Ok</button>
-    </span>
-
-    <script>
-        // Função para fechar o aviso
-        function fecharAviso() {
-            document.querySelector('.aviso-mobile').style.display = 'none';
-        }
-
-        // Verifica o tamanho da tela quando a página carrega
-        window.addEventListener('resize', function () {
-            // Atualiza a visibilidade do aviso conforme o tamanho da tela
-            if (window.innerWidth > 767) {
-                document.querySelector('.aviso-mobile').style.display = 'none';
-            } else {
-                document.querySelector('.aviso-mobile').style.display = 'flex';
-            }
-        });
-
-        // Inicia com o comportamento certo ao carregar
-        if (window.innerWidth <= 767) {
-            document.querySelector('.aviso-mobile').style.display = 'flex';
-        } else {
-            document.querySelector('.aviso-mobile').style.display = 'none';
-        }
-
-        WebFontConfig = {
-            google: { families: ['Lato:400,300,300italic,400italic,700,700italic,900,900italic:latin'] }
-        };
-        (function () {
-            var wf = document.createElement('script');
-            wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-            wf.type = 'text/javascript';
-            wf.async = 'true';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(wf, s);
-        })(); 
-    </script>
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="/menumobile.js"></script>
 </body>
 
 </html>

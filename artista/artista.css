@@ -125,15 +125,21 @@ body {
 
 #artist-gallery {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 colunas */
-    gap: 10px; /* Espaço entre as imagens */
-    max-width: 400px; /* Define uma largura máxima opcional */
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 colunas */
+    gap: 10px;
+    /* Espaço entre as imagens */
+    max-width: 400px;
+    /* Define uma largura máxima opcional */
 }
 
 #artist-gallery img {
-    width: 100%; /* Ajusta a largura da imagem ao contêiner */
-    height: 160px; /* Mantém a proporção */
-    border-radius: 8px; /* Cantos arredondados */
+    width: 100%;
+    /* Ajusta a largura da imagem ao contêiner */
+    height: 160px;
+    /* Mantém a proporção */
+    border-radius: 8px;
+    /* Cantos arredondados */
     object-fit: cover;
 }
 
@@ -183,7 +189,7 @@ body {
     top: 0;
     height: 100%;
     width: 78px;
-    background: #11101D;
+    background: #0D0D0D;
     padding: 6px 14px;
     z-index: 999;
     transition: all 0.5s ease;
@@ -259,7 +265,7 @@ body {
     border: none;
     border-radius: 12px;
     transition: all 0.5s ease;
-    background: #1d1b31;
+    background: #989CA6;
 }
 
 .sidebar.open input {
@@ -273,18 +279,18 @@ body {
     left: 0;
     transform: translateY(-50%);
     font-size: 22px;
-    background: #1d1b31;
-    color: #fff;
+    background: #989CA6;
+    color: #ffffff;
 }
 
 .sidebar .bx-search:hover {
-    background: #fff;
-    color: #11101D;
+    background: #ffffff;
+    color: #0D0D0D;
 }
 
 .sidebar.open .bx-search:hover {
-    background: #1d1b31;
-    color: #fff;
+    background: #989CA6;
+    color: #ffffff;
 }
 
 .sidebar li i {
@@ -302,11 +308,11 @@ body {
     align-items: center;
     text-decoration: none;
     transition: all 0.4s ease;
-    background: #11101D;
+    background: #0D0D0D;
 }
 
 .sidebar li a:hover {
-    background: #fff;
+    background: #ffffff;
 }
 
 .sidebar li a .links_name {
@@ -327,7 +333,7 @@ body {
 .sidebar li a:hover .links_name,
 .sidebar li a:hover i {
     transition: all 0.5s ease;
-    color: #11101D;
+    color: #0D0D0D;
 }
 
 .sidebar li .tooltip {
@@ -360,12 +366,12 @@ body {
 
 .sidebar li.profile {
     position: fixed;
-    height: 60px;
+    height: 57.1px;
     width: 78px;
     left: 0;
     bottom: -8px;
     padding: 10px 14px;
-    background: #1d1b31;
+    background: #989CA6;
     transition: all 0.5s ease;
     overflow: hidden;
 }
@@ -405,7 +411,7 @@ body {
     top: 50%;
     right: 0;
     transform: translateY(-50%);
-    background: #1d1b31;
+    background: #989CA6;
     width: 100%;
     height: 60px;
     line-height: 60px;
