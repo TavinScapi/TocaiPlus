@@ -1,6 +1,13 @@
 // Configuração do Spotify
 const clientId = "1ca02f4c12f247de9ef1552f920e191e";
-const redirectUri = "https://tavinscapi.github.io/Tocai/player/player.html";
+let redirectUri;
+
+if (window.location.hostname === "127.0.0.1") {
+    redirectUri = "http://127.0.0.1:5500/player/player.html"; // Para testes locais
+} else {
+    redirectUri = "https://tavinscapi.github.io/Tocai/player/player.html"; // Para produção no GitHub Pages
+}
+
 const scopes = "user-read-private user-read-email streaming";
 
 // URL para autenticação do Spotify
@@ -58,6 +65,7 @@ async function searchTracks(query) {
 
 // Executa a captura do token ao carregar a página
 getTokenFromUrl();
+
 
 
 
