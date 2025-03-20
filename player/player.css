@@ -762,6 +762,17 @@ a {
 
 /* footer e nav */
 
+
+
+
+
+
+
+
+
+
+
+
 .container {
     max-width: auto;
     margin: auto;
@@ -777,6 +788,12 @@ a {
     max-width: 600px;
     margin: 0 auto 20px;
     display: flex;
+}
+
+h1{
+    text-align: center;
+    color: #ffffff;
+    padding-bottom: 10px;
 }
 
 .search input {
