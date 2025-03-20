@@ -1,6 +1,6 @@
 // Configuração do Spotify
 const clientId = "1ca02f4c12f247de9ef1552f920e191e";
-const redirectUri = "https://tavinscapi.github.io/Tocai/player/player.html"; // URL do seu site
+const redirectUri = "https://tavinscapi.github.io/Tocai/player/player.html";
 const scopes = "user-read-private user-read-email streaming";
 
 // URL para autenticação do Spotify
