@@ -1,6 +1,6 @@
 // Configuração do Spotify
 const clientId = "1ca02f4c12f247de9ef1552f920e191e";
-const redirectUri = "http://127.0.0.1:5500/player/player.html"; // URL do seu site
+const redirectUri = "../player/player.html"; // URL do seu site
 const scopes = "user-read-private user-read-email streaming";
 
 // URL para autenticação do Spotify
@@ -60,74 +60,9 @@ async function searchTracks(query) {
 getTokenFromUrl();
 
 
-// Exibir resultados da busca
-function displaySearchResults(tracks) {
-    const resultsContainer = document.getElementById("searchResults");
-
-    // Primeiro, adicionar o título
-    resultsContainer.innerHTML = '<div class="playlist-title">Lista de reprodução</div>';
-
-    if (tracks.length === 0) {
-        resultsContainer.innerHTML += '<div class="no-results">Nenhum resultado encontrado</div>';
-        return;
-    }
-
-    resultsContainer.innerHTML += tracks
-        .map(
-            (track, index) => `
-        <div onclick="playTrack(${index})" class="${index === currentTrackIndex ? "current-track" : ""}">
-            <img src="${track.album.images[2]?.url || "/placeholder.svg?height=40&width=40"}" alt="${track.album.name}" style="width: 40px; height: 40px; vertical-align: middle; margin-right: 10px;">
-            ${track.name} - ${track.artists[0].name}
-        </div>
-    `,
-        )
-        .join("");
-    searchResults = tracks;
-
-    // Rolar até o elemento atual
-    if (currentTrackIndex >= 0) {
-        const currentElement = resultsContainer.children[currentTrackIndex + 1];
-        if (currentElement) {
-            currentElement.scrollIntoView({ behavior: "smooth", block: "nearest" });
-        }
-    }
-}
 
 // Elemento onde os resultados serão exibidos
 const resultsContainer = document.getElementById("searchResults");
-
-// Buscar músicas no Spotify e exibir na interface
-async function searchTracks(query) {
-    const token = getToken();
-
-    try {
-        const response = await fetch(
-            `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=5`,
-            {
-                headers: { Authorization: `Bearer ${token}` },
-            }
-        );
-
-        if (response.status === 401) {
-            alert("Sessão expirada! Faça login novamente.");
-            localStorage.removeItem("spotifyToken");
-            window.location.href = authUrl;
-            return [];
-        }
-
-        const data = await response.json();
-
-        if (data.tracks && data.tracks.items.length > 0) {
-            displaySearchResults(data.tracks.items);
-        } else {
-            resultsContainer.innerHTML = "<p>Nenhum resultado encontrado.</p>";
-        }
-
-    } catch (error) {
-        console.error("Erro ao buscar músicas:", error);
-        resultsContainer.innerHTML = "<p>Erro ao carregar músicas.</p>";
-    }
-}
 
 // Exibir os resultados da busca
 function displaySearchResults(tracks) {
