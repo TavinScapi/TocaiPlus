@@ -12,16 +12,6 @@
 - **Artistas & Bandas**: Descubra novos artistas e bandas, filtrando por gêneros musicais.
 - **Design Responsivo**: Navegue facilmente em qualquer dispositivo.
 
-## 📂 Estrutura do Projeto
-
-- **index.html**: Página inicial com navegação para todas as seções do site.
-- **estudio/**: Recursos do estúdio virtual, como metrônomo, afinador e gravador.
-- **bandaeartistas/**: Informações sobre artistas e bandas.
-- **player/**: Player de músicas integrado.
-- **cifra/**: Seção de cifras e acordes.
-- **tutoriais/**: Vídeos e tutoriais para aprendizado.
-- **teoria/**: Conteúdo de teoria musical.
-
 ## 🚀 Tecnologias Utilizadas
 
 - **HTML5**: Estrutura do site.
@@ -37,8 +27,10 @@
 
 ![Prévia do Tocaí](https://via.placeholder.com/800x400.png?text=Prévia+do+Projeto)
 
-## 🛠 Como Executar o Projeto
+## 📄 Licença
 
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/seu-usuario/tocai.git
+Este projeto está licenciado sob a [MIT License](LICENSE).
+
+---
+
+🎶 **Tocaí**: Descubra, aprenda e viva a música!
