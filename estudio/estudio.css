@@ -48,7 +48,6 @@ body {
     left: 0;
     background-color: #0D0D0D;
     overflow: hidden;
-
 }
 
 .logo {
@@ -1431,6 +1430,12 @@ a {
 }
 
 
+
+
+
+
+
+
 @import url("https://fonts.googleapis.com/css?family=Pirata+One|Rubik:900");
 
 
@@ -1470,18 +1475,6 @@ body {
     overflow-x: hidden;
     position: relative;
     background-color: #0D0D0D;
-}
-
-.hero {
-    width: 100%;
-    /* height: 100%; */
-    min-height: 450px;
-    position: relative;
-    top: 0;
-    left: 0;
-    background-color: #0D0D0D;
-    overflow: hidden;
-
 }
 
 .logo {
