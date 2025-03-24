@@ -12,7 +12,6 @@
 
 <body>
     <div class="artist-header">
-        <!-- Ícone de voltar -->
         <div class="back-button" onclick="window.history.back();">
             <i class="fas fa-arrow-left"></i> <!-- Usando Font Awesome -->
         </div>
@@ -27,10 +26,23 @@
     <div class="main-content">
         <div class="music-section">
             <div class="tabs-section" id="song-tabs">
-                <h2>Tabs</h2>
-                <div class="tablatura">
-                    <pre id="song-tabs-content"></pre>
-                </div>
+            <h2>Tabs</h2>
+            <div class="responsive-buttons">
+                <button id="auto-scroll-btn">Auto Rolagem</button>
+                <button id="responsive-listen-btn" onclick="toggleIframe()">Ouvir</button>
+            </div>
+            <div id="iframe-container" style="display: none; text-align: center;">
+                <iframe id="song-video1" src="" width="250" height="150" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>            
+            <div class="tablatura" style="overflow-y: scroll; scrollbar-width: none; -ms-overflow-style: none;">
+                <pre id="song-tabs-content" style="overflow-y: scroll; scrollbar-width: none; -ms-overflow-style: none;"></pre>
+            </div>
+            <style>
+                .tablatura::-webkit-scrollbar,
+                #song-tabs-content::-webkit-scrollbar {
+                    display: none;
+                }
+            </style>
             </div>
         </div>
 
@@ -38,15 +50,13 @@
             <div class="video-section">
                 <h2>Vídeo</h2>
                 <div class="video-container">
-                    <iframe id="song-video" src="" frameborder="0"
-                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
+                    <iframe id="song-video" src="" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
 
             <h3>Ferramentas</h3>
             <div class="scroll-controls">
-                <button id="auto-scroll-btn">Auto Rolagem ⏬</button>
+                <button id="start-scroll-btn">Auto Rolagem ⏬</button>
                 <div class="speed-controls">
                     <button id="decrease-speed">➖</button>
                     <span id="speed-display">1x</span>
@@ -63,35 +73,9 @@
         </aside>
     </div>
     
-    <div class="nav">
-        <ul class="nav__list">
-            <li>
-                <a href="../index.html" class="nav__link active-link">
-                    <i class="ri-home-2-line"></i>
-                </a>
-            </li>
-
-            <li>
-                <a href="../estudio/estudio.html" class="nav__link">
-                    <i class="ri-headphone-line"></i>
-                </a>
-            </li>
-
-            <li>
-                <a href="../bandaeartistas/bandasEartistas.html" class="nav__link">
-                    <i class="ri-search-line"></i>
-                </a>
-            </li>
-
-            <li>
-                <a href="../player/player.html" class="nav__link">
-                    <i class="ri-play-circle-line"></i>
-                </a>
-            </li>
-        </ul>
-    </div>
     <script src="musica.js"></script>
     <script src="script.js"></script>
 </body>
 
 </html>
+

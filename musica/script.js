@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const scrollBtn = document.getElementById("auto-scroll-btn");
+    const startScrollBtn = document.getElementById("start-scroll-btn"); // Botão para iniciar/pausar
     const tablatura = document.querySelector(".tablatura");
     const speedDisplay = document.getElementById("speed-display");
     const increaseSpeedBtn = document.getElementById("increase-speed");
@@ -37,6 +38,19 @@ document.addEventListener("DOMContentLoaded", function () {
         scrollActive = !scrollActive;
     });
 
+    // Novo evento para iniciar e pausar a rolagem com o mesmo botão
+    startScrollBtn.addEventListener("click", function () {
+        if (scrollActive) {
+            stopScrolling();
+            startScrollBtn.textContent = "Auto Rolagem ⏬";
+            scrollActive = false;
+        } else {
+            startScrolling();
+            startScrollBtn.textContent = "Pausar Rolagem ⏸️";
+            scrollActive = true;
+        }
+    });
+
     increaseSpeedBtn.addEventListener("click", function () {
         if (scrollSpeed < 5) {
             scrollSpeed++;
@@ -57,3 +71,17 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+
+function toggleIframe() {
+    const iframeContainer = document.getElementById('iframe-container');
+    const listenButton = document.getElementById('responsive-listen-btn');
+    
+    if (iframeContainer.style.display === 'none' || iframeContainer.style.display === '') {
+        iframeContainer.style.display = 'block';
+        listenButton.textContent = 'Fechar';
+    } else {
+        iframeContainer.style.display = 'none';
+        listenButton.textContent = 'Ouvir';
+    }
+    }

@@ -256,12 +256,12 @@ A|--9/11--x--9-x-7-x-x--------------------------------|
 E|--------x----x---x-x--------------------------------|
 ↓     ↓  ↑ ↓  ↑ ↓ ↑</span></span></pre>
 `,
-videoUrl: "../imagens/Charlie Brown Jr. - Só Os Loucos Sabem (Video Clipe).webm",
-artist: "Charlie Brown Jr.",
-artistImage: "../imagens/cbjr.avif", // URL da imagem do artista
+        videoUrl: "https://www.youtube.com/embed/JRJj4z-prvM?",
+        artist: "Charlie Brown Jr.",
+        artistImage: "../imagens/cbjr.avif", // URL da imagem do artista
 
 
-},
+    },
     "Céu Azul": {
         tabs: `
 <div><div class="cifra_cnt g-fix cifra-mono"><div class="bandsintownButton bandsintownButton--songAbove pub" id="js-bandsintownAds--songAbove"><div class="bandsintown-replacementAd" id="js-bandsintown-replacement"><div id="pub-cc-bandsintown--song_above" class="pub with-refresh withRefresh" data-slotempty="true"><div id="pub-cc-bandsintown--song_above_ad_refresh"><div id="pub-cc-bandsintown--song_above_ad" data-google-query-id="CLan1cj5kYwDFWdRuAQdbUclAg"><div id="google_ads_iframe_/3697496/cifraclub:320x50:cifra:reload_0__container__" style="border: 0pt none; width: 320px; height: 0px;"></div></div></div></div></div></div><span id="cifra_tom">Tom: <a class="js-modal-trigger" href="#" title="alterar o tom">Fm</a> (forma dos acordes no tom de  Em)</span><span data-cy="song-tuning" id="cifra_afi"></span><span data-cy="song-capo" id="cifra_capo">
@@ -417,12 +417,12 @@ O que importa é nossa alegria
 <b>Em7(9)</b>
 Tão natural quanto a luz do dia</pre>
 `,
-videoUrl: "https://www.youtube.com/embed/0dLX40UMUKo?",
-artist: "Charlie Brown Jr.",
-artistImage: "../imagens/cbjr.avif", // URL da imagem do artista
+        videoUrl: "https://www.youtube.com/embed/0dLX40UMUKo?",
+        artist: "Charlie Brown Jr.",
+        artistImage: "../imagens/cbjr.avif", // URL da imagem do artista
 
 
-},
+    },
 };
 
 // Recuperar a música selecionada
@@ -446,13 +446,15 @@ if (selectedSong && songData[selectedSong]) {
     document.getElementById("song-tabs-content").innerHTML = songData[selectedSong].tabs;
 
     // Atualizar o iframe com o vídeo da música
-    document.getElementById("song-video").src = songData[selectedSong].videoUrl;
+    document.getElementById("song-video").src = songData[selectedSong].videoUrl + "?autoplay=0";
+    document.getElementById("song-video1").src = songData[selectedSong].videoUrl + "?autoplay=0";
 } else {
     // Tratar o caso em que a música não é encontrada
     document.getElementById("song-title").innerText = "Música não encontrada";
     document.getElementById("artist-name").innerText = ""; // Limpar o nome do artista
     document.getElementById("song-tabs-content").innerHTML = ""; // Limpar as tablaturas
     document.getElementById("song-video").style.display = "none"; // Esconder o vídeo
+    document.getElementById("song-video1").style.display = "none"; // Esconder o vídeo
 
     // Limpar a imagem do artista
     const artistImageElement = document.getElementById("artist-image");
