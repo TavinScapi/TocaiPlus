@@ -25,7 +25,7 @@
 
 ## 📸 Prévia do Projeto
 
-![Prévia do Tocaí](https://via.placeholder.com/800x400.png?text=Prévia+do+Projeto)
+![Prévia do Tocaí](https://github.com/TavinScapi/Imagens/blob/main/PreviewTOCAÍ.png)
 
 ## 📄 Licença
 
