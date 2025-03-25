@@ -13,7 +13,7 @@
 <body>
     <div class="artist-header">
         <div class="back-button" onclick="window.history.back();">
-            <i class="fas fa-arrow-left"></i> <!-- Usando Font Awesome -->
+            <i class="fas fa-arrow-left"></i>
         </div>
 
         <img id="artist-image" src="" alt="Foto do Artista">
@@ -26,23 +26,20 @@
     <div class="main-content">
         <div class="music-section">
             <div class="tabs-section" id="song-tabs">
-            <h2>Tabs</h2>
-            <div class="responsive-buttons">
-                <button id="auto-scroll-btn">Auto Rolagem</button>
-                <button id="responsive-listen-btn" onclick="toggleIframe()">Ouvir</button>
-            </div>
-            <div id="iframe-container" style="display: none; text-align: center;">
-                <iframe id="song-video1" src="" width="250" height="150" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>            
-            <div class="tablatura" style="overflow-y: scroll; scrollbar-width: none; -ms-overflow-style: none;">
-                <pre id="song-tabs-content" style="overflow-y: scroll; scrollbar-width: none; -ms-overflow-style: none;"></pre>
-            </div>
-            <style>
-                .tablatura::-webkit-scrollbar,
-                #song-tabs-content::-webkit-scrollbar {
-                    display: none;
-                }
-            </style>
+                <h2>Tabs</h2>
+                <div class="responsive-buttons">
+                    <button id="auto-scroll-btn">Auto Rolagem</button>
+                    <button id="responsive-listen-btn" onclick="toggleIframe()">Ouvir</button>
+                </div>
+                <div id="iframe-container" style="display: none; text-align: center;">
+                    <iframe id="song-video1" src="" width="250" height="150" frameborder="0"
+                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+                <div class="tablatura" style="overflow-y: scroll; scrollbar-width: none; -ms-overflow-style: none;">
+                    <pre id="song-tabs-content"
+                        style="overflow-y: scroll; scrollbar-width: none; -ms-overflow-style: none;"></pre>
+                </div>
             </div>
         </div>
 
@@ -50,7 +47,9 @@
             <div class="video-section">
                 <h2>Vídeo</h2>
                 <div class="video-container">
-                    <iframe id="song-video" src="" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe id="song-video" src="" frameborder="0"
+                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
                 </div>
             </div>
 
@@ -72,10 +71,9 @@
             </ul>
         </aside>
     </div>
-    
+
     <script src="musica.js"></script>
     <script src="script.js"></script>
 </body>
 
 </html>
-

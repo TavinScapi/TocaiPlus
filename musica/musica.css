@@ -7,6 +7,11 @@ body {
     color: #333;
 }
 
+.tablatura::-webkit-scrollbar,
+#song-tabs-content::-webkit-scrollbar {
+    display: none;
+}
+
 /* Cabeçalho do Artista */
 .artist-header {
     display: flex;
