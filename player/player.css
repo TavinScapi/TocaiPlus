@@ -1340,34 +1340,43 @@ h1 {
 @media (max-width: 767px) {
     .playerSpotify {
         left: 0;
-        padding-left: 15px;
-        border-radius: 5px;
-        margin: 10px;
+        padding: 0;
+        /* Remove todo o padding */
+        margin: 5px;
+        /* Remove as margens */
+        border-radius: 15px;
+        /* Remove bordas arredondadas */
+        height: 80px;
+        /* Altura consistente */
     }
 
     .sidebarDireita {
         bottom: 80px;
-        /* Ajuste para altura do player mobile */
+        /* Ajuste para altura do player */
     }
 
     .spotify-iframe-container {
-        padding: 5px 0;
-        /* Padding menor para mobile */
+        padding: 0;
+        /* Remove todo o padding interno */
+        height: 100%;
+        /* Ocupa 100% da altura do player */
     }
 
     #spotify-iframe {
         height: 100%;
+        /* Ocupa 100% do container */
         width: 100%;
-        /* Altura menor para mobile */
+        /* Ocupa 100% da largura */
+        /* Remove bordas arredondadas se necessário */
     }
 
     .lyrics-button {
-        padding: 6px 12px;
-        font-size: 14px;
+        display: none;
+        /* Mantém o botão escondido */
     }
 
     #player-bar {
         margin-bottom: 100px;
-        /* Ajuste para altura do player mobile */
+        /* Ajuste para altura do player */
     }
 }
