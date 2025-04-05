@@ -1356,7 +1356,8 @@ h1 {
     }
 
     #spotify-iframe {
-        height: 70px;
+        height: 100%;
+        width: 100%;
         /* Altura menor para mobile */
     }
 
