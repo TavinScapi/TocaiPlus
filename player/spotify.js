@@ -1,8 +1,8 @@
 // Spotify Configuration
 const CLIENT_ID = '1ca02f4c12f247de9ef1552f920e191e';
 const REDIRECT_URI = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost'
-    ? 'http://127.0.0.1:5501/player/player.html'  // Local environment
-    : 'https://tavinscapi.github.io/Tocai/player/player.html'; // Production
+    ? 'http://127.0.0.1:5501/player/player.html'
+    : 'https://tavinscapi.github.io/Tocai/player/player.html';
 const SCOPE = 'user-read-private user-read-email user-top-read user-follow-read user-read-recently-played streaming';
 
 // DOM Elements
@@ -14,10 +14,6 @@ const loading = document.getElementById('loading');
 const searchInput = document.getElementById('search-input');
 const searchResults = document.getElementById('search-results');
 const playerBar = document.getElementById('player-bar');
-const audioPlayer = document.getElementById('audio-player');
-const nowPlayingCover = document.getElementById('now-playing-cover');
-const nowPlayingTitle = document.getElementById('now-playing-title');
-const nowPlayingArtist = document.getElementById('now-playing-artist');
 const resultsContainer = document.getElementById("searchResults");
 const lyricsContainer = document.getElementById("lyrics");
 
@@ -342,25 +338,14 @@ function playTrackFromSearch(track, index) {
     currentTrack = track;
     currentTrackIndex = index;
 
-    nowPlayingCover.src = track.album.images[0].url;
-    nowPlayingTitle.textContent = track.name;
-    nowPlayingArtist.textContent = track.artists.map(artist => artist.name).join(', ');
+    // Exibir o player do Spotify no iframe
+    const spotifyContainer = document.querySelector('.spotify-iframe-container');
+    spotifyContainer.innerHTML = `<iframe id="spotify-iframe" src="https://open.spotify.com/embed/track/${track.id}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
 
-    // Use preview audio (30 seconds)
-    audioPlayer.src = track.preview_url || '';
-    playerBar.classList.remove('hidden');
     searchResults.classList.add('hidden');
     searchInput.value = '';
 
-    if (track.preview_url) {
-        audioPlayer.play().catch(e => console.log('Auto-play prevented:', e));
-    }
-
-    // Also display in the player iframe
-    const player = document.getElementById("player");
-    player.innerHTML = `<iframe id="spotify-iframe" src="https://open.spotify.com/embed/track/${track.id}" width="80%" height="100%" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
-
-    // Load lyrics
+    // Carregar letras da música
     fetchLyrics(track.name, track.artists[0].name);
 }
 
@@ -369,7 +354,7 @@ function playPreviousTrack() {
         currentTrackIndex--;
         playTrackFromSearch(searchResultsList[currentTrackIndex], currentTrackIndex);
     } else {
-        alert("You're at the first track");
+        alert("Você está na primeira faixa.");
     }
 }
 
@@ -378,7 +363,7 @@ function playNextTrack() {
         currentTrackIndex++;
         playTrackFromSearch(searchResultsList[currentTrackIndex], currentTrackIndex);
     } else {
-        alert("You've reached the end of the list");
+        alert("Você chegou ao final da lista.");
     }
 }
 

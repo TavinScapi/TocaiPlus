@@ -21,3 +21,16 @@ function menuBtnChange() {
 }
 
 menuBtnChange();
+
+document.getElementById('toggleLyrics').addEventListener('click', function () {
+    const sidebar = document.getElementById('lyricsSidebar');
+    const button = this;
+
+    if (sidebar.style.display === 'none') {
+        sidebar.style.display = 'block';
+        button.textContent = 'Ocultar Letra';
+    } else {
+        sidebar.style.display = 'none';
+        button.textContent = 'Mostrar Letra';
+    }
+});

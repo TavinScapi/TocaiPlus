@@ -258,7 +258,7 @@
     position: relative;
     top: 0;
     left: 78px;
-    width: calc(73.2% - 78px);
+    width: calc(100% - 78px);
     transition: all 0.5s ease;
     height: 10px;
 }
@@ -576,6 +576,25 @@ footer .bottom-details .bottom_text {
         margin: 0;
         transition: all 0.5s ease;
     }
+
+    .sidebarDireita {
+        display: none;
+    }
+
+    .player-bar {
+        position: fixed;
+        margin-left: -78px;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        background-color: #282828;
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 50px;
+        margin-bottom: 100px;
+    }
 }
 
 @media screen and (min-width: 769px) {
@@ -796,10 +815,12 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1500px;
+    /* Define a reasonable maximum width */
     margin: 0 auto;
-    padding: 20px;
+    /* Centers the container horizontally */
     background-color: #0D0D0D;
+    padding-top: 15px;
 }
 
 header {
@@ -1098,7 +1119,6 @@ h1 {
     }
 }
 
-
 /* Barra de pesquisa */
 .search-container {
     margin: 20px 0;
@@ -1179,15 +1199,17 @@ h1 {
 .player-bar {
     position: fixed;
     bottom: 0;
-    left: 0;
-    right: 0;
-    background: #181818;
-    border-top: 1px solid #282828;
+    left: 78px;
+    /* igual à largura da sidebar esquerda */
+    right: 400px;
+    /* igual à largura da sidebar direita */
+    background-color: #282828;
     padding: 10px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    z-index: 1000;
+    z-index: 100;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .player-info {
@@ -1217,13 +1239,134 @@ h1 {
     color: #b3b3b3;
 }
 
-#audio-player {
-    flex: 1;
-    max-width: 600px;
-    margin: 0 20px;
-    z-index: 1000;
+
+
+
+
+/* Estilos para a sidebar de letras */
+.sidebarDireita {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 100px;
+    /* Ajustado para altura do player */
+    width: 350px;
+    background-color: #181818;
+    color: white;
+    overflow-y: auto;
+    z-index: 999;
+    transition: transform 0.3s ease;
 }
 
-#audio-player::-webkit-media-controls-panel {
+.sidebarDireita[style*="display: none"] {
+    transform: translateX(100%);
+}
+
+.main-content {
+    padding: 20px;
+}
+
+.lyrics {
+    white-space: pre-line;
+    line-height: 1.6;
+    font-size: 16px;
+    padding: 15px;
+}
+
+/* Player principal */
+.playerSpotify {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
     background-color: #282828;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    gap: 15px;
+}
+
+.player-footer {
+    flex-grow: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.spotify-iframe-container {
+    width: 100%;
+    height: 100%;
+    padding: 10px 0;
+    box-sizing: border-box;
+}
+
+#spotify-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    border-radius: 8px;
+}
+
+.lyrics-button {
+    background-color: #1DB954;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+/* DESKTOP (acima de 768px) */
+@media (min-width: 768px) {
+    .playerSpotify {
+        left: 70px;
+        padding-left: 30px;
+    }
+
+    #spotify-iframe {
+        height: 80px;
+        /* Altura fixa para desktop */
+    }
+}
+
+/* MOBILE (abaixo de 768px) */
+@media (max-width: 767px) {
+    .playerSpotify {
+        left: 0;
+        padding-left: 15px;
+        border-radius: 5px;
+        margin: 10px;
+    }
+
+    .sidebarDireita {
+        bottom: 80px;
+        /* Ajuste para altura do player mobile */
+    }
+
+    .spotify-iframe-container {
+        padding: 5px 0;
+        /* Padding menor para mobile */
+    }
+
+    #spotify-iframe {
+        height: 70px;
+        /* Altura menor para mobile */
+    }
+
+    .lyrics-button {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+
+    #player-bar {
+        margin-bottom: 100px;
+        /* Ajuste para altura do player mobile */
+    }
 }

@@ -11,7 +11,6 @@
     <script src='spotify.js' defer></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
 </head>
 
 <body>
@@ -94,62 +93,8 @@
             </li>
         </ul>
     </div>
-    <div class="sidebar1">
-        <div class="container1">
-            <!-- Conteúdo principal -->
-            <div class="main-content">
-                <!-- Player do Spotify -->
-                <div id="player" class="player"></div>
 
-                <!-- Letras da música -->
-                <div id="lyrics" class="lyrics">
-                    <p>Busque e reproduza uma música para ver a letra aqui.</p>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <style>
-        .sidebar1 {
-            width: 500px;
-            background-color: #181818;
-            color: white;
-            padding: 20px;
-            height: 100vh;
-            position: fixed;
-            right: 0;
-            top: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 1;
-        }
-
-        .sidebar1 nav ul {
-            list-style: none;
-            padding: 0;
-            margin-top: 20px;
-        }
-
-        .sidebar1 nav ul li {
-            margin-bottom: 10px;
-        }
-
-        .sidebar1 nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-        }
-
-        .container1 {
-            flex: 1;
-            width: 100%;
-        }
-
-        .main-content {
-            padding: 20px;
-        }
-    </style>
     <div class="home-section">
         <div class="container">
             <header>
@@ -174,17 +119,6 @@
                     <input type="text" id="search-input" placeholder="Pesquisar músicas, artistas ou álbuns...">
                 </div>
                 <div id="search-results" class="hidden"></div>
-            </div>
-
-            <div class="player-bar hidden" id="player-bar">
-                <div class="player-info">
-                    <img id="now-playing-cover" src="" alt="Capa do Álbum">
-                    <div>
-                        <div id="now-playing-title">Nenhuma música selecionada</div>
-                        <div id="now-playing-artist"></div>
-                    </div>
-                </div>
-                <audio id="audio-player" controls></audio>
             </div>
 
             <main id="main-content" class="hidden">
@@ -245,7 +179,27 @@
                 <p>Carregando seus dados do Spotify...</p>
             </div>
 
+            <div class="sidebarDireita" id="lyricsSidebar" style="display: none;">
+                <div class="container1">
+                    <div class="main-content">
+                        <div id="lyrics" class="lyrics">
+                            <p>Busque e reproduza uma música para ver a letra aqui.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="playerSpotify" id="player-bar">
+                <div id="player" class="player-footer">
+                    <div class="spotify-iframe-container">
+                        <!-- O iframe será inserido aqui via JavaScript -->
+                    </div>
+                </div>
+                <button id="toggleLyrics" class="lyrics-button">Mostrar Letra</button>
+            </div>
+
         </div>
+
         <footer>
             <div class="content1">
                 <div class="top">
@@ -313,6 +267,8 @@
             </div>
         </footer>
 
+        <br><br><br><br><br>
+
         <div class="seila">
             <br><br><br><br><br>
         </div>
@@ -375,9 +331,7 @@
                 </li>
             </ul>
         </div>
-    </div>
-
-    <script src="menumobile.js"></script>
+        <script src="menumobile.js"></script>
 </body>
 
 </html>
