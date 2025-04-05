@@ -1336,6 +1336,7 @@ h1 {
     }
 }
 
+
 /* MOBILE (abaixo de 768px) */
 @media (max-width: 767px) {
     .playerSpotify {
@@ -1348,6 +1349,7 @@ h1 {
         /* Remove bordas arredondadas */
         height: 80px;
         /* Altura consistente */
+        z-index: 1;
     }
 
     .sidebarDireita {
