@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     // =============== CARREGAMENTO DE COMPONENTES ===============
     // Carrega a sidebar
-    fetch('/components/sidebar.html')
+    fetch('../components/sidebar.html')
         .then(response => {
             if (!response.ok) throw new Error('Sidebar não encontrada');
             return response.text();
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Carrega o footer dentro do home-section
     const homeSection = document.querySelector('.home-section');
     if (homeSection) {
-        fetch('/components/footer.html')
+        fetch('../components/footer.html')
             .then(response => {
                 if (!response.ok) throw new Error('Footer não encontrado');
                 return response.text();
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Carrega o menu mobile
-    fetch('/components/mobile-menu.html')
+    fetch('../components/mobile-menu.html')
         .then(response => {
             if (!response.ok) throw new Error('Menu mobile não encontrado');
             return response.text();
