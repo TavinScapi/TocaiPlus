@@ -6,97 +6,18 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Tocaí | Estúdio</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='estudio.css'>
-    <script src='estudio.js' defer></script>
+    <link rel='stylesheet' type='text/css' media='screen' href='../css/estudio.css'>
+    <script src='../js/estudio.js' defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css">
+    <script src="../js/load-components.js" defer></script>
 </head>
 
 <body>
-    <div class="sidebar">
-        <div class="logo-details">
-            <div class="logo_name">Tocaí</div>
-            <i class='bx bx-menu' id="btn"></i>
-        </div>
-        <ul class="nav-list">
-            <li>
-                <i class='bx bx-search'></i>
-                <input type="text" placeholder="Pesquisar músicas...">
-                <span class="tooltip">Pesquisar</span>
-            </li>
-            <li>
-                <a href="../index.html">
-                    <i class='bx bx-home'></i>
-                    <span class="links_name">Início</span>
-                </a>
-                <span class="tooltip">Início</span>
-            </li>
-            <li>
-                <a href="../estudio/estudio.html">
-                    <i class='bx bx-headphone'></i>
-                    <span class="links_name">Estúdio Virtual</span>
-                </a>
-                <span class="tooltip">Estúdio Virtual</span>
-            </li>
-            <li>
-                <a href="../bandaeartistas/bandasEartistas.html">
-                    <i class='bx bx-group'></i>
-                    <span class="links_name">Artistas & Bandas</span>
-                </a>
-                <span class="tooltip">Artistas & Bandas</span>
-            </li>
-            <li>
-                <a href="../player/player.html">
-                    <i class='bx bx-play-circle'></i>
-                    <span class="links_name">Player</span>
-                </a>
-                <span class="tooltip">Player</span>
-            </li>
-            <li>
-                <a href="../cifra/cifra.html">
-                    <i class='bx bx-music'></i>
-                    <span class="links_name">Cifras & Acordes</span>
-                </a>
-                <span class="tooltip">Cifras & Acordes</span>
-            </li>
-            <li>
-                <a href="../tutoriais/tutoriais.html">
-                    <i class='bx bx-movie'></i>
-                    <span class="links_name">Vídeos & Tutoriais</span>
-                </a>
-                <span class="tooltip">Vídeos & Tutoriais</span>
-            </li>
-            <li>
-                <a href="../teoria/teoria.html">
-                    <i class='bx bx-book-open'></i>
-                    <span class="links_name">Teoria Musical</span>
-                </a>
-                <span class="tooltip">Teoria Musical</span>
-            </li>
-            <li>
-                <a href="">
-                    <i class='bx bx-cog'></i>
-                    <span class="links_name">Configurações</span>
-                </a>
-                <span class="tooltip">Configurações</span>
-            </li>
-            <li class="profile">
-                <div class="profile-details">
-                    <img src="./images/profile.png" alt="Imagem de perfil">
-                    <div class="name_job">
-                        <div class="name">Tocaí</div>
-                        <div class="job">Dev & Tester</div>
-                    </div>
-                </div>
-                <i class='bx bx-log-out' id="log_out"></i>
-            </li>
-        </ul>
-    </div>
-
     <div class="home-section">
         <div class="hero">
             <div class="wrapper-images">
@@ -679,7 +600,7 @@
 
         <div class="conteudo1">
             <div class="top-text">BEM-VINDO AO SEU ESTÚDIO VIRTUAL</div>
-            <div class="date">Rescursos essenciais para músicos em um só lugar</div>
+            <div class="date">Recursos essenciais para músicos em um só lugar</div>
             <div class="divider"></div>
             <div class="jubilee">EXPLORE E APRIMORE SUAS HABILIDADES MUSICAIS</div>
             <div class="bottom-text">Afinador, metrônomo, gerador de tablatura e muito mais</div>
@@ -839,138 +760,12 @@
 
         </section>
 
-        <footer>
-            <div class="content1">
-                <div class="top">
-                    <div class="logo-details">
-                        <i class="fab fa-slack"></i>
-                        <span class="logo_name">Logo</span>
-                    </div>
-
-                    <div class="media-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="link-boxes">
-                    <ul class="box">
-                        <li class="link_name">Aprenda</li>
-                        <li><a href="#">Cifra & Acordes</a></li>
-                        <li><a href="#">Vídeos & Tutoriais</a></li>
-                        <li><a href="#">Teoria Musical</a></li>
-                        <li><a href="estudio/estudio.html">Estúdio Online</a></li>
-                        <li><a href="#artistas">Bandas & Artistas</a></li>
-                    </ul>
-                    <ul class="box">
-                        <li class="link_name">Ferramentas</li>
-                        <li><a href="estudio/gravador/gravador.html">Gravador</a></li>
-                        <li><a href="estudio/mapa/mapa.html">Mapa de Acordes</a></li>
-                        <li><a href="estudio/metronomo/index.html">Metronomo</a></li>
-                        <li><a href="estudio/tuner-master/app/index.html">Afinador</a></li>
-                        <li><a href="estudio/tab/tab.html">Gerador de Tabs</a></li>
-                    </ul>
-                    <ul class="box">
-                        <li class="link_name">Conta</li>
-                        <li><a href="#">Perfil</a></li>
-                        <li><a href="#">Minha conta</a></li>
-                        <li><a href="#">Preferências</a></li>
-                        <li><a href="#">Compra</a></li>
-                    </ul>
-                    <ul class="box">
-                        <li class="link_name">Sobre o Site</li>
-                        <li><a href="#">HTML & CSS</a></li>
-                        <li><a href="#">JavaScript</a></li>
-                        <li><a href="#">Fotografia</a></li>
-                        <li><a href="#">Photoshop</a></li>
-                    </ul>
-                    <ul class="box input-box">
-                        <li class="link_name">Inscreva-se</li>
-                        <li><input type="text" placeholder="Digite seu e-mail"></li>
-                        <li><input type="button" value="Inscrever-se"></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="divider1"></div>
-            <div class="bottom-details">
-                <div class="bottom_text">
-                    <span class="copyright_text">Copyright © 2025 <a href="#">Logo.</a> Todos os direitos
-                        reservados</span>
-                    <span class="policy_terms">
-                        <a href="#">Política de privacidade</a>
-                        <a href="#">Termos e condições</a>
-                    </span>
-                </div>
-            </div>
-        </footer>
 
         <div class="seila">
             <br><br><br><br><br>
         </div>
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css">
-
-        <div class="nav">
-            <ul class="nav__list">
-                <li>
-                    <a href="../index.html" class="nav__link active-link">
-                        <i class="ri-home-2-line"></i>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="../estudio/estudio.html" class="nav__link">
-                        <i class="ri-headphone-line"></i>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="../bandaeartistas/bandasEartistas.html" class="nav__link">
-                        <i class="ri-search-line"></i>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="../player/player.html" class="nav__link">
-                        <i class="ri-play-circle-line"></i>
-                    </a>
-                </li>
-
-                <li>
-                    <button class="nav__expand" id="nav-expand">
-                        <i class="ri-book-line nav__expand-icon" id="nav-expand-icon"></i>
-                    </button>
-
-                    <ul class="nav__expand-list" id="nav-expand-list">
-                        <li>
-                            <a href="../cifra/cifra.html" class="nav__expand-link">
-                                <i class="ri-music-line"></i>
-                                <span>Cifras & Acordes</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="../tutoriais/tutoriais.html" class="nav__expand-link">
-                                <i class="ri-video-line"></i>
-                                <span>Vídeos & Tutoriais</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="../teoria/teoria.html" class="nav__expand-link">
-                                <i class="ri-music-2-line"></i>
-                                <span>Teoria Musical</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
     </div>
-    <script src="menumobile.js"></script>
-
+    
 </body>
 
 </html>

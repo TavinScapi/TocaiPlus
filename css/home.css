@@ -875,12 +875,16 @@ nav a {
 
 .lista-artistas {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Distribui melhor os cards */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* Distribui melhor os cards */
     gap: 1.5rem;
     padding: 2rem;
-    max-width: 1200px; /* Evita que os cards fiquem muito espalhados */
-    margin: 0 auto; /* Centraliza a seção */
-    justify-items: center; /* Centraliza os cards dentro da grid */
+    max-width: 1200px;
+    /* Evita que os cards fiquem muito espalhados */
+    margin: 0 auto;
+    /* Centraliza a seção */
+    justify-items: center;
+    /* Centraliza os cards dentro da grid */
 }
 
 /* cards artistas */
@@ -1029,12 +1033,6 @@ nav a {
         display: none !important;
     }
 }
-
-
-
-
-
-
 
 footer {
     background: linear-gradient(to bottom, #0D0D0D, #2d2d2d);

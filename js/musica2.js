@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function toggleIframe() {
     const iframeContainer = document.getElementById('iframe-container');
     const listenButton = document.getElementById('responsive-listen-btn');
-    
+
     if (iframeContainer.style.display === 'none' || iframeContainer.style.display === '') {
         iframeContainer.style.display = 'block';
         listenButton.textContent = 'Fechar';
@@ -84,5 +84,4 @@ function toggleIframe() {
         iframeContainer.style.display = 'none';
         listenButton.textContent = 'Ouvir';
     }
-    }
-    
+}

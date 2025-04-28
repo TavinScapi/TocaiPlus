@@ -1,7 +1,7 @@
 // Salvar o artista escolhido no localStorage e redirecionar
 function selectArtist(artist) {
     localStorage.setItem("selectedArtist", artist);
-    window.location.href = "artista/artista.html";
+    window.location.href = "../pages/artista.html";
 }
 
 // Dados das bandas
@@ -397,7 +397,7 @@ if (window.location.pathname.includes("artista.html")) {
             // Adicionar evento de clique para redirecionar para a página da música
             li.addEventListener("click", () => {
                 localStorage.setItem("selectedSong", song.name);
-                window.location.href = "../musica/musica.html"; // Redireciona para a página de aprendizado
+                window.location.href = "../pages/musica.html"; // Redireciona para a página de aprendizado
             });
 
             songsList.appendChild(li);

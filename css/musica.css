@@ -37,6 +37,7 @@ body {
     font-size: 32px;
     color: #ffffff;
 }
+
 .artist-header h2 {
     font-size: 16px;
     color: #ffffff;
@@ -55,22 +56,28 @@ body {
 /* Estilos para o botão de voltar */
 .back-button {
     position: absolute;
-    left: 15px; /* Distância da esquerda */
+    left: 15px;
+    /* Distância da esquerda */
     font-size: 28px;
     color: #ffffff;
     cursor: pointer;
-    z-index: 10; /* Garante que o ícone ficará acima de outros elementos */
+    z-index: 10;
+    /* Garante que o ícone ficará acima de outros elementos */
     transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .back-button:hover {
-    transform: translateX(-5px); /* Efeito de animação */
-    color: #989CA6; /* Cor de destaque (vermelho claro) */
+    transform: translateX(-5px);
+    /* Efeito de animação */
+    color: #989CA6;
+    /* Cor de destaque (vermelho claro) */
 }
 
 .back-button i {
-    font-size: 30px; /* Tamanho do ícone */
-    transition: transform 0.3s ease; /* Suaviza o efeito */
+    font-size: 30px;
+    /* Tamanho do ícone */
+    transition: transform 0.3s ease;
+    /* Suaviza o efeito */
 }
 
 /* Adicionando um efeito de sombra sutil ao ícone */
@@ -162,10 +169,14 @@ body {
 
 /* Estilo para o contêiner das tabs */
 .tablatura {
-    max-height: 600px; /* Defina a altura máxima desejada */
-    overflow-y: auto;  /* Habilita o scroll vertical */
-    background-color: #0D0D0D; /* Cor de fundo para melhorar a visibilidade */
-    color: #ffffff; /* Cor de fundo para melhorar a visibilidade */
+    max-height: 600px;
+    /* Defina a altura máxima desejada */
+    overflow-y: auto;
+    /* Habilita o scroll vertical */
+    background-color: #0D0D0D;
+    /* Cor de fundo para melhorar a visibilidade */
+    color: #ffffff;
+    /* Cor de fundo para melhorar a visibilidade */
 }
 
 .scroll-controls {
@@ -240,7 +251,8 @@ body {
 
 @media screen and (max-width: 768px) {
     .sidebar {
-        display: none;;
+        display: none;
+        ;
     }
 
     .home-section {
@@ -252,7 +264,8 @@ body {
     }
 
     .main-content {
-        flex-direction: column; /* Coloca os elementos em coluna */
+        flex-direction: column;
+        /* Coloca os elementos em coluna */
     }
 
     .music-section {

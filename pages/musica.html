@@ -5,15 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tabs de Música</title>
-    <link rel="stylesheet" href="musica.css">
+    <link rel="stylesheet" href="../css/musica.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css">
+    <script src="../js/musica.js" defer></script>
+    <script src="../js/musica2.js"></script>
 </head>
 
 <body>
     <div class="artist-header">
-        <div class="back-button" onclick="window.history.back();">
-            <i class="fas fa-arrow-left"></i>
+        <div class="back-button">
+            <a href="../pages/artista.html">
+                <i class="fas fa-arrow-left"></i>
+            </a>
         </div>
 
         <img id="artist-image" src="" alt="Foto do Artista">
@@ -71,9 +75,8 @@
             </ul>
         </aside>
     </div>
-
-    <script src="musica.js"></script>
-    <script src="script.js"></script>
+    <script src="../js/musica.js" defer></script>
+    <script src="../js/musica2.js" defer></script>
 </body>
 
 </html>
