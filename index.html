@@ -2,189 +2,66 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tocaí - Carregando</title>
+  <!-- Meta tags essenciais -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Informações básicas do site -->
+  <title>Tocaí - A música na ponta dos dedos</title>
+  <meta name="description" content="Encontre cifras, aprenda músicas e compartilhe seu talento com a comunidade Tocaí">
+  <meta name="keywords" content="cifras, violão, música, aprendizado musical, acordes">
+
+  <!-- Favicon e ícones -->
+  <link rel="icon" href="imagens/LogoTocaí.png" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="32x32" href="imagens/LogoTocaí.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="imagens/LogoTocaí.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="imagens/LogoTocaí.png">
+
+  <!-- Pré-conexão para recursos externos -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Fontes do Google -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --color-bg: #000000;
-      --color-primary: #1DB954; /* Verde Spotify */
-      --color-white: #FFFFFF;
-      --color-muted: rgba(255, 255, 255, 0.7);
-      --color-progress-bg: rgba(255, 255, 255, 0.1);
-      --transition: all 0.4s cubic-bezier(0.2, 0.8, 0.4, 1);
-    }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
 
-    body, html {
-      height: 100%;
-      background-color: var(--color-bg);
-      font-family: 'Poppins', sans-serif;
-      overflow: hidden;
-      color: var(--color-white);
-    }
+  <!-- Meta tags para redes sociais (Open Graph) -->
+  <meta property="og:title" content="Tocaí - A música na ponta dos dedos">
+  <meta property="og:description"
+    content="Encontre cifras, aprenda músicas e compartilhe seu talento com a comunidade Tocaí">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tocai.app">
+  <meta property="og:image" content="https://tocai.app/assets/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
-    .splash-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      text-align: center;
-      padding: 20px;
-      opacity: 0;
-      animation: fadeIn 0.8s ease-out forwards;
-    }
+  <!-- Links para arquivos JavaScript -->
+  <script src="script.js" defer></script>
 
-    .logo {
-      width: 160px;
-      height: auto;
-      margin-bottom: 24px;
-      filter: brightness(0) invert(1);
-    }
+  <!-- Verificação de propriedade (opcional) -->
+  <meta name="google-site-verification" content="[SEU-CODIGO-DE-VERIFICACAO]">
 
-    .app-name {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: var(--color-white);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin: 0 0 8px;
-    }
-
-    .tagline {
-      font-size: 1.1rem;
-      color: var(--color-muted);
-      margin-bottom: 32px;
-      font-weight: 400;
-      max-width: 300px;
-      line-height: 1.5;
-    }
-
-    .progress-container {
-      width: 260px;
-      max-width: 90%;
-      height: 4px;
-      background-color: var(--color-progress-bg);
-      border-radius: 2px;
-      overflow: hidden;
-      margin-bottom: 24px;
-    }
-
-    .progress-bar {
-      height: 100%;
-      width: 0%;
-      background-color: var(--color-primary);
-      border-radius: 2px;
-      transition: var(--transition);
-    }
-
-    .loading-text {
-      font-size: 0.95rem;
-      color: var(--color-muted);
-      min-height: 24px;
-      transition: var(--transition);
-      font-weight: 500;
-    }
-
-    .loading-dots::after {
-      content: '.';
-      animation: dots 1.5s steps(5, end) infinite;
-    }
-
-    /* Animações */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes dots {
-      0%, 20% { content: '.'; }
-      40% { content: '..'; }
-      60%, 100% { content: '...'; }
-    }
-  </style>
+  <!-- Cor do tema para navegadores mobile -->
+  <meta name="theme-color" content="#1DB954">
 </head>
 
 <body>
-  <!-- Conteúdo principal -->
   <div class="splash-container">
-    <!-- Logo da aplicação -->
-    <img src="imagens/LogoTocaí.png" alt="Logo Tocaí" class="logo" title="Tocaí" />
+    <img src="imagens/LogoTocaí.png" alt="Logo Tocaí" class="logo" />
 
-    <!-- Nome e slogan -->
     <h1 class="app-name">Tocaí</h1>
     <p class="tagline">A música na ponta dos dedos</p>
 
-    <!-- Barra de progresso -->
     <div class="progress-container">
       <div class="progress-bar" id="progressBar"></div>
     </div>
 
-    <!-- Texto de carregamento -->
     <p class="loading-text" id="loadingText">Carregando cifras<span class="loading-dots"></span></p>
   </div>
 
-  <script>
-    const messages = [
-      "Carregando cifras",
-      "Preparando o violão",
-      "Afinando as cordas",
-      "Pronto para tocar"
-    ];
-
-    let progress = 0;
-    let currentMessage = 0;
-    const progressBar = document.getElementById('progressBar');
-    const loadingText = document.getElementById('loadingText');
-
-    // Simular progresso
-    const interval = setInterval(() => {
-      // Incremento não linear para parecer mais natural
-      const increment = progress < 50 ? 
-        Math.random() * 5 + 3 : 
-        Math.random() * 3 + 1;
-      
-      progress = Math.min(progress + increment, 100);
-      progressBar.style.width = progress + '%';
-
-      // Atualizar mensagens
-      if (progress >= 25 && currentMessage < 1) {
-        loadingText.innerHTML = `${messages[1]}<span class="loading-dots"></span>`;
-        currentMessage = 1;
-      } else if (progress >= 50 && currentMessage < 2) {
-        loadingText.innerHTML = `${messages[2]}<span class="loading-dots"></span>`;
-        currentMessage = 2;
-      } else if (progress >= 75 && currentMessage < 3) {
-        loadingText.innerHTML = `${messages[3]}<span class="loading-dots"></span>`;
-        currentMessage = 3;
-      }
-
-      // Finalizar carregamento
-      if (progress >= 100) {
-        clearInterval(interval);
-        setTimeout(() => {
-          document.querySelector('.splash-container').style.opacity = 0;
-          setTimeout(() => {
-            window.location.href = "pages/home.html";
-          }, 600);
-        }, 800);
-      }
-    }, 300);
-
-    // Prevenir comportamento de toque indesejado
-    document.addEventListener('touchmove', (e) => {
-      if (e.target === document.documentElement) {
-        e.preventDefault();
-      }
-    }, { passive: false });
-  </script>
 </body>
 
 </html>
