@@ -155,6 +155,8 @@
                     document.querySelector('.splash-container').style.opacity = 0;
                     setTimeout(() => {
                         document.querySelector('.splash-container').remove();
+                        // Redireciona para a página principal após a animação terminar
+                        window.location.href = "../pages/home.html"; // Altere para o nome da sua página
                     }, 500);
                 }, 500);
             }
