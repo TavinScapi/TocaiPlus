@@ -1,180 +1,190 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 
 <head>
-    <style>
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tocaí - Carregando</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #000000;
+      --color-primary: #1DB954; /* Verde Spotify */
+      --color-white: #FFFFFF;
+      --color-muted: rgba(255, 255, 255, 0.7);
+      --color-progress-bg: rgba(255, 255, 255, 0.1);
+      --transition: all 0.4s cubic-bezier(0.2, 0.8, 0.4, 1);
+    }
 
-            to {
-                opacity: 1;
-            }
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
+    body, html {
+      height: 100%;
+      background-color: var(--color-bg);
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+      color: var(--color-white);
+    }
 
-            50% {
-                transform: scale(1.05);
-            }
+    .splash-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      text-align: center;
+      padding: 20px;
+      opacity: 0;
+      animation: fadeIn 0.8s ease-out forwards;
+    }
 
-            100% {
-                transform: scale(1);
-            }
-        }
+    .logo {
+      width: 160px;
+      height: auto;
+      margin-bottom: 24px;
+      filter: brightness(0) invert(1);
+    }
 
-        @keyframes progressLoad {
-            0% {
-                width: 0%;
-            }
+    .app-name {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--color-white);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin: 0 0 8px;
+    }
 
-            100% {
-                width: 100%;
-            }
-        }
+    .tagline {
+      font-size: 1.1rem;
+      color: var(--color-muted);
+      margin-bottom: 32px;
+      font-weight: 400;
+      max-width: 300px;
+      line-height: 1.5;
+    }
 
-        body,
-        html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
-        }
+    .progress-container {
+      width: 260px;
+      max-width: 90%;
+      height: 4px;
+      background-color: var(--color-progress-bg);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
 
-        .splash-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #1a1a2e, #16213e);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            animation: fadeIn 0.6s ease-out;
-        }
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background-color: var(--color-primary);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
 
-        .logo {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 20px;
-            animation: pulse 2s infinite ease-in-out;
-        }
+    .loading-text {
+      font-size: 0.95rem;
+      color: var(--color-muted);
+      min-height: 24px;
+      transition: var(--transition);
+      font-weight: 500;
+    }
 
-        .app-name {
-            color: #fff;
-            font-size: 3rem;
-            font-weight: 700;
-            margin: 10px 0;
-            font-family: 'Poppins', sans-serif;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
+    .loading-dots::after {
+      content: '.';
+      animation: dots 1.5s steps(5, end) infinite;
+    }
 
-        .tagline {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            font-family: 'Poppins', sans-serif;
-        }
+    /* Animações */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        .progress-container {
-            width: 250px;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 3px;
-            overflow: hidden;
-            margin-bottom: 20px;
-        }
-
-        .progress-bar {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #ff6b6b, #ffa3a3);
-            border-radius: 3px;
-            animation: progressLoad 2.5s ease-in-out forwards;
-        }
-
-        .loading-text {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-            font-family: 'Poppins', sans-serif;
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    @keyframes dots {
+      0%, 20% { content: '.'; }
+      40% { content: '..'; }
+      60%, 100% { content: '...'; }
+    }
+  </style>
 </head>
 
 <body>
-    <div class="splash-container">
-        <!-- Logo Musical (Violão + Notas) -->
-        <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 18C14.7614 18 17 15.7614 17 13V7H7V13C7 15.7614 9.23858 18 12 18Z" stroke="#fff"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M17 7V5H19V7H17Z" fill="#fff" />
-            <path d="M7 7V5H5V7H7Z" fill="#fff" />
-            <path d="M12 18V21" stroke="#fff" stroke-width="2" stroke-linecap="round" />
-            <path d="M10 21H14" stroke="#fff" stroke-width="2" stroke-linecap="round" />
-            <path d="M12 15V13" stroke="#ff6b6b" stroke-width="2" stroke-linecap="round" />
-            <path d="M9 10H10" stroke="#ff6b6b" stroke-width="2" stroke-linecap="round" />
-            <path d="M14 10H15" stroke="#ff6b6b" stroke-width="2" stroke-linecap="round" />
-        </svg>
+  <!-- Conteúdo principal -->
+  <div class="splash-container">
+    <!-- Logo da aplicação -->
+    <img src="../imagens/LogoTocaí.png" alt="Logo Tocaí" class="logo" title="Tocaí" />
 
-        <h1 class="app-name">Tocaí</h1>
-        <p class="tagline">A música na ponta dos dedos</p>
+    <!-- Nome e slogan -->
+    <h1 class="app-name">Tocaí</h1>
+    <p class="tagline">A música na ponta dos dedos</p>
 
-        <div class="progress-container">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
-
-        <p class="loading-text" id="loadingText">Carregando cifras...</p>
+    <!-- Barra de progresso -->
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
     </div>
 
-    <script>
-        const messages = [
-            "Carregando cifras...",
-            "Preparando o violão...",
-            "Afinando as cordas...",
-            "Pronto para tocar!"
-        ];
+    <!-- Texto de carregamento -->
+    <p class="loading-text" id="loadingText">Carregando cifras<span class="loading-dots"></span></p>
+  </div>
 
-        let progress = 0;
-        const progressBar = document.getElementById('progressBar');
-        const loadingText = document.getElementById('loadingText');
-        let currentMessage = 0;
+  <script>
+    const messages = [
+      "Carregando cifras",
+      "Preparando o violão",
+      "Afinando as cordas",
+      "Pronto para tocar"
+    ];
 
-        const interval = setInterval(() => {
-            progress += 10;
-            if (progress >= 100) {
-                clearInterval(interval);
-                setTimeout(() => {
-                    document.querySelector('.splash-container').style.opacity = 0;
-                    setTimeout(() => {
-                        document.querySelector('.splash-container').remove();
-                        // Redireciona para a página principal após a animação terminar
-                        window.location.href = "../pages/home.html"; // Altere para o nome da sua página
-                    }, 500);
-                }, 500);
-            }
-            progressBar.style.width = progress + '%';
+    let progress = 0;
+    let currentMessage = 0;
+    const progressBar = document.getElementById('progressBar');
+    const loadingText = document.getElementById('loadingText');
 
-            // Muda a mensagem conforme o progresso
-            if (progress >= 25 && currentMessage < 1) {
-                loadingText.textContent = messages[1];
-                currentMessage = 1;
-            } else if (progress >= 50 && currentMessage < 2) {
-                loadingText.textContent = messages[2];
-                currentMessage = 2;
-            } else if (progress >= 75 && currentMessage < 3) {
-                loadingText.textContent = messages[3];
-                currentMessage = 3;
-            }
-        }, 300);
-    </script>
+    // Simular progresso
+    const interval = setInterval(() => {
+      // Incremento não linear para parecer mais natural
+      const increment = progress < 50 ? 
+        Math.random() * 5 + 3 : 
+        Math.random() * 3 + 1;
+      
+      progress = Math.min(progress + increment, 100);
+      progressBar.style.width = progress + '%';
+
+      // Atualizar mensagens
+      if (progress >= 25 && currentMessage < 1) {
+        loadingText.innerHTML = `${messages[1]}<span class="loading-dots"></span>`;
+        currentMessage = 1;
+      } else if (progress >= 50 && currentMessage < 2) {
+        loadingText.innerHTML = `${messages[2]}<span class="loading-dots"></span>`;
+        currentMessage = 2;
+      } else if (progress >= 75 && currentMessage < 3) {
+        loadingText.innerHTML = `${messages[3]}<span class="loading-dots"></span>`;
+        currentMessage = 3;
+      }
+
+      // Finalizar carregamento
+      if (progress >= 100) {
+        clearInterval(interval);
+        setTimeout(() => {
+          document.querySelector('.splash-container').style.opacity = 0;
+          setTimeout(() => {
+            window.location.href = "../pages/home.html";
+          }, 600);
+        }, 800);
+      }
+    }, 300);
+
+    // Prevenir comportamento de toque indesejado
+    document.addEventListener('touchmove', (e) => {
+      if (e.target === document.documentElement) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+  </script>
 </body>
 
 </html>
