@@ -1,137 +1,136 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Tocaí | Player</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='../css/player.css'>
-    <script src='../js/spotify.js' defer></script>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="../js/load-components.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tocai - Seu Player Spotify-like</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/player.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
-    <div class="home-section">
-        <div class="container">
-            <header>
-                <h1>Spotify Profile</h1>
-                <div id="auth-section">
-                    <button id="login-btn" class="btn-spotify">
-                        <i class="fab fa-spotify"></i> LOGIN COM SPOTIFY
-                    </button>
-                    <div id="user-profile" class="hidden">
-                        <img id="user-avatar" src="" alt="User">
-                        <span id="user-name"></span>
-                        <button id="logout-btn" class="btn-logout">
-                            <i class="fas fa-sign-out-alt"></i>
-                        </button>
-                    </div>
-                </div>
-            </header>
-
-            <div class="search-container">
-                <div class="search-bar">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png"
+                alt="Spotify Logo">
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="#" class="nav-link active">
+                    <i class="fas fa-home"></i>
+                    <span>Início</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
                     <i class="fas fa-search"></i>
-                    <input type="text" id="search-input" placeholder="Pesquisar músicas, artistas ou álbuns...">
-                </div>
-                <div id="search-results" class="hidden"></div>
-            </div>
-
-            <main id="main-content" class="hidden">
-                <div class="profile-header">
-                    <div class="profile-image-container">
-                        <img id="profile-image" src="" alt="Profile Image">
-                    </div>
-                    <div class="profile-info">
-                        <h2 id="profile-name"></h2>
-                        <div class="profile-stats">
-                            <div class="stat">
-                                <span id="followers-count">0</span>
-                                <span>SEGUIDORES</span>
-                            </div>
-                            <div class="stat">
-                                <span id="following-count">0</span>
-                                <span>SEGUINDO</span>
-                            </div>
-                            <div class="stat">
-                                <span id="playlists-count">0</span>
-                                <span>PLAYLISTS</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tabs">
-                    <button class="tab-btn active" data-tab="top-tracks">TOP MÚSICAS</button>
-                    <button class="tab-btn" data-tab="top-artists">TOP ARTISTAS</button>
-                    <button class="tab-btn" data-tab="recently-played">TOCADAS RECENTEMENTE</button>
-                </div>
-
-                <div class="tab-content active" id="top-tracks">
-                    <div class="time-range">
-                        <button class="time-btn active" data-range="short_term">ÚLTIMAS 4 SEMANAS</button>
-                        <button class="time-btn" data-range="medium_term">ÚLTIMOS 6 MESES</button>
-                        <button class="time-btn" data-range="long_term">TODOS OS TEMPOS</button>
-                    </div>
-                    <div class="items-grid" id="top-tracks-grid"></div>
-                </div>
-
-                <div class="tab-content" id="top-artists">
-                    <div class="time-range">
-                        <button class="time-btn active" data-range="short_term">ÚLTIMAS 4 SEMANAS</button>
-                        <button class="time-btn" data-range="medium_term">ÚLTIMOS 6 MESES</button>
-                        <button class="time-btn" data-range="long_term">TODOS OS TEMPOS</button>
-                    </div>
-                    <div class="items-grid" id="top-artists-grid"></div>
-                </div>
-
-                <div class="tab-content" id="recently-played">
-                    <div class="items-grid" id="recently-played-grid"></div>
-                </div>
-            </main>
-
-            <div id="loading" class="hidden">
-                <div class="spinner"></div>
-                <p>Carregando seus dados do Spotify...</p>
-            </div>
-
-            <div class="sidebarDireita" id="lyricsSidebar" style="display: none;">
-                <div class="container1">
-                    <div class="main-content">
-                        <div id="lyrics" class="lyrics">
-                            <p>Busque e reproduza uma música para ver a letra aqui.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="playerSpotify" id="player-bar">
-                <div id="player" class="player-footer">
-                    <div class="spotify-iframe-container">
-                        <!-- O iframe será inserido aqui via JavaScript -->
-                    </div>
-                </div>
-                <button id="toggleLyrics" class="lyrics-button">Mostrar Letra</button>
+                    <span>Buscar</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-book"></i>
+                    <span>Sua Biblioteca</span>
+                </a>
+            </li>
+        </ul>
+        <div class="playlists">
+            <h3 class="playlists-title">Suas Playlists</h3>
+            <div id="user-playlists">
+                <!-- As playlists serão carregadas dinamicamente aqui -->
             </div>
         </div>
-        
-        <script>
-            document.getElementById('toggleLyrics').addEventListener('click', function () {
-                const sidebar = document.getElementById('lyricsSidebar');
-                const button = this;
+    </aside>
 
-                if (sidebar.style.display === 'none') {
-                    sidebar.style.display = 'block';
-                    button.textContent = 'Ocultar Letra';
-                } else {
-                    sidebar.style.display = 'none';
-                    button.textContent = 'Mostrar Letra';
-                }
-            });
-        </script>
+    <!-- Header -->
+    <header class="header">
+        <div class="search-container">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search-input" placeholder="Pesquisar músicas, artistas ou álbuns...">
+            </div>
+            <div id="search-results" class="hidden"></div>
+        </div>
+        <div class="user-profile hidden" id="user-profile">
+            <img src="" alt="User Avatar" class="user-avatar" id="user-avatar">
+            <span class="user-name" id="user-name"></span>
+            <button class="logout-btn option-btn" id="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+        </div>
+        <button class="login-btn" id="login-btn">Entrar</button>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content" id="main-content">
+        <div class="loading hidden" id="loading">
+            <div class="loading-spinner"></div>
+        </div>
+
+        <div class="profile-section hidden" id="profile-section">
+            <img src="" alt="Profile Image" class="profile-image" id="profile-image">
+            <div class="profile-info">
+                <h2 id="profile-name"></h2>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="followers-count">0</div>
+                        <div class="stat-label">Seguidores</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="following-count">0</div>
+                        <div class="stat-label">Seguindo</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="playlists-count">0</div>
+                        <div class="stat-label">Playlists</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="top-tracks">Músicas mais tocadas</button>
+            <button class="tab-btn" data-tab="top-artists">Artistas mais ouvidos</button>
+            <button class="tab-btn" data-tab="recently-played">Tocadas recentemente</button>
+        </div>
+
+        <div class="tab-content active" id="top-tracks">
+            <div class="time-range">
+                <div class="time-buttons">
+                    <button class="time-btn active" data-range="short_term">Últimas 4 semanas</button>
+                    <button class="time-btn" data-range="medium_term">Últimos 6 meses</button>
+                    <button class="time-btn" data-range="long_term">De todos os tempos</button>
+                </div>
+            </div>
+            <div class="grid" id="top-tracks-grid"></div>
+        </div>
+
+        <div class="tab-content" id="top-artists">
+            <div class="time-range">
+                <div class="time-buttons">
+                    <button class="time-btn active" data-range="short_term">Últimas 4 semanas</button>
+                    <button class="time-btn" data-range="medium_term">Últimos 6 meses</button>
+                    <button class="time-btn" data-range="long_term">De todos os tempos</button>
+                </div>
+            </div>
+            <div class="grid" id="top-artists-grid"></div>
+        </div>
+
+        <div class="tab-content" id="recently-played">
+            <div class="grid" id="recently-played-grid"></div>
+        </div>
+
+        <div class="fixed-player-container">
+            <div class="spotify-iframe-container"></div>
+            <div class="lyrics-container" id="lyrics"></div>
+        </div>
+        
+    </main>
+
+    <script src="../js/spotify.js"></script>
 </body>
 
 </html>

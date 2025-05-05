@@ -13,7 +13,6 @@ const mainContent = document.getElementById('main-content');
 const loading = document.getElementById('loading');
 const searchInput = document.getElementById('search-input');
 const searchResults = document.getElementById('search-results');
-const playerBar = document.getElementById('player-bar');
 const resultsContainer = document.getElementById("searchResults");
 const lyricsContainer = document.getElementById("lyrics");
 
@@ -80,7 +79,6 @@ function clearAuth() {
     loginBtn.classList.remove('hidden');
     userProfile.classList.add('hidden');
     mainContent.classList.add('hidden');
-    playerBar.classList.add('hidden');
 }
 
 // User Data Functions
@@ -407,4 +405,88 @@ function debounce(func, wait) {
         clearTimeout(timeout);
         timeout = setTimeout(() => func.apply(context, args), wait);
     };
+}
+
+// Adicione esta função para carregar as playlists
+async function loadUserPlaylists(accessToken) {
+    try {
+        const playlistsContainer = document.getElementById('user-playlists');
+        // Na função loadUserPlaylists, adicione um indicador de carregamento
+        playlistsContainer.innerHTML = `
+    <div style="display: flex; justify-content: center; padding: 10px;">
+        <div class="loading-spinner" style="width: 20px; height: 20px;"></div>
+    </div>
+`;
+        // Primeiro busca as playlists do usuário
+        let url = 'https://api.spotify.com/v1/me/playlists?limit=50';
+        let allPlaylists = [];
+
+        // Paginação para pegar todas as playlists
+        while (url) {
+            const response = await fetch(url, {
+                headers: { 'Authorization': `Bearer ${accessToken}` }
+            });
+
+            if (!response.ok) throw new Error('Failed to load playlists');
+
+            const data = await response.json();
+            allPlaylists = [...allPlaylists, ...data.items];
+            url = data.next; // URL para a próxima página de resultados
+        }
+
+        // Exibe as playlists
+        if (allPlaylists.length > 0) {
+            playlistsContainer.innerHTML = '';
+            allPlaylists.forEach(playlist => {
+                const playlistItem = document.createElement('div');
+                playlistItem.className = 'playlist-item';
+                playlistItem.innerHTML = `
+                    <img src="${playlist.images[0]?.url || 'https://via.placeholder.com/40'}" 
+                         alt="${playlist.name}" 
+                         class="playlist-image">
+                    <div class="playlist-info">
+                        <div class="playlist-name">${playlist.name}</div>
+                        <div class="playlist-owner">Por ${playlist.owner.display_name}</div>
+                    </div>
+                `;
+
+                playlistItem.addEventListener('click', () => {
+                    window.open(playlist.external_urls.spotify, '_blank');
+                });
+
+                playlistsContainer.appendChild(playlistItem);
+            });
+        } else {
+            playlistsContainer.innerHTML = '<div class="search-no-results">Nenhuma playlist encontrada</div>';
+        }
+    } catch (error) {
+        console.error('Error loading playlists:', error);
+        document.getElementById('user-playlists').innerHTML =
+            '<div class="search-error">Erro ao carregar playlists</div>';
+    }
+}
+
+// Atualize a função loadUserData para incluir as playlists
+async function loadUserData() {
+    loginBtn.classList.add('hidden');
+    loading.classList.remove('hidden');
+    userProfile.classList.remove('hidden');
+
+    try {
+        const accessToken = localStorage.getItem('spotify_access_token');
+        const userData = await fetchSpotifyData('https://api.spotify.com/v1/me', accessToken);
+
+        displayUserProfile(userData);
+        await loadUserStats(accessToken, userData.id);
+        loadTopTracks('short_term', accessToken);
+        loadUserPlaylists(accessToken); // Adicione esta linha
+        setupTabs();
+
+        loading.classList.add('hidden');
+        mainContent.classList.remove('hidden');
+    } catch (error) {
+        console.error('Error loading user data:', error);
+        if (error.status === 401) clearAuth();
+        loading.classList.add('hidden');
+    }
 }
