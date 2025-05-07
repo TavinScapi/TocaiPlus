@@ -15,6 +15,8 @@ const searchInput = document.getElementById('search-input');
 const searchResults = document.getElementById('search-results');
 const resultsContainer = document.getElementById("searchResults");
 const lyricsContainer = document.getElementById("lyrics");
+const clearSearchBtn = document.getElementById('clear-search-btn');
+
 
 // Global Variables
 let currentTrack = null;
@@ -31,6 +33,23 @@ checkAuthStatus();
 loginBtn.addEventListener('click', () => {
     window.location.href = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${encodeURIComponent(SCOPE)}&response_type=token&show_dialog=true`;
 });
+
+clearSearchBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    searchResults.classList.add('hidden');
+    clearSearchBtn.classList.add('hidden');
+});
+
+// Modifique o event listener do searchInput para:
+searchInput.addEventListener('input', debounce(() => {
+    const query = searchInput.value.trim();
+    if (query.length > 0) {
+        clearSearchBtn.classList.remove('hidden');
+    } else {
+        clearSearchBtn.classList.add('hidden');
+    }
+    handleSearch();
+}, 500));
 
 logoutBtn.addEventListener('click', () => {
     clearAuth();
@@ -326,25 +345,37 @@ function displaySearchResults(tracks) {
                 <p>${track.artists.map(artist => artist.name).join(', ')} • ${track.album.name}</p>
             </div>
         `;
-        item.addEventListener('click', () => playTrackFromSearch(track, index));
+        item.addEventListener('click', () => {
+            playTrackFromSearch(track, index);
+            clearSearchBtn.classList.add('hidden'); // Esconde o botão ao selecionar um resultado
+        });
         searchResults.appendChild(item);
     });
     searchResults.classList.remove('hidden');
 }
 
 function playTrackFromSearch(track, index) {
+    document.getElementById('player-container').classList.remove('hidden');
     currentTrack = track;
     currentTrackIndex = index;
 
-    // Exibir o player do Spotify no iframe
     const spotifyContainer = document.querySelector('.spotify-iframe-container');
     spotifyContainer.innerHTML = `<iframe id="spotify-iframe" src="https://open.spotify.com/embed/track/${track.id}" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`;
 
     searchResults.classList.add('hidden');
     searchInput.value = '';
+    clearSearchBtn.classList.add('hidden'); // Adicione esta linha
 
-    // Carregar letras da música
     fetchLyrics(track.name, track.artists[0].name);
+}
+
+function clearAuth() {
+    localStorage.removeItem('spotify_access_token');
+    localStorage.removeItem('spotify_token_expiry');
+    loginBtn.classList.remove('hidden');
+    userProfile.classList.add('hidden');
+    mainContent.classList.add('hidden');
+    document.getElementById('player-container').classList.add('hidden'); // Adicione esta linha
 }
 
 function playPreviousTrack() {
