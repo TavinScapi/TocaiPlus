@@ -7,22 +7,33 @@
     <title>Tocai - Seu Player Spotify-like</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/player.css">
 </head>
 
 <body>
-    <!-- Sidebar -->
     <aside class="sidebar">
-        <div class="playlists">
-            <h3 class="playlists-title">Suas Playlists</h3>
-            <div id="user-playlists">
-                <!-- As playlists serão carregadas dinamicamente aqui -->
+        <div class="sidebar-section">
+            <h3 class="sidebar-title">Suas Playlists</h3>
+            <div id="user-playlists" class="playlists-container">
+                <!-- As playlists serão carregadas aqui -->
+            </div>
+        </div>
+
+        <div class="sidebar-section">
+            <h3 class="sidebar-title">Artistas Seguidos</h3>
+            <div id="followed-artists" class="artists-container">
+                <!-- Os artistas serão carregados aqui -->
             </div>
         </div>
     </aside>
 
     <!-- Header -->
     <header class="header">
+        <button class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="mobile-overlay"></div>
         <div class="search-container">
             <div class="search-bar">
                 <i class="fas fa-search"></i>
@@ -47,7 +58,7 @@
             <div class="loading-spinner"></div>
         </div>
 
-        <div class="profile-section hidden" id="profile-section">
+        <div class="profile-section " id="profile-section">
             <img src="" alt="Profile Image" class="profile-image" id="profile-image">
             <div class="profile-info">
                 <h2 id="profile-name"></h2>
@@ -116,10 +127,6 @@
                 <button class="player-btn">
                     <i class="fas fa-circle-play"></i>
                     Tocando Agora
-                </button>
-                <button class="player-btn">
-                    <i class="fas fa-box-open"></i>
-                    Sua Biblioteca
                 </button>
             </div>
         </div>

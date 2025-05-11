@@ -37,3 +37,19 @@ function closeLyrics() {
     // Libera o scroll da página
     document.body.style.overflow = '';
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    const mobileOverlay = document.querySelector('.mobile-overlay');
+
+    menuToggle.addEventListener('click', function () {
+        sidebar.classList.toggle('active');
+        mobileOverlay.classList.toggle('active');
+    });
+
+    mobileOverlay.addEventListener('click', function () {
+        sidebar.classList.remove('active');
+        this.classList.remove('active');
+    });
+});

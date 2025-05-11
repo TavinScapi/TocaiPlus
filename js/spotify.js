@@ -397,16 +397,16 @@ function playNextTrack() {
 }
 
 async function fetchLyrics(trackName, artistName) {
-    lyricsContainer.innerHTML = "Loading lyrics...";
+    lyricsContainer.innerHTML = "Carregando letra...";
     try {
         const response = await fetch(
             `https://api.lyrics.ovh/v1/${encodeURIComponent(artistName)}/${encodeURIComponent(trackName)}`
         );
 
-        if (!response.ok) throw new Error("Couldn't find lyrics");
+        if (!response.ok) throw new Error("Não foi possível encontrar a letra");
 
         const data = await response.json();
-        if (!data.lyrics) throw new Error("No lyrics found for this track");
+        if (!data.lyrics) throw new Error("Letra não encontrada para esta música");
 
         currentLyrics = data.lyrics
             .split("\n")
@@ -417,8 +417,8 @@ async function fetchLyrics(trackName, artistName) {
             .join("");
         currentLyricIndex = 0;
     } catch (error) {
-        console.error("Error loading lyrics:", error);
-        lyricsContainer.innerHTML = "Couldn't load lyrics for this track";
+        console.error("Erro ao carregar letra:", error);
+        lyricsContainer.innerHTML = "Não foi possível carregar a letra desta música";
     }
 }
 
@@ -438,64 +438,155 @@ function debounce(func, wait) {
     };
 }
 
-// Adicione esta função para carregar as playlists
 async function loadUserPlaylists(accessToken) {
     try {
         const playlistsContainer = document.getElementById('user-playlists');
-        // Na função loadUserPlaylists, adicione um indicador de carregamento
+
+        // Mostrar loading state com animação melhor
         playlistsContainer.innerHTML = `
-    <div style="display: flex; justify-content: center; padding: 10px;">
-        <div class="loading-spinner" style="width: 20px; height: 20px;"></div>
-    </div>
-`;
-        // Primeiro busca as playlists do usuário
-        let url = 'https://api.spotify.com/v1/me/playlists?limit=50';
-        let allPlaylists = [];
+            <div class="loading-state">
+                <div class="loading-spinner"></div>
+                <p>Carregando suas playlists...</p>
+            </div>
+        `;
 
-        // Paginação para pegar todas as playlists
-        while (url) {
-            const response = await fetch(url, {
-                headers: { 'Authorization': `Bearer ${accessToken}` }
-            });
+        // Buscar playlists com tratamento de erro melhorado
+        const allPlaylists = await fetchAllPaginatedData(
+            'https://api.spotify.com/v1/me/playlists?limit=50',
+            accessToken
+        );
 
-            if (!response.ok) throw new Error('Failed to load playlists');
+        // Ordenar playlists (as mais recentes primeiro)
+        allPlaylists.sort((a, b) => new Date(b.added_at || b.tracks.added_at) - new Date(a.added_at || a.tracks.added_at));
 
-            const data = await response.json();
-            allPlaylists = [...allPlaylists, ...data.items];
-            url = data.next; // URL para a próxima página de resultados
-        }
-
-        // Exibe as playlists
+        // Exibir playlists
         if (allPlaylists.length > 0) {
-            playlistsContainer.innerHTML = '';
-            allPlaylists.forEach(playlist => {
-                const playlistItem = document.createElement('div');
-                playlistItem.className = 'playlist-item';
-                playlistItem.innerHTML = `
-                    <img src="${playlist.images[0]?.url || 'https://via.placeholder.com/40'}" 
-                         alt="${playlist.name}" 
-                         class="playlist-image">
-                    <div class="playlist-info">
-                        <div class="playlist-name">${playlist.name}</div>
-                        <div class="playlist-owner">Por ${playlist.owner.display_name}</div>
-                    </div>
-                `;
-
-                playlistItem.addEventListener('click', () => {
-                    window.open(playlist.external_urls.spotify, '_blank');
-                });
-
-                playlistsContainer.appendChild(playlistItem);
-            });
+            renderPlaylists(allPlaylists, playlistsContainer);
         } else {
-            playlistsContainer.innerHTML = '<div class="search-no-results">Nenhuma playlist encontrada</div>';
+            showNoPlaylistsMessage(playlistsContainer);
         }
+
     } catch (error) {
         console.error('Error loading playlists:', error);
-        document.getElementById('user-playlists').innerHTML =
-            '<div class="search-error">Erro ao carregar playlists</div>';
+        showPlaylistsError(playlistsContainer);
     }
 }
+
+// Função auxiliar para buscar dados paginados
+async function fetchAllPaginatedData(url, accessToken) {
+    let allItems = [];
+
+    while (url) {
+        const response = await fetch(url, {
+            headers: { 'Authorization': `Bearer ${accessToken}` }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        allItems = [...allItems, ...data.items];
+        url = data.next;
+    }
+
+    return allItems;
+}
+
+// Função para renderizar as playlists
+function renderPlaylists(playlists, container) {
+    container.innerHTML = '';
+
+    // Criar elemento de lista
+    const playlistList = document.createElement('div');
+    playlistList.className = 'playlist-grid';
+
+    playlists.forEach(playlist => {
+        const playlistItem = createPlaylistElement(playlist);
+        playlistList.appendChild(playlistItem);
+    });
+
+    container.appendChild(playlistList);
+}
+
+// Função para criar o elemento HTML de uma playlist
+function createPlaylistElement(playlist) {
+    const playlistItem = document.createElement('div');
+    playlistItem.className = 'playlist-item';
+
+    // Adicionar classe especial para playlists colaborativas
+    if (playlist.collaborative) {
+        playlistItem.classList.add('collaborative');
+    }
+
+    playlistItem.innerHTML = `
+        <div class="playlist-image-container">
+            <img src="${playlist.images[0]?.url || 'assets/default-playlist.png'}" 
+                 alt="${playlist.name}" 
+                 class="playlist-image"
+                 loading="lazy">
+            ${playlist.tracks.total > 0 ? `<span class="track-count">${playlist.tracks.total}</span>` : ''}
+            ${playlist.collaborative ? '<span class="collab-badge">Colab</span>' : ''}
+        </div>
+        <div class="playlist-info">
+            <div class="playlist-name" title="${playlist.name}">${playlist.name}</div>
+            <div class="playlist-meta">
+                <span class="playlist-owner">${playlist.owner.display_name}</span>
+                ${playlist.public ? '<span class="privacy public">Pública</span>' : '<span class="privacy private">Privada</span>'}
+            </div>
+        </div>
+    `;
+
+    // Adicionar eventos
+    playlistItem.addEventListener('click', (e) => {
+        if (!e.target.closest('.playlist-actions')) {
+            window.open(playlist.external_urls.spotify, '_blank');
+        }
+    });
+
+    // Adicionar menu de contexto (opcional)
+    playlistItem.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        showPlaylistContextMenu(e, playlist);
+    });
+
+    return playlistItem;
+}
+
+// Funções para mensagens de estado
+function showNoPlaylistsMessage(container) {
+    container.innerHTML = `
+        <div class="empty-state">
+            <img src="assets/no-playlists.svg" alt="Nenhuma playlist encontrada">
+            <h3>Nenhuma playlist encontrada</h3>
+            <p>Parece que você ainda não criou nenhuma playlist.</p>
+            <button class="btn-create-playlist" id="create-playlist-btn">Criar playlist</button>
+        </div>
+    `;
+
+    // Adicionar evento para o botão de criar playlist
+    document.getElementById('create-playlist-btn')?.addEventListener('click', () => {
+        // Implementar criação de playlist
+    });
+}
+
+function showPlaylistsError(container) {
+    container.innerHTML = `
+        <div class="error-state">
+            <img src="assets/error-loading.svg" alt="Erro ao carregar">
+            <h3>Erro ao carregar playlists</h3>
+            <p>Não foi possível carregar suas playlists. Por favor, tente novamente.</p>
+            <button class="btn-retry" id="retry-load-playlists">Tentar novamente</button>
+        </div>
+    `;
+
+    // Adicionar evento para tentar novamente
+    document.getElementById('retry-load-playlists')?.addEventListener('click', () => {
+        loadUserPlaylists(localStorage.getItem('spotify_access_token'));
+    });
+}
+
+
 
 // Atualize a função loadUserData para incluir as playlists
 async function loadUserData() {
