@@ -43,13 +43,39 @@ document.addEventListener('DOMContentLoaded', function () {
     const sidebar = document.querySelector('.sidebar');
     const mobileOverlay = document.querySelector('.mobile-overlay');
 
-    menuToggle.addEventListener('click', function () {
+    // Função para fechar a sidebar
+    function closeSidebar() {
+        sidebar.classList.remove('active');
+        mobileOverlay.classList.remove('active');
+    }
+
+    // Abrir/fechar com o botão de menu
+    menuToggle.addEventListener('click', function (e) {
+        e.stopPropagation(); // Impede que o evento chegue ao document
         sidebar.classList.toggle('active');
         mobileOverlay.classList.toggle('active');
     });
 
-    mobileOverlay.addEventListener('click', function () {
-        sidebar.classList.remove('active');
-        this.classList.remove('active');
+    // Fechar ao clicar no overlay
+    mobileOverlay.addEventListener('click', closeSidebar);
+
+    // Fechar ao clicar em qualquer lugar do documento
+    document.addEventListener('click', function (e) {
+        // Verifica se o clique foi fora da sidebar e se ela está aberta
+        if (!sidebar.contains(e.target) && sidebar.classList.contains('active') && e.target !== menuToggle) {
+            closeSidebar();
+        }
+    });
+
+    // Impede que o clique dentro da sidebar feche ela
+    sidebar.addEventListener('click', function (e) {
+        e.stopPropagation();
+    });
+
+    // Fechar ao pressionar a tecla ESC
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+            closeSidebar();
+        }
     });
 });
