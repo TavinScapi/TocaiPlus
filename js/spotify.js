@@ -16,6 +16,12 @@ const searchResults = document.getElementById('search-results');
 const resultsContainer = document.getElementById("searchResults");
 const lyricsContainer = document.getElementById("lyrics");
 const clearSearchBtn = document.getElementById('clear-search-btn');
+const nowPlayingBtn = document.querySelector('.player-btn:nth-of-type(2)'); // Botão "Tocando Agora"
+const nowPlayingSidebar = document.getElementById('now-playing-sidebar');
+const closeSidebarBtn = document.getElementById('close-sidebar');
+const sidebarOverlay = document.createElement('div');
+sidebarOverlay.className = 'sidebar-overlay';
+document.body.appendChild(sidebarOverlay);
 
 
 // Global Variables
@@ -33,6 +39,9 @@ checkAuthStatus();
 loginBtn.addEventListener('click', () => {
     window.location.href = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${encodeURIComponent(SCOPE)}&response_type=token&show_dialog=true`;
 });
+nowPlayingBtn.addEventListener('click', toggleNowPlayingSidebar);
+closeSidebarBtn.addEventListener('click', toggleNowPlayingSidebar);
+sidebarOverlay.addEventListener('click', toggleNowPlayingSidebar);
 
 clearSearchBtn.addEventListener('click', () => {
     searchInput.value = '';
@@ -62,6 +71,7 @@ document.getElementById("searchInput").addEventListener("keypress", handleSearch
 document.getElementById("prevButton").addEventListener("click", playPreviousTrack);
 document.getElementById("nextButton").addEventListener("click", playNextTrack);
 document.addEventListener('click', closeSearchResultsOnClickOutside);
+
 
 // Authentication Functions
 function checkAuthStatus() {
@@ -354,6 +364,176 @@ function displaySearchResults(tracks) {
     searchResults.classList.remove('hidden');
 }
 
+// Função para mostrar/ocultar a sidebar
+function toggleNowPlayingSidebar() {
+    nowPlayingSidebar.classList.toggle('hidden');
+    sidebarOverlay.classList.toggle('active');
+
+    // Se a sidebar está sendo aberta e há uma música tocando, atualiza as informações
+    if (!nowPlayingSidebar.classList.contains('hidden') && currentTrack) {
+        updateNowPlayingInfo(currentTrack);
+    }
+}
+
+// Modifique a função updateNowPlayingInfo para incluir os novos dados
+async function updateNowPlayingInfo(track) {
+    // Informações básicas
+    document.getElementById('now-playing-image').src = track.album.images[0].url;
+    document.getElementById('now-playing-title').textContent = track.name;
+    document.getElementById('now-playing-artist').textContent = track.artists.map(artist => artist.name).join(', ');
+    document.getElementById('now-playing-album').textContent = track.album.name;
+
+    // Data de lançamento
+    const releaseYear = track.album.release_date.split('-')[0];
+    document.getElementById('now-playing-release').textContent = releaseYear;
+
+    // Duração
+    const durationMs = track.duration_ms;
+    const minutes = Math.floor(durationMs / 60000);
+    const seconds = ((durationMs % 60000) / 1000).toFixed(0);
+    document.getElementById('now-playing-duration').textContent = `${minutes}:${seconds.padStart(2, '0')}`;
+
+    // Popularidade
+    const popularityStars = Math.round(track.popularity / 20);
+    const starsContainer = document.getElementById('popularity-stars');
+    starsContainer.innerHTML = '';
+    for (let i = 0; i < 5; i++) {
+        const star = document.createElement('i');
+        star.className = i < popularityStars ? 'fas fa-star' : 'far fa-star';
+        starsContainer.appendChild(star);
+    }
+
+    // Carregar features de áudio
+    await loadAudioFeatures(track.id);
+
+    // Carregar detalhes dos artistas
+    await loadArtistsDetails(track.artists);
+
+    // Carregar gêneros musicais
+    await loadArtistGenres(track.artists[0].id);
+
+    // Configurar ações dos botões
+    document.getElementById('view-album').onclick = () => window.open(track.album.external_urls.spotify, '_blank');
+    document.getElementById('view-artist').onclick = () => window.open(track.artists[0].external_urls.spotify, '_blank');
+}
+
+async function loadAudioFeatures(trackId) {
+    try {
+        console.log("Procurando elementos da UI...");
+
+        // Verifica se os elementos existem
+        const energyEl = document.getElementById('energy-value');
+        const valenceEl = document.getElementById('valence-value');
+        const tempoEl = document.getElementById('tempo-value');
+
+        if (!energyEl || !valenceEl || !tempoEl) {
+            console.error("Elementos não encontrados:", {
+                energyEl,
+                valenceEl,
+                tempoEl
+            });
+            throw new Error("Elementos da UI não encontrados");
+        }
+
+        console.log("Elementos encontrados com sucesso");
+
+        // Restante da função...
+        const accessToken = localStorage.getItem('spotify_access_token');
+        const response = await fetch(`https://api.spotify.com/v1/audio-features/${trackId}`, {
+            headers: { 'Authorization': `Bearer ${accessToken}` }
+        });
+
+        if (!response.ok) throw new Error('Falha ao carregar features');
+
+        const features = await response.json();
+
+        // Atualiza a UI
+        energyEl.textContent = Math.round(features.energy * 100) + '%';
+        valenceEl.textContent = Math.round(features.valence * 100) + '%';
+        tempoEl.textContent = Math.round(features.tempo);
+
+    } catch (error) {
+        console.error('Erro ao carregar audio features:', error);
+
+        // Mostra mensagem de erro mais amigável
+        const featuresContainer = document.querySelector('.audio-features');
+        if (featuresContainer) {
+            featuresContainer.innerHTML = `
+                <div class="feature-error">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>Recursos de áudio não disponíveis</span>
+                </div>
+            `;
+        }
+    }
+}
+
+// Nova função para carregar detalhes dos artistas
+async function loadArtistsDetails(artists) {
+    try {
+        const accessToken = localStorage.getItem('spotify_access_token');
+        const artistsContainer = document.getElementById('artists-details');
+        artistsContainer.innerHTML = '';
+
+        // Para cada artista, buscar informações detalhadas
+        for (const artist of artists) {
+            const response = await fetch(`https://api.spotify.com/v1/artists/${artist.id}`, {
+                headers: { 'Authorization': `Bearer ${accessToken}` }
+            });
+
+            if (!response.ok) continue;
+
+            const artistData = await response.json();
+
+            const artistCard = document.createElement('div');
+            artistCard.className = 'artist-card';
+            artistCard.innerHTML = `
+                <img src="${artistData.images[0]?.url || 'https://i.scdn.co/image/ab6761610000e5eb8acf72f6b2c3948890c8c8e1'}" alt="${artistData.name}">
+                <div class="artist-info">
+                    <h4>${artistData.name}</h4>
+                    <p>${artistData.followers.total.toLocaleString()} seguidores</p>
+                </div>
+            `;
+            artistCard.addEventListener('click', () => window.open(artistData.external_urls.spotify, '_blank'));
+            artistsContainer.appendChild(artistCard);
+        }
+
+    } catch (error) {
+        console.error('Error loading artist details:', error);
+    }
+}
+
+// Nova função para carregar gêneros musicais
+async function loadArtistGenres(artistId) {
+    try {
+        const accessToken = localStorage.getItem('spotify_access_token');
+        const response = await fetch(`https://api.spotify.com/v1/artists/${artistId}`, {
+            headers: { 'Authorization': `Bearer ${accessToken}` }
+        });
+
+        if (!response.ok) throw new Error('Failed to load artist genres');
+
+        const artistData = await response.json();
+        const genresContainer = document.getElementById('genres-container');
+        genresContainer.innerHTML = '';
+
+        if (artistData.genres && artistData.genres.length > 0) {
+            artistData.genres.forEach(genre => {
+                const genreTag = document.createElement('div');
+                genreTag.className = 'genre-tag';
+                genreTag.textContent = genre;
+                genresContainer.appendChild(genreTag);
+            });
+        } else {
+            genresContainer.innerHTML = '<p style="color: #b3b3b3; font-size: 14px;">Nenhum gênero disponível</p>';
+        }
+
+    } catch (error) {
+        console.error('Error loading artist genres:', error);
+    }
+}
+
+// Modifique a função playTrackFromSearch para atualizar a sidebar quando uma nova música começa
 function playTrackFromSearch(track, index) {
     document.getElementById('player-container').classList.remove('hidden');
     currentTrack = track;
@@ -364,9 +544,14 @@ function playTrackFromSearch(track, index) {
 
     searchResults.classList.add('hidden');
     searchInput.value = '';
-    clearSearchBtn.classList.add('hidden'); // Adicione esta linha
+    clearSearchBtn.classList.add('hidden');
 
     fetchLyrics(track.name, track.artists[0].name);
+
+    // Atualiza a sidebar se estiver aberta
+    if (!nowPlayingSidebar.classList.contains('hidden')) {
+        updateNowPlayingInfo(track);
+    }
 }
 
 function clearAuth() {
@@ -564,9 +749,7 @@ function showNoPlaylistsMessage(container) {
         </div>
     `;
 
-    // Adicionar evento para o botão de criar playlist
     document.getElementById('create-playlist-btn')?.addEventListener('click', () => {
-        // Implementar criação de playlist
     });
 }
 
@@ -580,15 +763,11 @@ function showPlaylistsError(container) {
         </div>
     `;
 
-    // Adicionar evento para tentar novamente
     document.getElementById('retry-load-playlists')?.addEventListener('click', () => {
         loadUserPlaylists(localStorage.getItem('spotify_access_token'));
     });
 }
 
-
-
-// Atualize a função loadUserData para incluir as playlists
 async function loadUserData() {
     loginBtn.classList.add('hidden');
     loading.classList.remove('hidden');
@@ -612,3 +791,4 @@ async function loadUserData() {
         loading.classList.add('hidden');
     }
 }
+

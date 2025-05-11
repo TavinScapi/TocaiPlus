@@ -934,3 +934,256 @@ body {
         display: block;
     }
 }
+
+/* Now Playing Sidebar */
+.now-playing-sidebar {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 350px;
+    height: 100vh;
+    background-color: #181818;
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.now-playing-sidebar.hidden {
+    transform: translateX(100%);
+}
+
+.now-playing-sidebar .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.now-playing-sidebar .sidebar-header h3 {
+    font-size: 18px;
+    color: #fff;
+}
+
+.now-playing-sidebar .close-sidebar {
+    background: none;
+    border: none;
+    color: #b3b3b3;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.track-info {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.track-info .track-image {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.track-info h2 {
+    font-size: 22px;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.track-info p {
+    font-size: 16px;
+    color: #b3b3b3;
+}
+
+.track-details {
+    margin-bottom: 30px;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #282828;
+}
+
+.detail-label {
+    color: #b3b3b3;
+    font-size: 14px;
+}
+
+.detail-value {
+    color: #fff;
+    font-size: 14px;
+}
+
+.popularity-stars {
+    display: flex;
+}
+
+.popularity-stars i {
+    color: #1DB954;
+    margin-left: 3px;
+}
+
+.track-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.action-btn {
+    background-color: #282828;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+}
+
+.action-btn:hover {
+    background-color: #383838;
+}
+
+.action-btn i {
+    font-size: 16px;
+}
+
+/* Overlay para quando a sidebar estiver aberta */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .now-playing-sidebar {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+/* Seções */
+.section-title {
+    color: #fff;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 25px 0 15px 0;
+    font-weight: 600;
+}
+
+/* Audio Features */
+.audio-features {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+}
+
+.feature-item i {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #1DB954;
+}
+
+.feature-item span:not(.feature-label) {
+    font-weight: bold;
+    color: #fff;
+    font-size: 14px;
+    margin-bottom: 3px;
+}
+
+.feature-label {
+    color: #b3b3b3;
+}
+
+/* Artistas e Integrantes */
+.artists-details, .album-members {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.artist-card, .member-card {
+    background: #282828;
+    border-radius: 4px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: calc(50% - 5px);
+    box-sizing: border-box;
+}
+
+.artist-card img, .member-card img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.artist-info, .member-info {
+    flex: 1;
+    overflow: hidden;
+}
+
+.artist-info h4, .member-info h4 {
+    font-size: 14px;
+    color: #fff;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.artist-info p, .member-info p {
+    font-size: 12px;
+    color: #b3b3b3;
+    margin: 0;
+}
+
+/* Gêneros */
+.genres-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.genre-tag {
+    background: rgba(29, 185, 84, 0.1);
+    color: #1DB954;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    border: 1px solid rgba(29, 185, 84, 0.3);
+}

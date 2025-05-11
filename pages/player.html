@@ -146,6 +146,84 @@
         <div class="lyrics-container" id="lyrics"><!-- As letras vão ficar aqui no js --></div>
     </div>
 
+    <!-- Sidebar de "Tocando Agora" -->
+    <div class="now-playing-sidebar hidden" id="now-playing-sidebar">
+        <div class="sidebar-header">
+            <h3>Tocando Agora</h3>
+            <button class="close-sidebar" id="close-sidebar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="track-info">
+            <img id="now-playing-image" src="" alt="Capa do Álbum" class="track-image">
+            <h2 id="now-playing-title">Nome da Música</h2>
+            <p id="now-playing-artist">Artista</p>
+
+            <div class="audio-features">
+                <div class="feature-item">
+                    <i class="fas fa-fire"></i>
+                    <span id="energy-value">--</span>
+                    <span class="feature-label">Energia</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-heart"></i>
+                    <span id="valence-value">--</span>
+                    <span class="feature-label">Felicidade</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span id="tempo-value">--</span>
+                    <span class="feature-label">BPM</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">Detalhes da Música</div>
+        <div class="track-details">
+            <div class="detail-item">
+                <span class="detail-label">Álbum</span>
+                <span id="now-playing-album" class="detail-value">Nome do Álbum</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Lançamento</span>
+                <span id="now-playing-release" class="detail-value">Ano</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Duração</span>
+                <span id="now-playing-duration" class="detail-value">0:00</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Popularidade</span>
+                <div class="popularity-stars">
+                    <div id="popularity-stars"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">Artistas</div>
+        <div class="artists-details" id="artists-details">
+            <!-- Artistas serão carregados aqui -->
+        </div>
+
+        <div class="section-title">Gêneros Musicais</div>
+        <div class="genres-container" id="genres-container">
+            <!-- Gêneros serão carregados aqui -->
+        </div>
+
+        <div class="track-actions">
+            <button class="action-btn" id="add-to-playlist">
+                <i class="fas fa-plus"></i> Adicionar à playlist
+            </button>
+            <button class="action-btn" id="view-album">
+                <i class="fas fa-compact-disc"></i> Ver álbum
+            </button>
+            <button class="action-btn" id="view-artist">
+                <i class="fas fa-user"></i> Ver artista principal
+            </button>
+        </div>
+    </div>
+
     <script src="../js/spotify.js"></script>
     <script src="../js/player.js"></script>
 </body>
