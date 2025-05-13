@@ -79,3 +79,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+document.getElementById('back-button').addEventListener('click', () => {
+    // Volta para a página anterior ou para uma página padrão se não houver histórico
+    if (document.referrer && document.referrer.includes(window.location.host)) {
+        window.history.back();
+    } else {
+        window.location.href = '../pages/home.html'; // ou outra página padrão
+    }
+});
