@@ -1,32 +1,98 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/mapa.css">
     <title>Tocaí | Mapa de Notas</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
-    <div class="settings">
-        <label for="instrument-selector">Instrumento selecionado:</label>
-        <select name="instrument-selector" id="instrument-selector"></select>
-        <div class="accidental-selector">
-            <input type="radio" class="acc-select" id="flats" name="accidentals" value="flats">
-            <label for="flats">♭</label>
-            <input type="radio" class="acc-select" id="sharps" name="accidentals" value="sharps" checked>
-            <label for="sharps">♯</label>
+    <h1>Visualização do Braço da Guitarra</h1>
+    <div class="guitar-neck">
+        <div class="fret first"></div>
+        <div class="fret"></div>
+        <div class="fret"></div>
+        <div class="fret"></div>
+        <div class="fret"></div>
+        <div class="fret"></div>
+        <div class="fret"></div>
+        <div class="fret"></div>
+        <div class="fret"></div>
+        <div class="fret"></div>
+        <div class="fret"></div>
+        <div class="fret"></div>
+        <div class="fret"></div>
+
+        <ul class="dots">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <ul class="strings">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <ul class="open-notes">
+            <li class="low-e">E</li>
+            <li class="b">B</li>
+            <li class="g">G</li>
+            <li class="d">D</li>
+            <li class="a">A</li>
+            <li class="high-e">E</li>
+        </ul>
+        <div class="notes">
+            <div class="mask low-e">
+                <ul></ul>
+            </div>
+            <div class="mask a">
+                <ul></ul>
+            </div>
+            <div class="mask d">
+                <ul></ul>
+            </div>
+            <div class="mask g">
+                <ul></ul>
+            </div>
+            <div class="mask b">
+                <ul></ul>
+            </div>
+            <div class="mask high-e">
+                <ul></ul>
+            </div>
         </div>
-        <label for="number-of-frets">Número de trastes:</label>
-        <input type="number" id="number-of-frets" min="5" max="30" value="12">
-        <label for="show-all-notes">Mostrar todas as notas:</label>
-        <input type="checkbox" id="show-all-notes">
-        <label for="show-multiple-notes">Mostrar múltiplas notas:</label>
-        <input type="checkbox" id="show-multiple-notes">
     </div>
-    <div class="fretboard"></div>
-    <div class="note-name-section"></div>
+
+    <div class="controls">
+        <a class="up" href="#" id="tune-up">Afinar +1/2 Tom</a>
+        <a class="down" href="#" id="tune-down">Afinar -1/2 Tom</a>
+
+        <h2>Mostrar notas:</h2>
+        <ul id="note-selector">
+            <li class="active" data-note="All">Todas</li>
+            <li data-note="A">A</li>
+            <li data-note="A#">A#</li>
+            <li data-note="B">B</li>
+            <li data-note="C">C</li>
+            <li data-note="C#">C#</li>
+            <li data-note="D">D</li>
+            <li data-note="D#">D#</li>
+            <li data-note="E">E</li>
+            <li data-note="F">F</li>
+            <li data-note="F#">F#</li>
+            <li data-note="G">G</li>
+            <li data-note="G#">G#</li>
+        </ul>
+    </div>
+
     <script src="../js/mapa.js"></script>
 </body>
 

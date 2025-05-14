@@ -609,7 +609,6 @@ nav a {
     background: linear-gradient(to right, rgba(0, 0, 0, 0.505), rgba(0, 0, 0, 0));
     z-index: 1;
     border-radius: inherit;
-    /* Faz com que o ::before siga o mesmo border-radius do elemento pai */
 }
 
 .content {

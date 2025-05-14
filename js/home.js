@@ -23,17 +23,6 @@ function menuBtnChange() {
 
 menuBtnChange();
 
-const slider = document.querySelector('.slider');
-
-function activate(e) {
-    const items = document.querySelectorAll('.item');
-    e.target.matches('.next') && slider.append(items[0])
-    e.target.matches('.prev') && slider.prepend(items[items.length - 1]);
-}
-
-document.addEventListener('click', activate, false);
-
-
 function toggleDropdown() {
     let dropdown = document.getElementById("dropdown");
     dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
@@ -76,7 +65,7 @@ document.addEventListener("click", function (event) {
 // Salvar o artista escolhido no localStorage e redirecionar
 function selectArtist(artist) {
     localStorage.setItem("selectedArtist", artist);
-    window.location.href = "artista/artista.html";
+    window.location.href = "../pages/artista.html";
 }
 
 // Dados das bandas
@@ -186,7 +175,7 @@ const artistsData = {
 };
 
 // Carregar os dados do artista na página
-if (window.location.pathname.includes("artista.html")) {
+if (window.location.pathname.includes("../pages/artista.html")) {
     const artistKey = localStorage.getItem("selectedArtist");
 
     if (artistKey && artistsData[artistKey]) {
@@ -208,7 +197,7 @@ if (window.location.pathname.includes("artista.html")) {
             // Adicionar evento de clique para redirecionar para a página da música
             li.addEventListener("click", () => {
                 localStorage.setItem("selectedSong", song.name);
-                window.location.href = "../musica/musica.html"; // Redireciona para a página de aprendizado
+                window.location.href = "../pages/musica.html"; // Redireciona para a página de aprendizado
             });
 
             songsList.appendChild(li);
@@ -245,7 +234,3 @@ if (window.location.pathname.includes("artista.html")) {
         });
     }
 }
-
-
-
-
