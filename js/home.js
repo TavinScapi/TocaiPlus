@@ -45,7 +45,7 @@ function selectGenre(value) {
 }
 
 function filterByGenre(selectedGenre) {
-    const cards = document.querySelectorAll('.card');
+    const cards = document.querySelectorAll('.card-vinil');
 
     cards.forEach(card => {
         if (selectedGenre === 'todos' || card.getAttribute('data-genre') === selectedGenre) {
