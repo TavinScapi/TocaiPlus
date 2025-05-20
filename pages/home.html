@@ -736,11 +736,23 @@
                         <div class="dropdown-content" id="dropdown">
                             <input type="text" id="searchGenre" placeholder="Digite o genêro musical..."
                                 onkeyup="filterGenres()">
-                            <div class="dropdown-item" onclick="selectGenre('rock')">Rock</div>
-                            <div class="dropdown-item" onclick="selectGenre('pop')">Pop</div>
+                            <div class="dropdown-item" onclick="selectGenre('alternativo')">Alternativo</div>
+                            <div class="dropdown-item" onclick="selectGenre('blues')">Blues</div>
+                            <div class="dropdown-item" onclick="selectGenre('bossanova')">Bossa nova</div>
+                            <div class="dropdown-item" onclick="selectGenre('dance')">Dance</div>
+                            <div class="dropdown-item" onclick="selectGenre('funk')">Funk</div>
+                            <div class="dropdown-item" onclick="selectGenre('grunge')">Grunge</div>
+                            <div class="dropdown-item" onclick="selectGenre('hard-rock')">Hard-Rock</div>
+                            <div class="dropdown-item" onclick="selectGenre('hardcore')">Hardcore</div>
                             <div class="dropdown-item" onclick="selectGenre('jazz')">Jazz</div>
-                            <div class="dropdown-item" onclick="selectGenre('sertanejo')">Sertanejo</div>
+                            <div class="dropdown-item" onclick="selectGenre('metal')">Metal</div>
                             <div class="dropdown-item" onclick="selectGenre('mpb')">MPB</div>
+                            <div class="dropdown-item" onclick="selectGenre('pop')">Pop</div>
+                            <div class="dropdown-item" onclick="selectGenre('punk')">Punk</div>
+                            <div class="dropdown-item" onclick="selectGenre('rap')">Rap</div>
+                            <div class="dropdown-item" onclick="selectGenre('reggae')">Reggae</div>
+                            <div class="dropdown-item" onclick="selectGenre('rock')">Rock</div>
+                            <div class="dropdown-item" onclick="selectGenre('sertanejo')">Sertanejo</div>
                         </div>
                     </div>
                 </div>
@@ -748,9 +760,10 @@
             <br>
             <div class="lista-artistas">
                 <!-- Charlie Brown Jr. -->
-                <div class="card-vinil" data-genre="rock" onclick="selectArtist('charliebrownjr')">
+                <div class="card-vinil" data-genre="rock hardcore punk rap reggae"
+                    onclick="selectArtist('charliebrownjr')">
                     <div class="record_case">
-                        <div class="genre-label">Rock</div>
+                        <div class="genre-label">Rock / Hardcore / Punk / Rap / Reggae</div>
                         <div class="record recorddefault">
                             <div class="front">
                                 <img src="https://i.pinimg.com/736x/a5/44/31/a54431e6da77b5886d95940de1122da2.jpg"
@@ -775,9 +788,9 @@
                 </div>
 
                 <!-- Michael Jackson -->
-                <div class="card-vinil" data-genre="pop" onclick="selectArtist('michaeljackson')">
+                <div class="card-vinil" data-genre="pop rock dance funk" onclick="selectArtist('michaeljackson')">
                     <div class="record_case">
-                        <div class="genre-label">Pop</div>
+                        <div class="genre-label">Pop / Rock / Dance / Funk</div>
                         <div class="record recorddefault">
                             <div class="front">
                                 <img src="https://i.pinimg.com/736x/61/7e/f8/617ef8a7b1fa50ade50aa1e8e0c4a3c9.jpg"
@@ -829,9 +842,9 @@
                 </div>
 
                 <!-- John Coltrane -->
-                <div class="card-vinil" data-genre="jazz" onclick="selectArtist('johncoltrane')">
+                <div class="card-vinil" data-genre="jazz blues" onclick="selectArtist('johncoltrane')">
                     <div class="record_case">
-                        <div class="genre-label">Jazz</div>
+                        <div class="genre-label">Jazz / Blues</div>
                         <div class="record recorddefault">
                             <div class="front">
                                 <img src="https://i.pinimg.com/736x/cf/ca/01/cfca01bcc292c3c6724c4e4cde0d860e.jpg"
@@ -856,9 +869,9 @@
                 </div>
 
                 <!-- Caetano Veloso -->
-                <div class="card-vinil" data-genre="mpb" onclick="selectArtist('caetanoveloso')">
+                <div class="card-vinil" data-genre="mpb bossanova" onclick="selectArtist('caetanoveloso')">
                     <div class="record_case">
-                        <div class="genre-label">MPB</div>
+                        <div class="genre-label">MPB / Bossa nova</div>
                         <div class="record recorddefault">
                             <div class="front">
                                 <img src="https://i.pinimg.com/736x/5d/84/e7/5d84e7dd8fee98f0d2fc375b2f62acac.jpg"
@@ -882,9 +895,9 @@
                     <button class="button">Ver Mais</button>
                 </div>
 
-                <div class="card-vinil" data-genre="rock" onclick="selectArtist('nirvana')">
+                <div class="card-vinil" data-genre="rock grunge alternativo" onclick="selectArtist('nirvana')">
                     <div class="record_case">
-                        <div class="genre-label">Rock</div>
+                        <div class="genre-label">Rock / Grunge / Alternativo</div>
                         <div class="record recorddefault">
                             <div class="front">
                                 <img src="https://i.pinimg.com/736x/50/be/bd/50bebd9953c56c1ae9973b882b8f133b.jpg"
@@ -910,17 +923,17 @@
 
                 <div class="card-vinil" data-genre="metal hard-rock" onclick="selectArtist('metallica')">
                     <div class="record_case">
-                        <div class="genre-label">Metal/Hard Rock</div>
+                        <div class="genre-label">Metal / Hard Rock</div>
                         <div class="record recorddefault">
                             <div class="front">
-                                <img src="https://i.pinimg.com/736x/31/2a/8a/312a8af0c959ca03919666da073bd043.jpg"
+                                <img src="https://i.pinimg.com/736x/5b/15/ae/5b15ae8fc382d0362dcfbb86aafb0dfc.jpg"
                                     alt="Metallica">
                                 <div class="cover"></div>
                                 <div class="cover-back"></div>
                             </div>
                             <div class="vinyl"></div>
                             <div class="back">
-                                <img src="https://i.pinimg.com/736x/31/2a/8a/312a8af0c959ca03919666da073bd043.jpg"
+                                <img src="https://i.pinimg.com/736x/5b/15/ae/5b15ae8fc382d0362dcfbb86aafb0dfc.jpg"
                                     alt="Metallica">
                             </div>
                             <div class="right"></div>
@@ -937,7 +950,7 @@
 
                 <div class="card-vinil" data-genre="rock hard-rock" onclick="selectArtist('acdc')">
                     <div class="record_case">
-                        <div class="genre-label">Rock/Hard Rock</div>
+                        <div class="genre-label">Rock / Hard Rock</div>
                         <div class="record recorddefault">
                             <div class="front">
                                 <img src="https://i.pinimg.com/736x/54/f9/11/54f911cd7a472a830901c75530fe6171.jpg"
@@ -965,7 +978,7 @@
             </div>
 
             <div class="descubra-mais">
-                <a href="bandaeartistas/bandasEartistas.html" class="button">Descubra Mais</a>
+                <a href="../pages/artistasEbandas.html" class="button">Descubra Mais</a>
             </div>
 
         </section>

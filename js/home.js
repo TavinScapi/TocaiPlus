@@ -48,10 +48,18 @@ function filterByGenre(selectedGenre) {
     const cards = document.querySelectorAll('.card-vinil');
 
     cards.forEach(card => {
-        if (selectedGenre === 'todos' || card.getAttribute('data-genre') === selectedGenre) {
-            card.style.display = 'block'; // Exibe o cartão
+        if (selectedGenre === 'todos') {
+            card.style.display = 'block'; // Exibe todos os cartões
         } else {
-            card.style.display = 'none'; // Oculta o cartão
+            // Obtém os gêneros do card e divide em um array
+            const cardGenres = card.getAttribute('data-genre').split(' ');
+
+            // Verifica se o gênero selecionado está no array de gêneros do card
+            if (cardGenres.includes(selectedGenre)) {
+                card.style.display = 'block'; // Exibe o cartão
+            } else {
+                card.style.display = 'none'; // Oculta o cartão
+            }
         }
     });
 }
