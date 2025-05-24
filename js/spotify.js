@@ -1,11 +1,9 @@
-// Spotify Configuration
 const CLIENT_ID = '1ca02f4c12f247de9ef1552f920e191e';
 const REDIRECT_URI = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost'
     ? 'http://127.0.0.1:5500/pages/player.html'
     : 'https://tocai.vercel.app/pages/player.html';
 const SCOPE = 'user-read-private user-read-email user-top-read user-follow-read user-read-recently-played streaming';
 
-// DOM Elements
 const loginBtn = document.getElementById('login-btn');
 const logoutBtn = document.getElementById('logout-btn');
 const userProfile = document.getElementById('user-profile');
@@ -16,15 +14,13 @@ const searchResults = document.getElementById('search-results');
 const resultsContainer = document.getElementById("searchResults");
 const lyricsContainer = document.getElementById("lyrics");
 const clearSearchBtn = document.getElementById('clear-search-btn');
-const nowPlayingBtn = document.querySelector('.player-btn:nth-of-type(2)'); // Botão "Tocando Agora"
+const nowPlayingBtn = document.querySelector('.player-btn:nth-of-type(2)');
 const nowPlayingSidebar = document.getElementById('now-playing-sidebar');
 const closeSidebarBtn = document.getElementById('close-sidebar');
 const sidebarOverlay = document.createElement('div');
 sidebarOverlay.className = 'sidebar-overlay';
 document.body.appendChild(sidebarOverlay);
 
-
-// Global Variables
 let currentTrack = null;
 let searchResultsList = [];
 let currentTrackIndex = 0;
@@ -32,10 +28,8 @@ let currentTrackId = null;
 let currentLyrics = [];
 let currentLyricIndex = 0;
 
-// Initialize
 checkAuthStatus();
 
-// Event Listeners
 loginBtn.addEventListener('click', () => {
     window.location.href = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${encodeURIComponent(SCOPE)}&response_type=token&show_dialog=true`;
 });
@@ -49,7 +43,6 @@ clearSearchBtn.addEventListener('click', () => {
     clearSearchBtn.classList.add('hidden');
 });
 
-// Modifique o event listener do searchInput para:
 searchInput.addEventListener('input', debounce(() => {
     const query = searchInput.value.trim();
     if (query.length > 0) {
@@ -73,9 +66,7 @@ document.getElementById("nextButton").addEventListener("click", playNextTrack);
 document.addEventListener('click', closeSearchResultsOnClickOutside);
 
 
-// Authentication Functions
 function checkAuthStatus() {
-    // Check URL hash for token
     const hash = window.location.hash.substring(1).split('&').reduce((initial, item) => {
         if (item) {
             const parts = item.split('=');
@@ -91,11 +82,13 @@ function checkAuthStatus() {
         localStorage.setItem('spotify_token_expiry', Date.now() + (hash.expires_in * 1000));
     }
 
-    // Check localStorage for valid token
     const token = localStorage.getItem('spotify_access_token');
     const tokenExpiry = localStorage.getItem('spotify_token_expiry');
 
     if (token && tokenExpiry && Date.now() < parseInt(tokenExpiry)) {
+        document.body.classList.add('logged-in');
+        document.getElementById('sidebar').classList.remove('hidden');
+        document.getElementById('header').classList.remove('hidden');
         loadUserData();
     } else {
         clearAuth();
@@ -105,9 +98,14 @@ function checkAuthStatus() {
 function clearAuth() {
     localStorage.removeItem('spotify_access_token');
     localStorage.removeItem('spotify_token_expiry');
+    document.body.classList.remove('logged-in');
+    mainContent.classList.add('hidden');
     loginBtn.classList.remove('hidden');
     userProfile.classList.add('hidden');
-    mainContent.classList.add('hidden');
+    document.getElementById('player-container').classList.add('hidden');
+    document.getElementById('welcome-screen').classList.remove('hidden');
+    document.getElementById('sidebar').classList.add('hidden');
+    document.getElementById('header').classList.add('hidden');
 }
 
 // User Data Functions
@@ -554,15 +552,6 @@ function playTrackFromSearch(track, index) {
     }
 }
 
-function clearAuth() {
-    localStorage.removeItem('spotify_access_token');
-    localStorage.removeItem('spotify_token_expiry');
-    loginBtn.classList.remove('hidden');
-    userProfile.classList.add('hidden');
-    mainContent.classList.add('hidden');
-    document.getElementById('player-container').classList.add('hidden'); // Adicione esta linha
-}
-
 function playPreviousTrack() {
     if (currentTrackIndex > 0) {
         currentTrackIndex--;
@@ -791,4 +780,3 @@ async function loadUserData() {
         loading.classList.add('hidden');
     }
 }
-

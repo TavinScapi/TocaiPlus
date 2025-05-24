@@ -36,7 +36,7 @@
 
 
 <body>
-    <aside class="sidebar">
+    <aside class="sidebar hidden" id="sidebar">
         <!-- Adicione este botão no topo da sidebar -->
         <button class="back-button" id="back-button">
             <i class="fas fa-arrow-left"></i>
@@ -49,16 +49,16 @@
                 <!-- As playlists serão carregadas aqui -->
             </div>
         </div>
-        <!-- ... restante do seu código ... -->
     </aside>
 
     <!-- Header -->
-    <header class="header">
+    <header class="header hidden" id="header">
         <button class="menu-toggle">
             <i class="fas fa-bars"></i>
         </button>
         <div class="mobile-overlay"></div>
-        <div class="search-container">
+
+        <div class="search-container" id="search-container">
             <div class="search-bar">
                 <i class="fas fa-search"></i>
                 <input type="text" id="search-input" placeholder="Pesquisar músicas, artistas ou álbuns...">
@@ -66,6 +66,7 @@
             </div>
             <div id="search-results" class="hidden"></div>
         </div>
+
         <div class="user-profile hidden" id="user-profile">
             <img src="" alt="User Avatar" class="user-avatar" id="user-avatar">
             <span class="user-name" id="user-name"></span>
@@ -73,8 +74,32 @@
                 <i class="fas fa-sign-out-alt"></i>
             </button>
         </div>
-        <button class="login-btn" id="login-btn">Entrar</button>
     </header>
+
+    <div class="welcome-screen" id="welcome-screen">
+        <div class="welcome-content">
+            <img src="../imagens/LogoTocaí.png" alt="Logo Tocaí" class="welcome-logo">
+            <h1>Bem-vindo ao Tocaí Play</h1>
+            <p>Conecte-se ao Spotify para explorar suas músicas, artistas favoritos e muito mais.</p>
+            <button class="login-btn" id="login-btn">
+                <i class="fab fa-spotify"></i> Conectar com Spotify
+            </button>
+            <div class="welcome-features">
+                <div class="feature">
+                    <i class="fas fa-music"></i>
+                    <span>Suas músicas mais tocadas</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-user"></i>
+                    <span>Artistas favoritos</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-history"></i>
+                    <span>Histórico de reprodução</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <main class="main-content" id="main-content">
@@ -236,9 +261,6 @@
         </div>
 
         <div class="track-actions">
-            <button class="action-btn" id="add-to-playlist">
-                <i class="fas fa-plus"></i> Adicionar à playlist
-            </button>
             <button class="action-btn" id="view-album">
                 <i class="fas fa-compact-disc"></i> Ver álbum
             </button>
