@@ -117,7 +117,6 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         window.addEventListener('scroll', scrollActive);
-        // Run once on load to set initial state
         scrollActive();
     }
 });

@@ -367,11 +367,6 @@ const artistsData = {
             "Prêmio Shell de Música - 1992"
         ]
     }
-    
-
-
-
-
 };
 
 // Carregar os dados do artista na página
