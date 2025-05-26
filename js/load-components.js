@@ -42,13 +42,27 @@ document.addEventListener('DOMContentLoaded', function () {
     function setupSidebar() {
         const sidebar = document.querySelector(".sidebar");
         const closeBtn = document.querySelector("#btn");
+        const searchBtn = document.querySelector(".bx-search");
+        const searchInput = document.querySelector(".nav-list input[type='text']"); // Seleciona o input de pesquisa
 
-        if (sidebar && closeBtn) {
+        if (sidebar && closeBtn && searchBtn && searchInput) {
+            // Evento do botão de menu (abrir/fechar sidebar)
             closeBtn.addEventListener("click", () => {
                 sidebar.classList.toggle("open");
                 menuBtnChange();
             });
 
+            // Evento do ícone de pesquisa (abre sidebar + foca no input)
+            searchBtn.addEventListener("click", (e) => {
+                e.preventDefault(); // Evita comportamentos indesejados (se for um link)
+                if (!sidebar.classList.contains("open")) {
+                    sidebar.classList.add("open"); // Garante que a sidebar abra
+                    menuBtnChange();
+                }
+                searchInput.focus(); // Foca no input para digitar imediatamente
+            });
+
+            // Altera o ícone do botão de menu
             function menuBtnChange() {
                 if (sidebar.classList.contains("open")) {
                     closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");

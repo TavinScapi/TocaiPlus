@@ -1,28 +1,4 @@
-let sidebar = document.querySelector(".sidebar");
-let closeBtn = document.querySelector("#btn");
-let searchBtn = document.querySelector(".bx-search");
-
-closeBtn.addEventListener("click", () => {
-    sidebar.classList.toggle("open");
-    menuBtnChange();
-})
-
-searchBtn.addEventListener("click", () => {
-    sidebar.classList.toggle("open");
-    menuBtnChange();
-})
-
-function menuBtnChange() {
-    if (sidebar.classList.contains("open")) {
-        closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
-    } else {
-        closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
-    }
-}
-
-
-menuBtnChange();
-
+// Funções para o dropdown de gêneros
 function toggleDropdown() {
     let dropdown = document.getElementById("dropdown");
     dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
@@ -51,32 +27,30 @@ function filterByGenre(selectedGenre) {
         if (selectedGenre === 'todos') {
             card.style.display = 'block'; // Exibe todos os cartões
         } else {
-            // Obtém os gêneros do card e divide em um array
             const cardGenres = card.getAttribute('data-genre').split(' ');
-
-            // Verifica se o gênero selecionado está no array de gêneros do card
             if (cardGenres.includes(selectedGenre)) {
-                card.style.display = 'block'; // Exibe o cartão
+                card.style.display = 'block';
             } else {
-                card.style.display = 'none'; // Oculta o cartão
+                card.style.display = 'none';
             }
         }
     });
 }
 
+// Fecha o dropdown ao clicar fora dele
 document.addEventListener("click", function (event) {
     if (!event.target.closest(".filtro-generos")) {
         document.getElementById("dropdown").style.display = "none";
     }
 });
 
-// Salvar o artista escolhido no localStorage e redirecionar
+// Salva o artista selecionado e redireciona
 function selectArtist(artist) {
     localStorage.setItem("selectedArtist", artist);
     window.location.href = "../pages/artista.html";
 }
 
-// Dados das bandas
+// Dados dos artistas (pode ser movido para um arquivo JSON se preferir)
 const artistsData = {
     charliebrownjr: {
         name: "Charlie Brown Jr.",
@@ -182,48 +156,44 @@ const artistsData = {
     }
 };
 
-// Carregar os dados do artista na página
-if (window.location.pathname.includes("../pages/artista.html")) {
+// Carrega os dados do artista na página "artista.html"
+if (window.location.pathname.includes("artista.html")) {
     const artistKey = localStorage.getItem("selectedArtist");
 
     if (artistKey && artistsData[artistKey]) {
         const artist = artistsData[artistKey];
 
-        // Definir o nome, imagem e visualizações
+        // Atualiza os elementos da página com os dados do artista
         document.getElementById("artist-name").innerText = artist.name;
         document.getElementById("artist-image").src = artist.image;
         document.getElementById("artist-views").innerText = artist.views;
         document.getElementById("artist-history").innerText = artist.history;
 
-        // Músicas
+        // Preenche a lista de músicas
         const songsList = document.getElementById("artist-songs");
-        songsList.innerHTML = ""; // Limpar lista antes de adicionar novos itens
+        songsList.innerHTML = "";
         artist.songs.forEach(song => {
             const li = document.createElement("li");
             li.innerHTML = `${song.name} <span class="music-icons">${song.icons}</span>`;
-
-            // Adicionar evento de clique para redirecionar para a página da música
             li.addEventListener("click", () => {
                 localStorage.setItem("selectedSong", song.name);
-                window.location.href = "../pages/musica.html"; // Redireciona para a página de aprendizado
+                window.location.href = "../pages/musica.html";
             });
-
             songsList.appendChild(li);
         });
 
-
-        // Integrantes
+        // Preenche a lista de membros
         const membersList = document.getElementById("artist-members");
-        membersList.innerHTML = ""; // Limpar lista antes de adicionar novos itens
+        membersList.innerHTML = "";
         artist.members.forEach(member => {
             const li = document.createElement("li");
             li.innerText = member;
             membersList.appendChild(li);
         });
 
-        // Galeria
+        // Preenche a galeria de imagens
         const galleryContainer = document.getElementById("artist-gallery");
-        galleryContainer.innerHTML = ""; // Limpar a galeria antes de adicionar novas imagens
+        galleryContainer.innerHTML = "";
         artist.gallery.forEach(image => {
             const imgElement = document.createElement("img");
             imgElement.src = image;
@@ -232,9 +202,9 @@ if (window.location.pathname.includes("../pages/artista.html")) {
             galleryContainer.appendChild(imgElement);
         });
 
-        // Prêmios
+        // Preenche a lista de prêmios
         const awardsList = document.getElementById("artist-awards");
-        awardsList.innerHTML = ""; // Limpar lista de prêmios antes de adicionar novos
+        awardsList.innerHTML = "";
         artist.awards.forEach(award => {
             const li = document.createElement("li");
             li.innerText = award;
