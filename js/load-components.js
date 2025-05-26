@@ -1,3 +1,5 @@
+import { artistsData } from './artista.js';
+
 document.addEventListener('DOMContentLoaded', function () {
     // =============== CARREGAMENTO DE COMPONENTES ===============
     // Carrega a sidebar
@@ -43,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const sidebar = document.querySelector(".sidebar");
         const closeBtn = document.querySelector("#btn");
         const searchBtn = document.querySelector(".bx-search");
-        const searchInput = document.querySelector(".nav-list input[type='text']"); // Seleciona o input de pesquisa
+        const searchInput = document.querySelector(".nav-list input[type='text']");
 
         if (sidebar && closeBtn && searchBtn && searchInput) {
             // Evento do botão de menu (abrir/fechar sidebar)
@@ -54,12 +56,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Evento do ícone de pesquisa (abre sidebar + foca no input)
             searchBtn.addEventListener("click", (e) => {
-                e.preventDefault(); // Evita comportamentos indesejados (se for um link)
+                e.preventDefault();
                 if (!sidebar.classList.contains("open")) {
-                    sidebar.classList.add("open"); // Garante que a sidebar abra
+                    sidebar.classList.add("open");
                     menuBtnChange();
                 }
-                searchInput.focus(); // Foca no input para digitar imediatamente
+                searchInput.focus();
             });
 
             // Altera o ícone do botão de menu
@@ -70,6 +72,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
                 }
             }
+
+            // Configura a funcionalidade de pesquisa
+            setupSearch();
         }
     }
 
@@ -119,4 +124,126 @@ document.addEventListener('DOMContentLoaded', function () {
         window.addEventListener('scroll', scrollActive);
         scrollActive();
     }
+
+    // =============== CONFIGURAÇÃO DA PESQUISA ===============
+    function setupSearch() {
+        const searchInput = document.getElementById('sidebar-search-input');
+
+        if (searchInput) {
+            searchInput.addEventListener('input', function () {
+                const query = this.value;
+                if (query.length > 2) { // Só pesquisa com pelo menos 3 caracteres
+                    const results = searchSongs(query);
+                    displaySearchResults(results);
+                } else {
+                    // Remove os resultados se a query for muito curta
+                    const existingContainer = document.getElementById('search-results-container');
+                    if (existingContainer) {
+                        existingContainer.remove();
+                    }
+                }
+            });
+
+            // Fecha os resultados ao clicar fora
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('#search-results-container')) {
+                    const existingContainer = document.getElementById('search-results-container');
+                    if (existingContainer && e.target !== searchInput) {
+                        existingContainer.remove();
+                    }
+                }
+            });
+        }
+    }
+
+    // Função para pesquisar músicas em todos os artistas
+    function searchSongs(query) {
+        query = query.toLowerCase().trim();
+        if (!query) return []; // Retorna vazio se a query estiver vazia
+
+        const results = [];
+
+        // Percorre todos os artistas
+        for (const artistKey in artistsData) {
+            const artist = artistsData[artistKey];
+
+            // Filtra as músicas que correspondem à pesquisa
+            const matchingSongs = artist.songs.filter(song =>
+                song.name.toLowerCase().includes(query)
+            );
+
+            if (matchingSongs.length > 0) {
+                results.push({
+                    artist: artist.name,
+                    artistKey: artistKey,
+                    songs: matchingSongs
+                });
+            }
+        }
+
+        return results;
+    }
+
+    // Função para exibir os resultados da pesquisa
+    function displaySearchResults(results) {
+        const searchResultsContainer = document.createElement('div');
+        searchResultsContainer.id = 'search-results-container';
+        searchResultsContainer.style.position = 'fixed';
+        searchResultsContainer.style.top = '60px';
+        searchResultsContainer.style.left = '80px';
+        searchResultsContainer.style.backgroundColor = '#fff';
+        searchResultsContainer.style.zIndex = '1000';
+        searchResultsContainer.style.borderRadius = '5px';
+        searchResultsContainer.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+        searchResultsContainer.style.maxHeight = '400px';
+        searchResultsContainer.style.overflowY = 'auto';
+        searchResultsContainer.style.width = '300px';
+        searchResultsContainer.style.padding = '10px';
+
+        if (results.length === 0) {
+            searchResultsContainer.innerHTML = '<p>Nenhuma música encontrada</p>';
+        } else {
+            let html = '';
+            results.forEach(result => {
+                html += `<div class="artist-result">
+                        <h4>${result.artist}</h4>
+                        <ul>`;
+
+                result.songs.forEach(song => {
+                    html += `<li class="song-result" 
+                             data-artist="${result.artistKey}" 
+                             data-song="${song.name}">
+                             ${song.name}
+                          </li>`;
+                });
+
+                html += `</ul></div>`;
+            });
+            searchResultsContainer.innerHTML = html;
+        }
+
+        // Remove o container anterior se existir
+        const existingContainer = document.getElementById('search-results-container');
+        if (existingContainer) {
+            existingContainer.remove();
+        }
+
+        document.body.appendChild(searchResultsContainer);
+
+        // Adiciona eventos de clique aos resultados
+        document.querySelectorAll('.song-result').forEach(item => {
+            item.addEventListener('click', function () {
+                const artistKey = this.getAttribute('data-artist');
+                const songName = this.getAttribute('data-song');
+
+                // Salva o artista e a música selecionada
+                localStorage.setItem("selectedArtist", artistKey);
+                localStorage.setItem("selectedSong", songName);
+
+                // Redireciona para a página da música
+                window.location.href = "../pages/musica.html";
+            });
+        });
+    }
 });
+

@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Pirata+One|Rubik:900");
 
+* {
+    font-family: "Poppins", sans-serif;
+}
+
 
 ::-webkit-scrollbar {
     width: 8px
@@ -268,7 +272,6 @@ nav a {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
 }
 
 .sidebar {
@@ -662,7 +665,6 @@ nav a {
     z-index: 2;
 
     & .title {
-        font-family: 'arial-black';
         text-transform: uppercase;
     }
 
