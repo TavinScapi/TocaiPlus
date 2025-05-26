@@ -120,7 +120,4 @@ document.addEventListener('DOMContentLoaded', function () {
         // Run once on load to set initial state
         scrollActive();
     }
-
-    // =============== OUTRAS FUNCIONALIDADES GLOBAIS ===============
-    // Adicione aqui quaisquer outros scripts globais necessários
 });

@@ -452,7 +452,7 @@ nav a {
     display: none;
 }
 
-.sidebar li.profile {
+.sidebar li.site-version {
     position: fixed;
     height: 57.1px;
     width: 78px;
@@ -464,11 +464,11 @@ nav a {
     overflow: hidden;
 }
 
-.sidebar.open li.profile {
+.sidebar.open li.site-version {
     width: 250px;
 }
 
-.sidebar li .profile-details {
+.sidebar li .version-details {
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
@@ -482,19 +482,19 @@ nav a {
     margin-right: 10px;
 }
 
-.sidebar li.profile .name,
-.sidebar li.profile .job {
+.sidebar li.site-version .name,
+.sidebar li.site-version .version-number {
     font-size: 15px;
     font-weight: 400;
     color: #fff;
     white-space: nowrap;
 }
 
-.sidebar li.profile .job {
+.sidebar li.site-version .version-number {
     font-size: 12px;
 }
 
-.sidebar .profile #log_out {
+.sidebar .site-version #log_out {
     position: absolute;
     top: 50%;
     right: 0;
@@ -506,7 +506,7 @@ nav a {
     transition: all 0.5s ease;
 }
 
-.sidebar.open .profile #log_out {
+.sidebar.open .site-version #log_out {
     width: 50px;
     background: none;
 }
@@ -1495,4 +1495,40 @@ a {
     .container {
         margin-inline: auto;
     }
+}
+
+.site-version {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    margin-top: 10px;
+    color: #fff;
+}
+
+.version-details {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.version-details .logo-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.version-details .text {
+    display: flex;
+    flex-direction: column;
+}
+
+.version-details .name {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.version-details .version-number {
+    font-size: 12px;
+    color: #aaa;
 }
