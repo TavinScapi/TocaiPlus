@@ -1,6 +1,6 @@
 let songData = {};
 
-fetch('../musica.json')
+fetch('../data/musica.json')
     .then(response => response.json())
     .then(data => {
         songData = data.Artistas; // Acessa o objeto "Artistas"
@@ -93,7 +93,7 @@ let allSongsData = {};
 
 // Carregar os dados do JSON quando a página carregar
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('../musica.json')
+    fetch('../data/musica.json')
         .then(response => response.json())
         .then(data => {
             allSongsData = data.Artistas;

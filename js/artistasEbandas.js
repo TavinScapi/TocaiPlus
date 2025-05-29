@@ -1,39 +1,50 @@
-let sidebar = document.querySelector(".sidebar");
-let closeBtn = document.querySelector("#btn");
-let searchBtn = document.querySelector(".bx-search");
+document.addEventListener('DOMContentLoaded', function () {
+    // Carrega os artistas do JSON
+    fetch('../data/artistas.json')
+        .then(response => response.json())
+        .then(data => {
+            const listaArtistas = document.querySelector('.lista-artistas');
+            listaArtistas.innerHTML = ''; // Limpa o conteúdo padrão
 
-closeBtn.addEventListener("click", () => {
-    sidebar.classList.toggle("open");
-    menuBtnChange();
-})
+            data.artistas.forEach(artista => {
+                // Cria o card do artista
+                const card = document.createElement('div');
+                card.className = 'card-vinil';
+                card.setAttribute('data-genre', artista.generos.join(' '));
+                card.onclick = () => selectArtist(artista.id);
 
-searchBtn.addEventListener("click", () => {
-    sidebar.classList.toggle("open");
-    menuBtnChange();
-})
+                // Gera o HTML interno do card
+                card.innerHTML = `
+                    <div class="record_case">
+                        <div class="genre-label">${artista.generos.join(' / ')}</div>
+                        <div class="record recorddefault">
+                            <div class="front">
+                                <img src="${artista.imagem}" alt="${artista.nome}">
+                                <div class="cover"></div>
+                                <div class="cover-back"></div>
+                            </div>
+                            <div class="vinyl"></div>
+                            <div class="back">
+                                <img src="${artista.imagem}" alt="${artista.nome}">
+                            </div>
+                            <div class="right"></div>
+                            <div class="left"></div>
+                            <div class="top"></div>
+                            <div class="bottom"></div>
+                        </div>
+                    </div>
+                    <h3>${artista.nome}</h3>
+                    <p>${artista.descricao}</p>
+                    <button class="button">Ver Mais</button>
+                `;
 
-function menuBtnChange() {
-    if (sidebar.classList.contains("open")) {
-        closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
-    } else {
-        closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
-    }
-}
+                listaArtistas.appendChild(card);
+            });
+        })
+        .catch(error => console.error('Erro ao carregar artistas:', error));
+});
 
-
-menuBtnChange();
-
-const slider = document.querySelector('.slider');
-
-function activate(e) {
-    const items = document.querySelectorAll('.item');
-    e.target.matches('.next') && slider.append(items[0])
-    e.target.matches('.prev') && slider.prepend(items[items.length - 1]);
-}
-
-document.addEventListener('click', activate, false);
-
-
+// Funções de filtro (mantidas do código original)
 function toggleDropdown() {
     let dropdown = document.getElementById("dropdown");
     dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
@@ -56,18 +67,17 @@ function selectGenre(value) {
 }
 
 function filterByGenre(selectedGenre) {
-    const cards = document.querySelectorAll('.card');
+    const cards = document.querySelectorAll('.card-vinil');
 
     cards.forEach(card => {
-        const genres = card.getAttribute('data-genre').split(' '); // Divide os gêneros por espaço
+        const genres = card.getAttribute('data-genre').split(' ');
         if (selectedGenre === 'todos' || genres.includes(selectedGenre)) {
-            card.style.display = 'block'; // Exibe o cartão
+            card.style.display = 'block';
         } else {
-            card.style.display = 'none'; // Oculta o cartão
+            card.style.display = 'none';
         }
     });
 }
-
 
 document.addEventListener("click", function (event) {
     if (!event.target.closest(".filtro-generos")) {
@@ -75,10 +85,7 @@ document.addEventListener("click", function (event) {
     }
 });
 
-// Salvar o artista escolhido no localStorage e redirecionar
 function selectArtist(artist) {
     localStorage.setItem("selectedArtist", artist);
     window.location.href = "../pages/artista.html";
 }
-
-
