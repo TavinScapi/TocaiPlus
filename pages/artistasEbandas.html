@@ -27,6 +27,8 @@
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/Menu-moblie.css">
+    <link rel="stylesheet" href="../css/pagination.css">
+
 
     <!-- Scripts -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js" defer></script>
@@ -41,7 +43,6 @@
     <div class="home-section">
         <section id="artistas">
             <h2>Artistas & Bandas</h2>
-
             <div class="filtros">
                 <button class="genre-button" onclick="filterByGenre('todos')">Todos</button>
                 <button class="genre-button" onclick="filterByGenre('rock')">Rock</button>
@@ -89,10 +90,25 @@
             </div>
             <br>
 
+
+            <!-- Adicione isso na seção de artistas, antes do div .lista-artistas -->
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Pesquisar artistas..." onkeyup="searchArtists()">
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+
             <div class="lista-artistas">
                 <!-- Os cards serão carregados dinamicamente aqui -->
             </div>
-            
+
+            <div class="pagination-container">
+                <div class="pagination" id="pagination">
+                    <!-- Os botões de paginação serão gerados aqui -->
+                </div>
+            </div>
+
         </section>
 
         <div class="seila">
