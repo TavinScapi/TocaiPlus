@@ -37,6 +37,16 @@ function filterByGenre(selectedGenre) {
     });
 }
 
+const slider = document.querySelector('.slider');
+
+function activate(e) {
+    const items = document.querySelectorAll('.item');
+    e.target.matches('.next') && slider.append(items[0])
+    e.target.matches('.prev') && slider.prepend(items[items.length - 1]);
+}
+
+document.addEventListener('click', activate, false);
+
 // Fecha o dropdown ao clicar fora dele
 document.addEventListener("click", function (event) {
     if (!event.target.closest(".filtro-generos")) {
