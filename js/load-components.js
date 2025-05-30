@@ -86,75 +86,67 @@ document.addEventListener('DOMContentLoaded', function () {
         const navExpandIcon = document.getElementById('nav-expand-icon');
 
         if (navExpand && navExpandList && navExpandIcon) {
-            navExpand.addEventListener('click', () => {
-                // Expand list
+            navExpand.addEventListener('click', (e) => {
+                e.stopPropagation();
                 navExpandList.classList.toggle('show-list');
+                navExpandIcon.classList.toggle('ri-book-open-line');
+                navExpandIcon.classList.toggle('ri-book-line');
+            });
 
-                // Troca o ícone entre livro fechado e livro aberto
+            // Fecha o menu expandido ao clicar fora
+            document.addEventListener('click', () => {
                 if (navExpandList.classList.contains('show-list')) {
-                    navExpandIcon.classList.replace('ri-book-line', 'ri-book-open-line');
-                } else {
+                    navExpandList.classList.remove('show-list');
                     navExpandIcon.classList.replace('ri-book-open-line', 'ri-book-line');
                 }
             });
         }
 
-        // =============== SCROLL SECTIONS ACTIVE LINK ===============
-        const sections = document.querySelectorAll('section[id]');
+        // =============== ATIVAÇÃO DE LINKS POR PÁGINA ===============
         const navLinks = document.querySelectorAll('.nav__list a');
+        const currentPage = window.location.pathname.split('/').pop();
 
-        const scrollActive = () => {
-            const scrollDown = window.scrollY;
+        // Remove a classe active de todos os links primeiro
+        navLinks.forEach(link => link.classList.remove('active-link'));
 
-            sections.forEach(current => {
-                const sectionHeight = current.offsetHeight;
-                const sectionTop = current.offsetTop - 58;
-                const sectionId = current.getAttribute('id');
-                const sectionLink = document.querySelector(`.nav__list a[href*="${sectionId}"]`);
+        // Ativa o link correspondente à página atual
+        navLinks.forEach(link => {
+            const linkPage = link.getAttribute('href').split('/').pop();
 
-                if (scrollDown > sectionTop && scrollDown <= sectionTop + sectionHeight) {
-                    // Remove active class from all links first
-                    navLinks.forEach(link => link.classList.remove('active-link'));
-                    // Add to current section link
-                    if (sectionLink) sectionLink.classList.add('active-link');
-                }
-            });
-        };
-
-        window.addEventListener('scroll', scrollActive);
-        scrollActive();
-
-        // =============== ESCONDER/MOSTRAR MENU MOBILE NO SCROLL ===============
-        function setupMobileMenuScroll() {
-            const mobileMenu = document.querySelector('.mobile-menu');
-            let lastScrollPosition = 0;
-            const scrollThreshold = 10;
-
-            if (mobileMenu) {
-                window.addEventListener('scroll', function () {
-                    const currentScrollPosition = window.scrollY;
-
-                    // Scroll para baixo - esconde o menu
-                    if (currentScrollPosition > lastScrollPosition && currentScrollPosition > scrollThreshold) {
-                        mobileMenu.style.transform = 'translateY(100%)';
-                        mobileMenu.style.transition = 'transform 0.3s ease';
-                    }
-                    // Scroll para cima - mostra o menu
-                    else if (currentScrollPosition < lastScrollPosition) {
-                        mobileMenu.style.transform = 'translateY(0)';
-                        mobileMenu.style.transition = 'transform 0.3s ease';
-                    }
-
-                    lastScrollPosition = currentScrollPosition;
-                });
+            // Verifica se o link corresponde à página atual
+            if (linkPage === currentPage ||
+                (currentPage === 'index.html' && linkPage === 'home.html') ||
+                (currentPage === 'home.html' && linkPage === 'index.html')) {
+                link.classList.add('active-link');
             }
+        });
+
+        // =============== ESCONDER/MOSTRAR MENU NO SCROLL ===============
+        const mobileMenu = document.querySelector('.nav');
+        let lastScrollPosition = 0;
+        const scrollThreshold = 10;
+
+        if (mobileMenu) {
+            mobileMenu.style.position = 'fixed';
+            mobileMenu.style.zIndex = '1000';
+            mobileMenu.style.transition = 'transform 0.3s ease';
+
+            window.addEventListener('scroll', function () {
+                const currentScrollPosition = window.scrollY;
+
+                // Scroll para baixo - esconde o menu
+                if (currentScrollPosition > lastScrollPosition && currentScrollPosition > scrollThreshold) {
+                    mobileMenu.style.transform = 'translateY(150%)';
+                }
+                // Scroll para cima - mostra o menu
+                else if (currentScrollPosition < lastScrollPosition) {
+                    mobileMenu.style.transform = 'translateY(0)';
+                }
+
+                lastScrollPosition = currentScrollPosition;
+            });
         }
-
-        // ADICIONE ESTA LINHA PARA CHAMAR A FUNÇÃO
-        setupMobileMenuScroll();
     }
-
-
 
     // =============== CONFIGURAÇÃO DA PESQUISA ===============
     function setupSearch() {

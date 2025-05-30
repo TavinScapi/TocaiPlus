@@ -35,6 +35,18 @@
 }
 
 /*=============== BASE ===============*/
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: var(--body-font);
+    background-color: var(--body-color);
+    color: var(--text-color);
+    -webkit-tap-highlight-color: transparent;
+}
 
 ul {
     list-style: none;
@@ -45,20 +57,27 @@ a {
     color: inherit;
 }
 
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
 /*=============== NAVIGATION ===============*/
 .nav {
     position: fixed;
     bottom: 1.5rem;
+    transform: translateX(-50%);
     background-color: var(--black-color);
-    margin-inline: auto;
     width: 88%;
+    max-width: 350px;
+    box-shadow: 0 4px 20px var(--shadow-color);
     padding: 1rem 1.75rem;
     border-radius: 4rem;
     z-index: var(--z-fixed);
     transition: transform var(--transition-normal) var(--transition-smooth),
         box-shadow var(--transition-normal) var(--transition-smooth);
-    left: 0;
-    right: 0;
 }
 
 .nav__list {
