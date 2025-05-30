@@ -1,24 +1,66 @@
 // Variáveis globais
 let allArtists = [];
+let filteredArtists = [];
 let currentPage = 1;
-const artistsPerPage = 12; // Ajuste conforme necessário
+const artistsPerPage = 12;
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Carrega os artistas do JSON
     fetch('../data/artistas.json')
         .then(response => response.json())
         .then(data => {
             allArtists = data.artistas;
-            displayArtists(allArtists, currentPage);
-            setupPagination(allArtists);
+            filteredArtists = [...allArtists]; // Inicialmente, todos os artistas estão visíveis
+            displayArtists(filteredArtists, currentPage);
+            setupPagination(filteredArtists);
         })
         .catch(error => console.error('Erro ao carregar artistas:', error));
 });
 
-// Função para exibir artistas com paginação
+// Função de filtro por gênero atualizada
+function filterByGenre(selectedGenre) {
+    if (selectedGenre === 'todos') {
+        filteredArtists = [...allArtists];
+    } else {
+        filteredArtists = allArtists.filter(artist =>
+            artist.generos.some(genre => genre.toLowerCase() === selectedGenre.toLowerCase())
+        );
+    }
+
+    currentPage = 1; // Resetar para a primeira página
+    displayArtists(filteredArtists, currentPage);
+    setupPagination(filteredArtists);
+
+    // Atualizar a barra de pesquisa para refletir os filtros
+    document.getElementById('searchInput').value = '';
+}
+
+// Função de pesquisa atualizada
+function searchArtists() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+
+    if (searchTerm === '') {
+        // Se a pesquisa estiver vazia, voltar aos artistas filtrados atualmente
+        displayArtists(filteredArtists, 1);
+        setupPagination(filteredArtists);
+        currentPage = 1;
+        return;
+    }
+
+    const searchedArtists = filteredArtists.filter(artist =>
+        artist.nome.toLowerCase().includes(searchTerm) ||
+        artist.descricao.toLowerCase().includes(searchTerm) ||
+        artist.generos.some(genre => genre.toLowerCase().includes(searchTerm))
+    );
+
+    currentPage = 1;
+    displayArtists(searchedArtists, currentPage);
+    setupPagination(searchedArtists);
+}
+
+// Funções de exibição e paginação (permanecem as mesmas, mas agora trabalham com filteredArtists)
 function displayArtists(artists, page) {
     const listaArtistas = document.querySelector('.lista-artistas');
-    listaArtistas.innerHTML = ''; // Limpa o conteúdo
+    listaArtistas.innerHTML = '';
 
     const startIndex = (page - 1) * artistsPerPage;
     const endIndex = startIndex + artistsPerPage;
@@ -30,7 +72,6 @@ function displayArtists(artists, page) {
     }
 
     paginatedArtists.forEach(artista => {
-        // Cria o card do artista (mesmo código que você já tinha)
         const card = document.createElement('div');
         card.className = 'card-vinil';
         card.setAttribute('data-genre', artista.generos.join(' '));
@@ -64,7 +105,6 @@ function displayArtists(artists, page) {
     });
 }
 
-// Função para configurar a paginação
 function setupPagination(artists) {
     const pagination = document.getElementById('pagination');
     pagination.innerHTML = '';
@@ -120,7 +160,6 @@ function setupPagination(artists) {
     updatePaginationButtons(artists);
 }
 
-// Atualiza o estado dos botões de paginação
 function updatePaginationButtons(artists) {
     const pageCount = Math.ceil(artists.length / artistsPerPage);
     const buttons = document.querySelectorAll('.pagination button');
@@ -128,41 +167,19 @@ function updatePaginationButtons(artists) {
     buttons.forEach((button, index) => {
         button.classList.remove('active');
 
-        if (index === 0) { // Botão Anterior
+        if (index === 0) {
             button.disabled = currentPage === 1;
             button.classList.toggle('disabled', currentPage === 1);
-        } else if (index === buttons.length - 1) { // Botão Próximo
+        } else if (index === buttons.length - 1) {
             button.disabled = currentPage === pageCount;
             button.classList.toggle('disabled', currentPage === pageCount);
-        } else if (index === currentPage) { // Botão da página atual
+        } else if (index === currentPage) {
             button.classList.add('active');
         }
     });
 }
 
-// Função de pesquisa
-function searchArtists() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-
-    if (searchTerm === '') {
-        displayArtists(allArtists, 1);
-        setupPagination(allArtists);
-        currentPage = 1;
-        return;
-    }
-
-    const filteredArtists = allArtists.filter(artist =>
-        artist.nome.toLowerCase().includes(searchTerm) ||
-        artist.descricao.toLowerCase().includes(searchTerm) ||
-        artist.generos.some(genre => genre.toLowerCase().includes(searchTerm))
-    );
-
-    displayArtists(filteredArtists, 1);
-    setupPagination(filteredArtists);
-    currentPage = 1;
-}
-
-// Funções de filtro (mantidas do código original)
+// Mantenha as outras funções como estão
 function toggleDropdown() {
     let dropdown = document.getElementById("dropdown");
     dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
@@ -183,25 +200,6 @@ function selectGenre(value) {
     document.getElementById("dropdown").style.display = "none";
     filterByGenre(value);
 }
-
-function filterByGenre(selectedGenre) {
-    const cards = document.querySelectorAll('.card-vinil');
-
-    cards.forEach(card => {
-        const genres = card.getAttribute('data-genre').split(' ');
-        if (selectedGenre === 'todos' || genres.includes(selectedGenre)) {
-            card.style.display = 'block';
-        } else {
-            card.style.display = 'none';
-        }
-    });
-}
-
-document.addEventListener("click", function (event) {
-    if (!event.target.closest(".filtro-generos")) {
-        document.getElementById("dropdown").style.display = "none";
-    }
-});
 
 function selectArtist(artist) {
     localStorage.setItem("selectedArtist", artist);

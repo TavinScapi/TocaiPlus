@@ -151,3 +151,32 @@ a {
 .active-link {
     color: var(--white-color);
 }
+
+/*=============== BREAKPOINTS ===============*/
+/* For medium devices */
+@media screen and (min-width: 450px) {
+    .nav {
+        width: 350px;
+    }
+}
+
+/* For large devices */
+@media screen and (min-width: 1150px) {
+    .container {
+        margin-inline: auto;
+    }
+}
+
+.mobile-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    /* Cor de fundo do seu menu */
+    z-index: 1000;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    /* Adicione outros estilos conforme necessário para seu menu */
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}

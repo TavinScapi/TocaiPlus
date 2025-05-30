@@ -123,7 +123,38 @@ document.addEventListener('DOMContentLoaded', function () {
 
         window.addEventListener('scroll', scrollActive);
         scrollActive();
+
+        // =============== ESCONDER/MOSTRAR MENU MOBILE NO SCROLL ===============
+        function setupMobileMenuScroll() {
+            const mobileMenu = document.querySelector('.mobile-menu');
+            let lastScrollPosition = 0;
+            const scrollThreshold = 10;
+
+            if (mobileMenu) {
+                window.addEventListener('scroll', function () {
+                    const currentScrollPosition = window.scrollY;
+
+                    // Scroll para baixo - esconde o menu
+                    if (currentScrollPosition > lastScrollPosition && currentScrollPosition > scrollThreshold) {
+                        mobileMenu.style.transform = 'translateY(100%)';
+                        mobileMenu.style.transition = 'transform 0.3s ease';
+                    }
+                    // Scroll para cima - mostra o menu
+                    else if (currentScrollPosition < lastScrollPosition) {
+                        mobileMenu.style.transform = 'translateY(0)';
+                        mobileMenu.style.transition = 'transform 0.3s ease';
+                    }
+
+                    lastScrollPosition = currentScrollPosition;
+                });
+            }
+        }
+
+        // ADICIONE ESTA LINHA PARA CHAMAR A FUNÇÃO
+        setupMobileMenuScroll();
     }
+
+
 
     // =============== CONFIGURAÇÃO DA PESQUISA ===============
     function setupSearch() {
@@ -246,4 +277,3 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
-
