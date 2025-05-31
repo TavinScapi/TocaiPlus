@@ -1,17 +1,15 @@
 :root {
     /*========== Colors ==========*/
-    --first-color: hsl(225, 95%, 56%);
-    --first-color-light: hsl(225, 95%, 70%);
-    --black-color: hsl(225, 12%, 12%);
-    --black-color-light: hsl(225, 12%, 20%);
-    --white-color: hsl(0, 0%, 100%);
-    --text-color: hsl(225, 8%, 65%);
-    --text-color-light: hsl(225, 8%, 75%);
-    --body-color: hsl(225, 100%, 99%);
-    --shadow-color: hsla(228, 95%, 4%, 0.1);
+    --first-color: #282828;
+    --first-color-light: #535353;
+    --black-color: #121212;
+    --white-color: #ffffff;
+    --text-color: #9fa2ad;
+    --shadow-color: #0104141a;
 
     /*========== Font and typography ==========*/
-    --body-font: "Montserrat Alternates", sans-serif;
+    --body-font: "Montserrat Alternates",
+    sans-serif;
     --biggest-font-size: 2.5rem;
     --tiny-font-size: 0.625rem;
     --small-font-size: 0.75rem;
@@ -218,7 +216,7 @@ a {
     transform: translateX(-50%);
     width: 5px;
     height: 5px;
-    background-color: var(--first-color);
+    background-color: var(--first-color-light);
     border-radius: 50%;
 }
 

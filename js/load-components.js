@@ -181,7 +181,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Função para pesquisar músicas em todos os artistas
     function searchSongs(query) {
-        query = query.toLowerCase().trim();
+        // Normaliza a query: remove acentos e coloca em minúsculas
+        const normalize = (str) => {
+            return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        };
+
+        query = normalize(query.trim());
         if (!query) return []; // Retorna vazio se a query estiver vazia
 
         const results = [];
@@ -192,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Filtra as músicas que correspondem à pesquisa
             const matchingSongs = artist.songs.filter(song =>
-                song.name.toLowerCase().includes(query)
+                normalize(song.name).includes(query)
             );
 
             if (matchingSongs.length > 0) {
@@ -207,43 +212,99 @@ document.addEventListener('DOMContentLoaded', function () {
         return results;
     }
 
-    // Função para exibir os resultados da pesquisa
     function displaySearchResults(results) {
         const searchResultsContainer = document.createElement('div');
         searchResultsContainer.id = 'search-results-container';
+
+        // Estilo Spotify
         searchResultsContainer.style.position = 'fixed';
-        searchResultsContainer.style.top = '60px';
-        searchResultsContainer.style.left = '80px';
-        searchResultsContainer.style.backgroundColor = '#fff';
+        searchResultsContainer.style.top = '70px';
+        searchResultsContainer.style.left = '280px';
+        searchResultsContainer.style.backgroundColor = '#181818';  // Fundo escuro do Spotify
+        searchResultsContainer.style.color = '#ffffff';
         searchResultsContainer.style.zIndex = '1000';
-        searchResultsContainer.style.borderRadius = '5px';
-        searchResultsContainer.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-        searchResultsContainer.style.maxHeight = '400px';
+        searchResultsContainer.style.borderRadius = '8px';
+        searchResultsContainer.style.boxShadow = '0 8px 16px rgba(0,0,0,0.3)';
+        searchResultsContainer.style.maxHeight = '500px';
         searchResultsContainer.style.overflowY = 'auto';
-        searchResultsContainer.style.width = '300px';
-        searchResultsContainer.style.padding = '10px';
+        searchResultsContainer.style.width = '350px';
+        searchResultsContainer.style.padding = '0';  // Removido padding geral para controle individual
+        searchResultsContainer.style.fontFamily = "'Circular', 'Helvetica Neue', sans-serif";  // Fontes do Spotify
+        searchResultsContainer.style.border = '1px solid #282828';
 
         if (results.length === 0) {
-            searchResultsContainer.innerHTML = '<p>Nenhuma música encontrada</p>';
+            searchResultsContainer.innerHTML = `
+            <div style="
+                padding: 20px;
+                text-align: center;
+                color: #b3b3b3;
+                font-size: 14px;
+            ">
+                Nenhuma música encontrada
+            </div>
+        `;
         } else {
             let html = '';
             results.forEach(result => {
-                html += `<div class="artist-result">
-                        <h4>${result.artist}</h4>
-                        <ul>`;
+                html += `
+                <div class="artist-result" style="
+                    padding: 12px 16px;
+                    border-bottom: 1px solid #282828;
+                ">
+                    <h4 style="
+                        margin: 0 0 8px 0;
+                        color: #1db954;  // Verde Spotify
+                        font-size: 14px;
+                        font-weight: 700;
+                        letter-spacing: 0.5px;
+                        text-transform: uppercase;
+                    ">${result.artist}</h4>
+                    <ul style="
+                        list-style: none;
+                        padding: 0;
+                        margin: 0;
+                    ">`;
 
                 result.songs.forEach(song => {
-                    html += `<li class="song-result" 
-                             data-artist="${result.artistKey}" 
-                             data-song="${song.name}">
-                             ${song.name}
-                          </li>`;
+                    html += `
+                    <li class="song-result" 
+                         data-artist="${result.artistKey}" 
+                         data-song="${song.name}"
+                         style="
+                            padding: 10px 16px;
+                            margin: 2px 0;
+                            border-radius: 4px;
+                            cursor: pointer;
+                            transition: all 0.2s ease;
+                            display: flex;
+                            align-items: center;
+                            font-size: 14px;
+                            font-weight: 500;
+                         "
+                         onmouseover="this.style.backgroundColor='#282828'"
+                         onmouseout="this.style.backgroundColor='transparent'"
+                    >
+                        <div style="
+                            background-color: #535353;
+                            width: 24px;
+                            height: 24px;
+                            border-radius: 2px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            margin-right: 12px;
+                        ">
+                            <i class='bx bx-music' style="color: #b3b3b3; font-size: 12px;"></i>
+                        </div>
+                        <span>${song.name}</span>
+                    </li>`;
                 });
 
                 html += `</ul></div>`;
             });
             searchResultsContainer.innerHTML = html;
         }
+
 
         // Remove o container anterior se existir
         const existingContainer = document.getElementById('search-results-container');

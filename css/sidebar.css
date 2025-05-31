@@ -1,3 +1,14 @@
+/* Cores do Spotify */
+:root {
+    --spotify-black: #121212;
+    --spotify-dark-gray: #181818;
+    --spotify-gray: #282828;
+    --spotify-light-gray: #535353;
+    --spotify-lighter-gray: #b3b3b3;
+    --spotify-white: #ffffff;
+}
+
+/* Base styles */
 * {
     margin: 0;
     padding: 0;
@@ -10,10 +21,11 @@
     top: 0;
     height: 100%;
     width: 78px;
-    background: #0D0D0D;
+    background: var(--spotify-black);
     padding: 6px 14px;
     z-index: 999;
     transition: all 0.5s ease;
+    border-right: 1px solid var(--spotify-gray);
 }
 
 .sidebar.open {
@@ -29,9 +41,9 @@
 }
 
 .sidebar .logo-details .logo_name {
-    color: #fff;
+    color: var(--spotify-white);
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 700;
     opacity: 0;
     transition: all 0.5s ease;
 }
@@ -50,6 +62,7 @@
     text-align: center;
     cursor: pointer;
     transition: all 0.5s ease;
+    color: var(--spotify-lighter-gray);
 }
 
 .sidebar.open .logo-details #btn {
@@ -57,7 +70,7 @@
 }
 
 .sidebar i {
-    color: #fff;
+    color: var(--spotify-lighter-gray);
     height: 60px;
     min-width: 50px;
     font-size: 28px;
@@ -78,68 +91,62 @@
 
 .sidebar input {
     font-size: 15px;
-    color: #fff;
+    color: transparent;
     font-weight: 400;
     outline: none;
-    height: 50px;
+    height: 40px;
     width: 100%;
     border: none;
-    border-radius: 12px;
+    border-radius: 20px;
     transition: all 0.5s ease;
-    background: #989CA6;
+    background: var(--spotify-gray);
+    padding-left: 40px;
+}
+
+.sidebar:not(.open) input::placeholder {
+    color: transparent;
 }
 
 .sidebar.open input {
     padding: 0 20px 0 50px;
     width: 100%;
+    color: var(--spotify-white);
 }
 
 .sidebar .bx-search {
     position: absolute;
     top: 50%;
-    left: 0;
     transform: translateY(-50%);
-    font-size: 22px;
-    background: #989CA6;
-    color: #ffffff;
-}
-
-.sidebar .bx-search:hover {
-    background: #ffffff;
-    color: #0D0D0D;
-}
-
-.sidebar.open .bx-search:hover {
-    background: #989CA6;
-    color: #ffffff;
+    font-size: 18px;
+    color: var(--spotify-lighter-gray);
 }
 
 .sidebar li i {
     height: 50px;
     line-height: 50px;
     font-size: 18px;
-    border-radius: 12px;
+    border-radius: 4px;
 }
 
 .sidebar li a {
     display: flex;
     height: 100%;
     width: 100%;
-    border-radius: 12px;
+    border-radius: 4px;
     align-items: center;
     text-decoration: none;
     transition: all 0.4s ease;
-    background: #0D0D0D;
+    background: transparent;
 }
 
 .sidebar li a:hover {
-    background: #ffffff;
+    background: var(--spotify-gray);
 }
 
 .sidebar li a .links_name {
-    color: #fff;
-    font-size: 15px;
-    font-weight: 400;
+    color: var(--spotify-white);
+    font-size: 14px;
+    font-weight: 500;
     white-space: nowrap;
     opacity: 0;
     pointer-events: none;
@@ -153,24 +160,24 @@
 
 .sidebar li a:hover .links_name,
 .sidebar li a:hover i {
-    transition: all 0.5s ease;
-    color: #0D0D0D;
+    color: var(--spotify-white);
 }
 
 .sidebar li .tooltip {
     position: absolute;
     top: -20px;
-    left: calc(100% + 15px);
-    background: #fff;
+    left: calc(100% + 20px);
+    background: var(--spotify-gray);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
     padding: 6px 12px;
     border-radius: 4px;
-    font-size: 15px;
-    font-weight: 400;
+    font-size: 14px;
+    font-weight: 500;
     opacity: 0;
     white-space: nowrap;
     pointer-events: none;
     transition: 0s;
+    color: var(--spotify-white);
 }
 
 .sidebar li:hover .tooltip {
@@ -187,14 +194,15 @@
 
 .sidebar li.site-version {
     position: fixed;
-    height: 57.1px;
+    height: 57px;
     width: 78px;
     left: 0;
     bottom: -8px;
     padding: 10px 14px;
-    background: #989CA6;
+    background: var(--spotify-gray);
     transition: all 0.5s ease;
     overflow: hidden;
+    border-top: 1px solid var(--spotify-light-gray);
 }
 
 .sidebar.open li.site-version {
@@ -208,23 +216,24 @@
 }
 
 .sidebar li img {
-    height: 45px;
-    width: 45px;
-    object-fit: contain;
-    border-radius: 6px;
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border-radius: 50%;
     margin-right: 10px;
 }
 
 .sidebar li.site-version .name,
 .sidebar li.site-version .version-number {
-    font-size: 15px;
-    font-weight: 400;
-    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--spotify-white);
     white-space: nowrap;
 }
 
 .sidebar li.site-version .version-number {
     font-size: 12px;
+    color: var(--spotify-lighter-gray);
 }
 
 .sidebar .site-version #log_out {
@@ -232,11 +241,12 @@
     top: 50%;
     right: 0;
     transform: translateY(-50%);
-    background: #989CA6;
+    background: var(--spotify-gray);
     width: 100%;
     height: 60px;
     line-height: 60px;
     transition: all 0.5s ease;
+    color: var(--spotify-white);
 }
 
 .sidebar.open .site-version #log_out {
@@ -244,33 +254,7 @@
     background: none;
 }
 
-#search-results-container {
-    font-family: 'Poppins', sans-serif;
-    color: #333;
-}
-
-.artist-result {
-    margin-bottom: 15px;
-}
-
-.artist-result h4 {
-    margin: 0 0 5px 0;
-    color: #1d1b31;
-    font-size: 16px;
-}
-
-.song-result {
-    padding: 8px 10px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-}
-
-.song-result:hover {
-    background-color: #f0f0f0;
-}
-
-
+/* Responsividade */
 @media screen and (max-width: 768px) {
     .sidebar {
         display: none;
@@ -291,10 +275,6 @@
 
 @media screen and (min-width: 769px) {
     .nav {
-        display: none;
-    }
-
-    .seila {
         display: none;
     }
 }
