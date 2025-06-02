@@ -410,7 +410,7 @@ function loadArtistData() {
 
     // Adicionar evento de clique para cada música popular
     document.querySelectorAll('.track-item').forEach(item => {
-        item.addEventListener('click', () => {
+        item.addEventListener('click', () => {  
             const songName = item.getAttribute('data-song');
             localStorage.setItem('selectedSong', songName);
             window.location.href = '../pages/musica.html'; // ajuste o caminho se necessário
