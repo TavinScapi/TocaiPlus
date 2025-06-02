@@ -1,8 +1,4 @@
-const CLIENT_ID = '1ca02f4c12f247de9ef1552f920e191e';
-const REDIRECT_URI = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost'
-    ? 'http://127.0.0.1:5500/pages/player.html'
-    : 'https://tocai.vercel.app/pages/player.html';
-const SCOPE = 'user-read-private user-read-email user-top-read user-follow-read user-read-recently-played streaming';
+
 
 const loginBtn = document.getElementById('login-btn');
 const logoutBtn = document.getElementById('logout-btn');
