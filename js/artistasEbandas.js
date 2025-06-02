@@ -1,45 +1,47 @@
-// Variáveis globais
+// ===================
+// Variáveis Globais
+// ===================
 let allArtists = [];
 let filteredArtists = [];
 let currentPage = 1;
 const artistsPerPage = 12;
 
-document.addEventListener('DOMContentLoaded', function () {
-    fetch('../data/artistas.json')
+// ===================
+// Carregar Dados JSON
+// ===================
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('../data/cardArtistas.json')
         .then(response => response.json())
         .then(data => {
             allArtists = data.artistas;
-            filteredArtists = [...allArtists]; // Inicialmente, todos os artistas estão visíveis
+            filteredArtists = [...allArtists];
             displayArtists(filteredArtists, currentPage);
             setupPagination(filteredArtists);
         })
         .catch(error => console.error('Erro ao carregar artistas:', error));
 });
 
-// Função de filtro por gênero atualizada
+// ===================
+// Filtros
+// ===================
 function filterByGenre(selectedGenre) {
-    if (selectedGenre === 'todos') {
-        filteredArtists = [...allArtists];
-    } else {
-        filteredArtists = allArtists.filter(artist =>
+    filteredArtists = (selectedGenre === 'todos')
+        ? [...allArtists]
+        : allArtists.filter(artist =>
             artist.generos.some(genre => genre.toLowerCase() === selectedGenre.toLowerCase())
         );
-    }
 
-    currentPage = 1; // Resetar para a primeira página
+    currentPage = 1;
     displayArtists(filteredArtists, currentPage);
     setupPagination(filteredArtists);
 
-    // Atualizar a barra de pesquisa para refletir os filtros
     document.getElementById('searchInput').value = '';
 }
 
-// Função de pesquisa atualizada
 function searchArtists() {
     const searchTerm = document.getElementById('searchInput').value.toLowerCase();
 
     if (searchTerm === '') {
-        // Se a pesquisa estiver vazia, voltar aos artistas filtrados atualmente
         displayArtists(filteredArtists, 1);
         setupPagination(filteredArtists);
         currentPage = 1;
@@ -57,7 +59,9 @@ function searchArtists() {
     setupPagination(searchedArtists);
 }
 
-// Funções de exibição e paginação (permanecem as mesmas, mas agora trabalham com filteredArtists)
+// ===================
+// Exibir Artistas
+// ===================
 function displayArtists(artists, page) {
     const listaArtistas = document.querySelector('.lista-artistas');
     listaArtistas.innerHTML = '';
@@ -105,12 +109,14 @@ function displayArtists(artists, page) {
     });
 }
 
+// ===================
+// Paginação
+// ===================
 function setupPagination(artists) {
     const pagination = document.getElementById('pagination');
     pagination.innerHTML = '';
 
     const pageCount = Math.ceil(artists.length / artistsPerPage);
-
     if (pageCount <= 1) return;
 
     // Botão Anterior
@@ -126,13 +132,11 @@ function setupPagination(artists) {
     });
     pagination.appendChild(prevButton);
 
-    // Botões de página
+    // Botões de Página
     for (let i = 1; i <= pageCount; i++) {
         const pageButton = document.createElement('button');
         pageButton.textContent = i;
-        if (i === currentPage) {
-            pageButton.classList.add('active');
-        }
+        if (i === currentPage) pageButton.classList.add('active');
 
         pageButton.addEventListener('click', () => {
             currentPage = i;
@@ -179,18 +183,20 @@ function updatePaginationButtons(artists) {
     });
 }
 
-// Mantenha as outras funções como estão
+// ===================
+// Dropdown de Gêneros
+// ===================
 function toggleDropdown() {
-    let dropdown = document.getElementById("dropdown");
+    const dropdown = document.getElementById("dropdown");
     dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
 }
 
 function filterGenres() {
-    let input = document.getElementById("searchGenre").value.toLowerCase();
-    let items = document.getElementsByClassName("dropdown-item");
+    const input = document.getElementById("searchGenre").value.toLowerCase();
+    const items = document.getElementsByClassName("dropdown-item");
 
     for (let item of items) {
-        let text = item.innerText.toLowerCase();
+        const text = item.innerText.toLowerCase();
         item.style.display = text.includes(input) ? "block" : "none";
     }
 }
@@ -201,7 +207,10 @@ function selectGenre(value) {
     filterByGenre(value);
 }
 
-function selectArtist(artist) {
-    localStorage.setItem("selectedArtist", artist);
-    window.location.href = "../pages/artista.html";
+// ===================
+// Selecionar Artista
+// ===================
+function selectArtist(artistId) {
+    // Mude para passar por URL em vez de localStorage
+    window.location.href = `../pages/artista.html?artist=${artistId}`;
 }

@@ -31,52 +31,36 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js" defer></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js" defer></script>
 
-    <script type="module" src="../js/artista.js"></script>
+    <script type="module" src="../js/a.js"></script>
     <script type="module" src="../js/load-components.js"></script>
 </head>
 
 <body>
     <div class="home-section">
-        <div class="artist-container">
-            <!-- Cabeçalho -->
-            <div class="artist-header">
-                <div class="back-button" onclick="window.location.href='../pages/artistasEbandas.html';">
-                    <i class="fas fa-arrow-left"></i>
-                </div>
-                <img id="artist-image" src="" alt="Imagem do Artista">
-                <div>
-                    <h1 id="artist-name"></h1>
-                    <p id="artist-views"></p>
-                </div>
-            </div>
+        <button class="back-btn" onclick="window.history.back()">← Voltar</button>
 
-            <!-- Conteúdo Principal -->
-            <div class="main-content">
-                <!-- Lista de Músicas -->
-                <div class="music-section">
-                    <h2>Músicas Mais Acessadas</h2>
-                    <ul id="artist-songs"></ul>
-                </div>
+        <header class="artist-header" id="artist-header">
+            <!-- Conteúdo será preenchido pelo JavaScript -->
+        </header>
 
-                <!-- Sidebar -->
-                <div class="sidebar2">
-                    <h3>História</h3>
-                    <p id="artist-history"></p>
-                    <br>
-                    <h3>Integrantes</h3>
-                    <ul id="artist-members"></ul>
-                    <br>
-                    <h3>Prêmios</h3>
-                    <ul id="artist-awards"></ul>
-                    <br>
-                    <h3>Galeria</h3>
-                    <div id="artist-gallery"></div>
+        <div class="container">
+            <section class="popular-tracks">
+                <h2 class="section-title">Músicas populares</h2>
+                <div class="track-list" id="popular-tracks">
+                    <!-- Conteúdo será preenchido pelo JavaScript -->
                 </div>
-            </div>
-        </div>
+            </section>
 
-        <div class="seila">
-            <br><br><br><br><br>
+            <section class="discography">
+                <h2 class="section-title">Discografia</h2>
+                <div class="album-grid" id="discography">
+                    <!-- Conteúdo será preenchido pelo JavaScript -->
+                </div>
+            </section>
+
+            <section class="biography" id="biography">
+                <!-- Conteúdo será preenchido pelo JavaScript -->
+            </section>
         </div>
     </div>
 </body>
