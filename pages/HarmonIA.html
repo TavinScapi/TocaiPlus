@@ -14,15 +14,6 @@
 
 <body>
     <div class="container">
-        <div class="api-key-container">
-            <input type="password" id="apiKey" placeholder="Sua Chave API Gemini">
-            <button id="saveApiKey"><i class="fas fa-save"></i> Salvar</button>
-        </div>
-        <small class="api-key-help">
-            Não tem uma chave API? Obtenha uma em
-            <a href="https://aistudio.google.com/app/apikey" target="_blank">Google AI Studio</a>
-        </small>
-
         <div class="chat-container">
             <div id="chatArea"></div>
         </div>
@@ -47,6 +38,19 @@
     <footer>
         &copy; 2025 HarmonIA. Todos os direitos reservados.
     </footer>
+
+    <div id="apiKeyModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" id="closeApiKeyModal">&times;</span>
+            <h2>Configurar Chave API Gemini</h2>
+            <input type="password" id="apiKey" placeholder="Sua Chave API Gemini">
+            <button id="saveApiKey"><i class="fas fa-save"></i> Salvar</button>
+            <small class="api-key-help">
+                Não tem uma chave API? Obtenha uma em
+                <a href="https://aistudio.google.com/app/apikey" target="_blank">Google AI Studio</a>
+            </small>
+        </div>
+    </div>
 </body>
 
 </html>

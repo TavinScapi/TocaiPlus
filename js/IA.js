@@ -11,7 +11,10 @@ const elements = {
     perguntaInput: document.getElementById('pergunta'),
     btnEnviar: document.getElementById('btnEnviar'),
     chatArea: document.getElementById('chatArea'),
-    newChatBtn: document.getElementById('newChatBtn')
+    newChatBtn: document.getElementById('newChatBtn'),
+    apiKeyModal: document.getElementById('apiKeyModal'),
+    closeApiKeyModal: document.getElementById('closeApiKeyModal'),
+    maisBtn: document.querySelector('.fa-ellipsis-h').closest('button')
 };
 
 // Estado da aplicação
@@ -57,9 +60,9 @@ function initializeApp() {
     const savedApiKey = localStorage.getItem(API_KEY_STORAGE_KEY);
     if (savedApiKey) {
         elements.apiKeyInput.value = savedApiKey;
-        displayMessage("Chave API carregada do armazenamento local. Você pode atualizá-la se necessário.", 'ai');
+        displayMessage("Chave API carregada. Pronto para conversar sobre música!", 'ai');
         // SÓ MOSTRA BOAS-VINDAS SE TIVER CHAVE VÁLIDA
-        displayMessage("Olá! Eu sou o Harmon. Como posso te ajudar hoje?", 'ai');
+        displayMessage("Olá! Eu sou o Harmon, seu assistente musical. Como posso ajudar?", 'ai');
     } else {
         displayMessage("Por favor, insira sua Chave API Gemini e clique em Salvar para começar a usar o HarmonIA.", 'error');
         // NÃO MOSTRA MENSAGEM DE BOAS-VINDAS AQUI
@@ -88,6 +91,24 @@ function setupEventListeners() {
         setTimeout(() => {
             elements.perguntaInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }, 300);
+    });
+
+    // Abrir modal ao clicar em "Mais"
+    elements.maisBtn.addEventListener('click', () => {
+        elements.apiKeyModal.style.display = 'flex';
+        elements.apiKeyInput.focus();
+    });
+
+    // Fechar modal
+    elements.closeApiKeyModal.addEventListener('click', () => {
+        elements.apiKeyModal.style.display = 'none';
+    });
+
+    // Fechar modal ao clicar fora do conteúdo
+    elements.apiKeyModal.addEventListener('click', (e) => {
+        if (e.target === elements.apiKeyModal) {
+            elements.apiKeyModal.style.display = 'none';
+        }
     });
 }
 
