@@ -33,7 +33,8 @@ body {
     height: 100vh;
     line-height: 1.5;
     margin: 0;
-    overflow: hidden;
+    overflow: auto;
+    /* <-- alterado de hidden para auto */
 }
 
 /* ========== LAYOUT CONTAINERS ========== */
@@ -43,22 +44,20 @@ body {
     margin: 0 auto;
     margin-top: 10px;
     padding: 20px;
-    flex: 1;
+    flex: 1 1 0%;
     display: flex;
     flex-direction: column;
     min-height: 0;
-    /* Permite que o flexbox controle a altura */
-    /* Remova ou comente as linhas abaixo */
-    /* height: 100%; */
-    /* height: calc(100vh - 60px); */
+    height: 100vh; /* <-- adicione esta linha */
+    box-sizing: border-box; /* <-- garanta que padding não estoure o container */
 }
 
 .chat-container {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    min-height: 0; /* Permite que o flexbox controle a altura */
+    overflow: auto; /* <-- alterado de hidden para auto */
+    min-height: 0;
 }
 
 /* ========== API KEY SECTION ========== */
