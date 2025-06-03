@@ -10,6 +10,35 @@
     <script src="bot.js" defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* Garante que o container principal ocupe toda a altura e permita rolagem */
+        .container {
+            padding-bottom: 80px;
+            /* Espaço para o input */
+        }
+
+        /* Ajusta o chat container para crescer e permitir rolagem */
+        .chat-container {
+            -webkit-overflow-scrolling: touch;
+            /* Suaviza a rolagem no iOS */
+        }
+
+        /* Ajusta o container de input para ficar fixo na parte inferior */
+        .input-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Ajusta o footer para não ficar escondido */
+        footer {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
 </head>
 
 <body>
@@ -47,6 +76,15 @@
     <footer>
         &copy; 2025 RosieAI. Todos os direitos reservados.
     </footer>
+
+    <script>
+        // Rola para baixo quando o campo de texto recebe foco
+        document.getElementById('pergunta').addEventListener('focus', function () {
+            setTimeout(() => {
+                window.scrollTo(0, document.body.scrollHeight);
+            }, 300); // Pequeno delay para garantir que o teclado já esteja aberto
+        });
+    </script>
 </body>
 
 </html>
