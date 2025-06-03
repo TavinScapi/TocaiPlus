@@ -46,15 +46,19 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    height: 100%;
-    height: calc(100vh - 60px);
+    min-height: 0;
+    /* Permite que o flexbox controle a altura */
+    /* Remova ou comente as linhas abaixo */
+    /* height: 100%; */
+    /* height: calc(100vh - 60px); */
 }
 
 .chat-container {
-    flex: 1;
+    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    min-height: 0; /* Permite que o flexbox controle a altura */
 }
 
 /* ========== API KEY SECTION ========== */
@@ -253,9 +257,6 @@ body {
     box-shadow: var(--box-shadow);
     padding: 16px;
     margin-bottom: 20px;
-    position: sticky;
-    bottom: 0;
-    z-index: 10;
 }
 
 .input-wrapper {
@@ -609,5 +610,13 @@ footer {
 
     .modal-content h2 {
         font-size: 1.1em;
+    }
+}
+
+@media (max-width: 768px) {
+    .input-container {
+        position: sticky;
+        bottom: 0;
+        z-index: 10;
     }
 }
