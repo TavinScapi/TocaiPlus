@@ -252,3 +252,9 @@ setTimeout(() => {
         displayMessage("Olá! Eu sou a RosieAI. Como posso te ajudar hoje?", 'ai');
     }
 }, 500);
+
+document.getElementById('pergunta').addEventListener('focus', function () {
+    setTimeout(() => {
+        this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 300); // espera o teclado abrir
+});

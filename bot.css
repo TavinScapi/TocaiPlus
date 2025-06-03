@@ -457,4 +457,8 @@ footer {
         flex: 1 0 calc(50% - 4px);
         justify-content: center;
     }
+
+    footer {
+        display: none;
+    }
 }
