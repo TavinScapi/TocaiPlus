@@ -111,11 +111,11 @@ function displayMessage(text, sender = 'ai', customTime = null, isHistory = fals
     avatar.classList.add('avatar');
 
     if (sender === 'ai') {
-        avatar.src = 'https://raw.githubusercontent.com/seu-usuario/harmonia/main/assets/harmon-avatar.webp';
+        avatar.src = '../images/LogoTocaí.png';
         avatar.alt = 'Avatar do Harmon';
         avatar.classList.add('ai-avatar');
     } else {
-        avatar.src = 'https://raw.githubusercontent.com/seu-usuario/harmonia/main/assets/user-avatar.webp';
+        avatar.src = '../images/LogoTocaí.png'; // Caminho para o avatar do usuário
         avatar.alt = 'Seu avatar';
         avatar.classList.add('user-avatar');
     }
