@@ -111,23 +111,12 @@ function startNewChat() {
 }
 
 function handleKeyPress(event) {
-    // Sempre permite que o Enter pule linha em dispositivos móveis
-    if (event.key === 'Enter' && !isDesktopDevice()) {
-        return; // Permite o comportamento padrão (nova linha)
-    }
-
-    // Comportamento original para desktop
     if (event.key === 'Enter' && !event.shiftKey) {
         event.preventDefault();
         if (!elements.btnEnviar.disabled) {
             enviarPergunta();
         }
     }
-}
-
-// Função para detectar se é dispositivo móvel
-function isDesktopDevice() {
-    return !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
 }
 
 function updateSendButtonState() {
