@@ -111,12 +111,41 @@ function startNewChat() {
 }
 
 function handleKeyPress(event) {
-    if (event.key === 'Enter' && !event.shiftKey) {
+    // Dispositivos móveis - Enter sempre cria nova linha
+    if (!isDesktopDevice() && event.key === 'Enter') {
+        return; // Permite o comportamento padrão (nova linha)
+    }
+
+    // Desktop - Shift+Enter cria nova linha
+    if (event.key === 'Enter' && event.shiftKey) {
+        return; // Permite nova linha
+    }
+
+    // Desktop - Enter envia mensagem
+    if (event.key === 'Enter') {
         event.preventDefault();
-        if (!elements.btnEnviar.disabled) {
+
+        // Só envia se houver texto e o botão não estiver desativado
+        if (elements.perguntaInput.value.trim() && !elements.btnEnviar.disabled) {
             enviarPergunta();
+        } else {
+            // Adiciona feedback visual se tentar enviar vazio
+            elements.perguntaInput.classList.add('shake');
+            setTimeout(() => {
+                elements.perguntaInput.classList.remove('shake');
+            }, 500);
         }
     }
+}
+
+// Função otimizada para detecção de mobile
+function isDesktopDevice() {
+    const userAgent = navigator.userAgent;
+    const mobileKeywords = [
+        'Android', 'webOS', 'iPhone', 'iPad', 'iPod',
+        'BlackBerry', 'IEMobile', 'Opera Mini', 'Mobile'
+    ];
+    return !mobileKeywords.some(keyword => userAgent.includes(keyword));
 }
 
 function updateSendButtonState() {
@@ -151,7 +180,7 @@ function displayMessage(text, sender = 'ai', customTime = null) {
 function createAvatar(sender) {
     const avatar = document.createElement('img');
     avatar.classList.add('avatar', `${sender}-avatar`);
-    avatar.src = '../images/LogoTocaí.png';
+    avatar.src = 'a';
     avatar.alt = sender === 'ai' ? 'Avatar do Harmon' : 'Seu avatar';
     return avatar;
 }
