@@ -1,39 +1,99 @@
+// Configurações
 const GEMINI_MODEL = 'gemini-1.5-flash-latest';
 const API_KEY_STORAGE_KEY = 'harmonia_api_key';
-const CHAT_HISTORY_KEY = 'harmonia_chat_history';
+const MAX_HISTORY_LENGTH = 20; // Limite para evitar sobrecarga
+const TYPING_INDICATOR_DELAY = 300; // ms antes de mostrar "digitando..."
 
-// DOM Elements
-const apiKeyInput = document.getElementById('apiKey');
-const saveApiKeyBtn = document.getElementById('saveApiKey');
-const perguntaInput = document.getElementById('pergunta');
-const btnEnviar = document.getElementById('btnEnviar');
-const chatArea = document.getElementById('chatArea');
-const newChatBtn = document.getElementById('newChatBtn');
+// Cache de elementos DOM
+const elements = {
+    apiKeyInput: document.getElementById('apiKey'),
+    saveApiKeyBtn: document.getElementById('saveApiKey'),
+    perguntaInput: document.getElementById('pergunta'),
+    btnEnviar: document.getElementById('btnEnviar'),
+    chatArea: document.getElementById('chatArea'),
+    newChatBtn: document.getElementById('newChatBtn')
+};
 
-// Carregar API Key e histórico do chat ao iniciar
+// Estado da aplicação
+const state = {
+    sessionHistory: [],
+    isTyping: false,
+    typingTimeout: null
+};
+
+// Utilidades
+const utils = {
+    getCurrentTime: () => {
+        return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    },
+
+    scrollToBottom: (element) => {
+        element.scrollTop = element.scrollHeight;
+    },
+
+    debounce: (func, delay) => {
+        let timeoutId;
+        return function (...args) {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => func.apply(this, args), delay);
+        };
+    },
+
+    sanitizeHTML: (text) => {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML.replace(/\n/g, '<br>');
+    }
+};
+
+// Inicialização
 document.addEventListener('DOMContentLoaded', () => {
+    initializeApp();
+    setupEventListeners();
+});
+
+function initializeApp() {
+    // Carregar API Key
     const savedApiKey = localStorage.getItem(API_KEY_STORAGE_KEY);
     if (savedApiKey) {
-        apiKeyInput.value = savedApiKey;
+        elements.apiKeyInput.value = savedApiKey;
         displayMessage("Chave API carregada do armazenamento local. Você pode atualizá-la se necessário.", 'ai');
+        // SÓ MOSTRA BOAS-VINDAS SE TIVER CHAVE VÁLIDA
+        displayMessage("Olá! Eu sou o Harmon. Como posso te ajudar hoje?", 'ai');
     } else {
         displayMessage("Por favor, insira sua Chave API Gemini e clique em Salvar para começar a usar o HarmonIA.", 'error');
+        // NÃO MOSTRA MENSAGEM DE BOAS-VINDAS AQUI
     }
 
-    // Carregar histórico de conversa se existir
-    loadChatHistory();
-    toggleIcon();
-});
+    updateSendButtonState();
+}
 
-newChatBtn.addEventListener('click', () => {
-    chatArea.innerHTML = '';
-    localStorage.removeItem(CHAT_HISTORY_KEY);
-    displayMessage("Olá! Eu sou o Harmon. Como posso te ajudar hoje?", 'ai');
-});
 
-// Salvar API Key no Local Storage
-saveApiKeyBtn.addEventListener('click', () => {
-    const apiKey = apiKeyInput.value.trim();
+function setupEventListeners() {
+    // Eventos de entrada
+    elements.perguntaInput.addEventListener('input', () => {
+        updateSendButtonState();
+        adjustTextareaHeight();
+    });
+
+    elements.perguntaInput.addEventListener('keydown', handleKeyPress);
+
+    // Eventos de clique
+    elements.btnEnviar.addEventListener('click', enviarPergunta);
+    elements.saveApiKeyBtn.addEventListener('click', saveApiKey);
+    elements.newChatBtn.addEventListener('click', startNewChat);
+
+    // Foco no campo de pergunta
+    elements.perguntaInput.addEventListener('focus', () => {
+        setTimeout(() => {
+            elements.perguntaInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 300);
+    });
+}
+
+// Funções principais
+function saveApiKey() {
+    const apiKey = elements.apiKeyInput.value.trim();
 
     if (!apiKey) {
         displayMessage("Por favor, insira uma chave API válida antes de salvar.", 'error');
@@ -42,163 +102,168 @@ saveApiKeyBtn.addEventListener('click', () => {
 
     localStorage.setItem(API_KEY_STORAGE_KEY, apiKey);
     displayMessage("Chave API salva com sucesso! Agora você pode fazer perguntas.", 'ai');
-});
-
-// Mostrar hora atual formatada
-function getCurrentTime() {
-    const now = new Date();
-    return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
-// Alternar estado do botão de enviar
-function toggleIcon() {
-    const pergunta = perguntaInput.value.trim();
-    btnEnviar.disabled = pergunta === '';
-
-    // Ajusta a altura do textarea automaticamente
-    perguntaInput.style.height = 'auto';
-    perguntaInput.style.height = (perguntaInput.scrollHeight) + 'px';
+function startNewChat() {
+    elements.chatArea.innerHTML = '';
+    state.sessionHistory = [];
+    displayMessage("Olá! Eu sou o Harmon. Como posso te ajudar hoje?", 'ai');
 }
 
-// Enviar mensagem ao pressionar Enter (sem Shift), ou nova linha com Shift+Enter
 function handleKeyPress(event) {
-    if (event.key === 'Enter') {
-        if (event.shiftKey) {
-            // Shift+Enter - insere nova linha
-            return; // Permite o comportamento padrão (nova linha)
-        } else {
-            // Apenas Enter - envia a mensagem
-            event.preventDefault();
-            if (!btnEnviar.disabled) {
-                enviarPergunta();
-            }
+    // Sempre permite que o Enter pule linha em dispositivos móveis
+    if (event.key === 'Enter' && !isDesktopDevice()) {
+        return; // Permite o comportamento padrão (nova linha)
+    }
+
+    // Comportamento original para desktop
+    if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        if (!elements.btnEnviar.disabled) {
+            enviarPergunta();
         }
     }
 }
 
-// Salvar histórico do chat
-function saveChatHistory() {
-    const messages = Array.from(chatArea.querySelectorAll('.message-container')).map(container => {
-        return {
-            text: container.querySelector('.message-content').innerHTML,
-            sender: container.classList.contains('ai-message-container') ? 'ai' : 'user',
-            time: container.querySelector('.message-time').textContent
-        };
-    });
-
-    localStorage.setItem(CHAT_HISTORY_KEY, JSON.stringify(messages));
+// Função para detectar se é dispositivo móvel
+function isDesktopDevice() {
+    return !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
 }
 
-// Carregar histórico do chat
-function loadChatHistory() {
-    const savedChat = localStorage.getItem(CHAT_HISTORY_KEY);
-    if (savedChat) {
-        const messages = JSON.parse(savedChat);
-        messages.forEach(msg => {
-            displayMessage(msg.text, msg.sender, msg.time, true);
-        });
-    } else {
-        displayMessage("Olá! Eu sou o Harmon. Como posso te ajudar hoje?", 'ai');
-    }
+function updateSendButtonState() {
+    elements.btnEnviar.disabled = elements.perguntaInput.value.trim() === '';
 }
 
-// Adicionar mensagem ao chat (função atualizada)
-function displayMessage(text, sender = 'ai', customTime = null, isHistory = false) {
+function adjustTextareaHeight() {
+    elements.perguntaInput.style.height = 'auto';
+    elements.perguntaInput.style.height = `${elements.perguntaInput.scrollHeight}px`;
+}
+
+function displayMessage(text, sender = 'ai', customTime = null) {
     const messageContainer = document.createElement('div');
     messageContainer.classList.add('message-container', `${sender}-message-container`);
 
-    const avatar = document.createElement('img');
-    avatar.classList.add('avatar');
+    const avatar = createAvatar(sender);
+    const messageDiv = createMessageDiv(text, sender, customTime);
 
     if (sender === 'ai') {
-        avatar.src = '../images/LogoTocaí.png';
-        avatar.alt = 'Avatar do Harmon';
-        avatar.classList.add('ai-avatar');
+        messageContainer.append(avatar, messageDiv);
     } else {
-        avatar.src = '../images/LogoTocaí.png'; // Caminho para o avatar do usuário
-        avatar.alt = 'Seu avatar';
-        avatar.classList.add('user-avatar');
+        messageContainer.append(messageDiv, avatar);
     }
 
+    elements.chatArea.appendChild(messageContainer);
+    utils.scrollToBottom(elements.chatArea);
+
+    // Adiciona ao histórico da sessão (formatado para a API Gemini)
+    addToSessionHistory(text, sender);
+}
+
+function createAvatar(sender) {
+    const avatar = document.createElement('img');
+    avatar.classList.add('avatar', `${sender}-avatar`);
+    avatar.src = '../images/LogoTocaí.png';
+    avatar.alt = sender === 'ai' ? 'Avatar do Harmon' : 'Seu avatar';
+    return avatar;
+}
+
+function createMessageDiv(text, sender, customTime) {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('chat-message', `${sender}-message`);
 
     const contentDiv = document.createElement('div');
     contentDiv.classList.add('message-content');
-    contentDiv.innerHTML = text.replace(/\n/g, '<br>');
+    contentDiv.innerHTML = utils.sanitizeHTML(text);
 
     const timeSpan = document.createElement('span');
     timeSpan.classList.add('message-time');
-    timeSpan.textContent = customTime || getCurrentTime();
+    timeSpan.textContent = customTime || utils.getCurrentTime();
+
+    messageDiv.append(contentDiv, timeSpan);
 
     if (sender === 'ai') {
-        const copyBtn = document.createElement('button');
-        copyBtn.classList.add('copy-btn');
-        copyBtn.innerHTML = '<i class="far fa-copy"></i>';
-        copyBtn.title = 'Copiar mensagem';
-        copyBtn.addEventListener('click', () => {
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = text;
-            const plainText = tempDiv.textContent || tempDiv.innerText || '';
+        const copyBtn = createCopyButton(text);
+        messageDiv.prepend(copyBtn);
+    }
 
-            navigator.clipboard.writeText(plainText).then(() => {
-                const tooltip = document.createElement('span');
-                tooltip.classList.add('copy-tooltip');
-                tooltip.textContent = 'Copiado!';
-                copyBtn.appendChild(tooltip);
-                setTimeout(() => tooltip.remove(), 2000);
-            });
+    return messageDiv;
+}
+
+function createCopyButton(text) {
+    const copyBtn = document.createElement('button');
+    copyBtn.classList.add('copy-btn');
+    copyBtn.innerHTML = '<i class="far fa-copy"></i>';
+    copyBtn.title = 'Copiar mensagem';
+
+    copyBtn.addEventListener('click', () => {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = text;
+        const plainText = tempDiv.textContent || tempDiv.innerText || '';
+
+        navigator.clipboard.writeText(plainText).then(() => {
+            showCopyFeedback(copyBtn);
         });
-        messageDiv.appendChild(copyBtn);
-    }
+    });
 
-    messageDiv.appendChild(contentDiv);
-    messageDiv.appendChild(timeSpan);
-
-    if (sender === 'ai') {
-        messageContainer.appendChild(avatar);
-        messageContainer.appendChild(messageDiv);
-    } else {
-        messageContainer.appendChild(messageDiv);
-        messageContainer.appendChild(avatar);
-    }
-
-    chatArea.appendChild(messageContainer);
-
-    if (!isHistory) {
-        chatArea.scrollTop = chatArea.scrollHeight;
-        saveChatHistory(); // Salva o histórico após cada nova mensagem
-    }
+    return copyBtn;
 }
 
-// Mostrar indicador de digitação
+function showCopyFeedback(button) {
+    const tooltip = document.createElement('span');
+    tooltip.classList.add('copy-tooltip');
+    tooltip.textContent = 'Copiado!';
+    button.appendChild(tooltip);
+    setTimeout(() => tooltip.remove(), 2000);
+}
+
+function addToSessionHistory(text, sender) {
+    const role = sender === 'ai' ? 'model' : 'user';
+
+    // Limita o histórico para evitar sobrecarga
+    if (state.sessionHistory.length >= MAX_HISTORY_LENGTH) {
+        state.sessionHistory.shift();
+    }
+
+    state.sessionHistory.push({
+        role,
+        parts: [{ text }]
+    });
+}
+
 function showTypingIndicator() {
-    const typingDiv = document.createElement('div');
-    typingDiv.classList.add('typing-indicator');
-    typingDiv.id = 'typingIndicator';
+    if (state.isTyping) return;
 
-    typingDiv.innerHTML = `
-        <div class="typing-dot"></div>
-        <div class="typing-dot"></div>
-        <div class="typing-dot"></div>
-        <span style="margin-left: 8px; font-size: 13px; color: var(--text-muted)">Harmon está digitando...</span>
-    `;
+    state.typingTimeout = setTimeout(() => {
+        const typingDiv = document.createElement('div');
+        typingDiv.classList.add('typing-indicator');
+        typingDiv.id = 'typingIndicator';
 
-    chatArea.appendChild(typingDiv);
-    chatArea.scrollTop = chatArea.scrollHeight;
+        typingDiv.innerHTML = `
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <span style="margin-left: 8px; font-size: 13px; color: var(--text-muted)">Harmon está digitando...</span>
+        `;
+
+        elements.chatArea.appendChild(typingDiv);
+        utils.scrollToBottom(elements.chatArea);
+        state.isTyping = true;
+    }, TYPING_INDICATOR_DELAY);
 }
 
-// Remover indicador de digitação
 function hideTypingIndicator() {
+    clearTimeout(state.typingTimeout);
+
     const typingIndicator = document.getElementById('typingIndicator');
     if (typingIndicator) {
         typingIndicator.remove();
     }
+
+    state.isTyping = false;
 }
 
-// Enviar pergunta para a API (atualizado para incluir histórico)
 async function enviarPergunta() {
-    const pergunta = perguntaInput.value.trim();
+    const pergunta = elements.perguntaInput.value.trim();
     const apiKey = localStorage.getItem(API_KEY_STORAGE_KEY);
 
     if (!apiKey) {
@@ -211,30 +276,34 @@ async function enviarPergunta() {
         return;
     }
 
-    // Mostrar mensagem do usuário
+    // Mostrar mensagem do usuário e limpar campo
     displayMessage(pergunta, 'user');
-    perguntaInput.value = '';
-    perguntaInput.style.height = 'auto';
-    toggleIcon();
+    elements.perguntaInput.value = '';
+    adjustTextareaHeight();
+    updateSendButtonState();
 
-    // Mostrar que a IA está digitando
+    // Mostrar indicador de digitação
     showTypingIndicator();
 
-    // Obter histórico da conversa
-    const chatHistory = Array.from(chatArea.querySelectorAll('.message-container')).map(container => {
-        const isAI = container.classList.contains('ai-message-container');
-        const content = container.querySelector('.message-content').textContent;
-        return {
-            role: isAI ? 'model' : 'user',
-            parts: [{ text: content }]
-        };
-    });
+    try {
+        elements.btnEnviar.disabled = true;
 
-    // Configuração da API com histórico
+        const response = await callGeminiAPI(apiKey, pergunta);
+        processAPIResponse(response);
+
+    } catch (error) {
+        handleAPIError(error);
+    } finally {
+        hideTypingIndicator();
+        elements.btnEnviar.disabled = false;
+    }
+}
+
+async function callGeminiAPI(apiKey, pergunta) {
     const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
 
     const requestBody = {
-        contents: chatHistory,
+        contents: state.sessionHistory,
         generationConfig: {
             temperature: 0.7,
             topP: 0.9,
@@ -242,60 +311,33 @@ async function enviarPergunta() {
         }
     };
 
-    try {
-        btnEnviar.disabled = true;
+    const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestBody)
+    });
 
-        const response = await fetch(API_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestBody),
-        });
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error?.message || 'Erro desconhecido na API');
+    }
 
-        hideTypingIndicator();
+    return await response.json();
+}
 
-        if (!response.ok) {
-            const errorData = await response.json();
-            console.error('Erro da API Gemini:', errorData);
-            displayMessage(`Erro ao processar sua pergunta: ${errorData.error?.message || 'Erro desconhecido'}`, 'error');
-            return;
-        }
-
-        const responseData = await response.json();
-
-        if (responseData.candidates?.[0]?.content?.parts?.[0]?.text) {
-            const aiResponse = responseData.candidates[0].content.parts[0].text;
-            displayMessage(aiResponse, 'ai');
-        } else if (responseData.promptFeedback?.blockReason) {
-            const blockReason = responseData.promptFeedback.blockReason;
-            displayMessage(`Desculpe, não posso responder a essa pergunta devido a: ${blockReason}`, 'error');
-        } else {
-            displayMessage("Não consegui entender a resposta da API. Por favor, tente novamente.", 'error');
-        }
-
-    } catch (error) {
-        hideTypingIndicator();
-        console.error('Erro:', error);
-        displayMessage(`Ocorreu um erro: ${error.message}`, 'error');
-    } finally {
-        btnEnviar.disabled = false;
+function processAPIResponse(responseData) {
+    if (responseData.candidates?.[0]?.content?.parts?.[0]?.text) {
+        const aiResponse = responseData.candidates[0].content.parts[0].text;
+        displayMessage(aiResponse, 'ai');
+    } else if (responseData.promptFeedback?.blockReason) {
+        const blockReason = responseData.promptFeedback.blockReason;
+        displayMessage(`Desculpe, não posso responder a essa pergunta devido a: ${blockReason}`, 'error');
+    } else {
+        displayMessage("Não consegui entender a resposta da API. Por favor, tente novamente.", 'error');
     }
 }
 
-// Inicialização
-toggleIcon();
-
-// Mensagem de boas-vindas inicial
-setTimeout(() => {
-    const savedApiKey = localStorage.getItem(API_KEY_STORAGE_KEY);
-    if (savedApiKey) {
-        displayMessage("Olá! Eu sou o Harmon. Como posso te ajudar hoje?", 'ai');
-    }
-}, 500);
-
-document.getElementById('pergunta').addEventListener('focus', function () {
-    setTimeout(() => {
-        this.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 300); // espera o teclado abrir
-});
+function handleAPIError(error) {
+    console.error('Erro:', error);
+    displayMessage(`Ocorreu um erro: ${error.message}`, 'error');
+}
