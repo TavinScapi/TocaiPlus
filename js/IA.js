@@ -111,41 +111,23 @@ function startNewChat() {
 }
 
 function handleKeyPress(event) {
-    // Dispositivos móveis - Enter sempre cria nova linha
-    if (!isDesktopDevice() && event.key === 'Enter') {
+    // Sempre permite que o Enter pule linha em dispositivos móveis
+    if (event.key === 'Enter' && !isDesktopDevice()) {
         return; // Permite o comportamento padrão (nova linha)
     }
 
-    // Desktop - Shift+Enter cria nova linha
-    if (event.key === 'Enter' && event.shiftKey) {
-        return; // Permite nova linha
-    }
-
-    // Desktop - Enter envia mensagem
-    if (event.key === 'Enter') {
+    // Comportamento original para desktop
+    if (event.key === 'Enter' && !event.shiftKey) {
         event.preventDefault();
-
-        // Só envia se houver texto e o botão não estiver desativado
-        if (elements.perguntaInput.value.trim() && !elements.btnEnviar.disabled) {
+        if (!elements.btnEnviar.disabled) {
             enviarPergunta();
-        } else {
-            // Adiciona feedback visual se tentar enviar vazio
-            elements.perguntaInput.classList.add('shake');
-            setTimeout(() => {
-                elements.perguntaInput.classList.remove('shake');
-            }, 500);
         }
     }
 }
 
-// Função otimizada para detecção de mobile
+// Função para detectar se é dispositivo móvel
 function isDesktopDevice() {
-    const userAgent = navigator.userAgent;
-    const mobileKeywords = [
-        'Android', 'webOS', 'iPhone', 'iPad', 'iPod',
-        'BlackBerry', 'IEMobile', 'Opera Mini', 'Mobile'
-    ];
-    return !mobileKeywords.some(keyword => userAgent.includes(keyword));
+    return !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
 }
 
 function updateSendButtonState() {
