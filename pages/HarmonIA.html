@@ -10,6 +10,48 @@
     <script src="../js/IA.js" defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        .chat-container {
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            background: #1c1c35;
+            border-radius: 16px;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+            padding: 0;
+            height: 70vh;
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        #chatArea {
+            flex: 1;
+            padding: 24px 20px 24px 20px;
+            overflow-y: auto;
+            font-family: 'Roboto', Arial, sans-serif;
+            font-size: 1.08rem;
+            color: #222;
+            background: transparent;
+            scrollbar-width: thin;
+            scrollbar-color: #bbb #f7f7fa;
+        }
+
+        #chatArea::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #chatArea::-webkit-scrollbar-thumb {
+            background: #ddd;
+            border-radius: 8px;
+        }
+
+        #chatArea::-webkit-scrollbar-track {
+            background: #f7f7fa;
+            border-radius: 8px;
+        }
+    </style>
 </head>
 
 <body>
