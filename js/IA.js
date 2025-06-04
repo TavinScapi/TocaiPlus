@@ -86,6 +86,13 @@ function setupEventListeners() {
     elements.saveApiKeyBtn.addEventListener('click', saveApiKey);
     elements.newChatBtn.addEventListener('click', startNewChat);
 
+    // Foco no campo de pergunta
+    elements.perguntaInput.addEventListener('focus', () => {
+        setTimeout(() => {
+            elements.perguntaInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 300);
+    });
+
     // Abrir modal ao clicar em "Mais"
     elements.maisBtn.addEventListener('click', () => {
         elements.apiKeyModal.style.display = 'flex';
