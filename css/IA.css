@@ -445,10 +445,6 @@ footer {
         padding: 6px 10px;
         font-size: 12px;
     }
-
-    .nav {
-        display: none;
-    }
 }
 
 @media (max-width: 480px) {
