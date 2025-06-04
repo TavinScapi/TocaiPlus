@@ -27,6 +27,11 @@ body {
     font-family: 'Roboto', sans-serif;
     background-color: var(--background-dark);
     color: var(--text-light);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: 100vh;
+    margin: 0;
     overflow: hidden;
 }
 
@@ -419,10 +424,11 @@ footer {
 @media (max-width: 768px) {
     .container {
         padding: 12px;
+        margin-top: 10px;
     }
 
     .chat-message {
-        max-width: 90%;
+        max-width: 70%;
         font-size: 14px;
     }
 
