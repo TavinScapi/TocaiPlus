@@ -33,7 +33,7 @@ body {
     height: 100vh;
     line-height: 1.5;
     margin: 0;
-    overflow: auto;
+    overflow: hidden;
     /* <-- alterado de hidden para auto */
 }
 
@@ -42,21 +42,23 @@ body {
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
-    margin-top: 10px;
-    padding: 20px;
+    margin-top: 0;
+    padding: 0;
     flex: 1 1 0%;
     display: flex;
     flex-direction: column;
     min-height: 0;
-    height: 100vh; /* <-- adicione esta linha */
-    box-sizing: border-box; /* <-- garanta que padding não estoure o container */
+    height: 100vh;
+    /* ocupa toda a tela */
+    box-sizing: border-box;
 }
 
 .chat-container {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-    overflow: auto; /* <-- alterado de hidden para auto */
+    overflow: hidden;
+    /* impede scroll externo */
     min-height: 0;
 }
 
@@ -121,8 +123,9 @@ body {
 #chatArea {
     flex: 1;
     overflow-y: auto;
+    /* só o chatArea tem scroll */
     padding: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     background-color: var(--background-light);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
@@ -613,9 +616,15 @@ footer {
 }
 
 @media (max-width: 768px) {
+    .container {
+        padding: 0;
+        margin-top: 0;
+    }
+
     .input-container {
         position: sticky;
         bottom: 0;
         z-index: 10;
+        margin-bottom: 0;
     }
 }
