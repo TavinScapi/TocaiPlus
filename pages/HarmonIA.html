@@ -10,9 +10,54 @@
     <script src="../js/IA.js" defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* Adicione ao IA.css */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #222;
+            color: #fff;
+            padding: 16px 32px;
+            font-family: 'Roboto', sans-serif;
+            border-bottom: 2px solid #444;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .settings-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .settings-btn:hover {
+            color: #ffd700;
+        }
+    </style>
 </head>
 
 <body>
+    <header class="header">
+        <div class="logo">
+            <!-- Substitua pelo seu logo se quiser -->
+            <i class="fas fa-robot"></i>
+            <span>HarmonIA</span>
+        </div>
+        <button class="settings-btn" id="openApiKeyModal" aria-label="Configurações">
+            <i class="fas fa-cog"></i>
+        </button>
+    </header>
+
     <div class="container">
         <div class="chat-container">
             <div id="chatArea"></div>
