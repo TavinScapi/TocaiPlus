@@ -71,7 +71,6 @@ function initializeApp() {
     updateSendButtonState();
 }
 
-
 function setupEventListeners() {
     // Eventos de entrada
     elements.perguntaInput.addEventListener('input', () => {
