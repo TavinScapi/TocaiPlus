@@ -121,7 +121,7 @@ body {
     margin-bottom: 20px;
     background-color: var(--background-light);
     border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow);  
     display: flex;
     flex-direction: column;
     gap: 12px;

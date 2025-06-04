@@ -15,8 +15,6 @@
             width: 100%;
             max-width: 700px;
             margin: 0 auto;
-            background: #1c1c35;
-            border-radius: 16px;
             box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
             padding: 0;
             height: 70vh;
@@ -26,30 +24,32 @@
             overflow: hidden;
         }
 
-        #chatArea {
-            flex: 1;
-            padding: 24px 20px 24px 20px;
-            overflow-y: auto;
-            font-family: 'Roboto', Arial, sans-serif;
-            font-size: 1.08rem;
-            color: #222;
-            background: transparent;
-            scrollbar-width: thin;
-            scrollbar-color: #bbb #f7f7fa;
+
+
+        .input-container {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 60px;
+            /* altura do footer + espaçamento */
+            margin: 0 auto;
+            max-width: 700px;
+            padding: 16px 24px 8px 24px;
+            /* espaçamento interno */
+            border-radius: 16px;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+            z-index: 101;
+            display: flex;
+            flex-direction: column;
         }
 
-        #chatArea::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        #chatArea::-webkit-scrollbar-thumb {
-            background: #ddd;
-            border-radius: 8px;
-        }
-
-        #chatArea::-webkit-scrollbar-track {
-            background: #f7f7fa;
-            border-radius: 8px;
+        @media (max-width: 750px) {
+            .input-container {
+                max-width: 95vw;
+                padding-left: 8px;
+                padding-right: 8px;
+                bottom: 15px;
+            }
         }
     </style>
 </head>
