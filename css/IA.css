@@ -424,11 +424,11 @@ footer {
 @media (max-width: 768px) {
     .container {
         padding: 12px;
-        margin-top: 10px;
+        margin-top: 0;
     }
 
     .chat-message {
-        max-width: 70%;
+        max-width: 90%;
         font-size: 14px;
     }
 
