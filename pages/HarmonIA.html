@@ -7,19 +7,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>HarmonIA - Chatbot | Tocaí</title>
     <link rel="stylesheet" href="../css/IA.css">
+    <script src="../js/IA.js" defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css">
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
     <style>
         /* Adicione ao IA.css */
         .header {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            background: #222;
             color: #fff;
             padding: 16px 32px;
+            font-family: 'Roboto', sans-serif;
+            border-bottom: 2px solid #444;
         }
 
         .logo {
@@ -29,10 +30,20 @@
             font-size: 1.5rem;
             font-weight: 700;
         }
+
+        .settings-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .settings-btn:hover {
+            color: #ffd700;
+        }
     </style>
-    <script type="module" src="../js/load-components.js"></script>
-    <link rel="stylesheet" href="../css/sidebar.css">
-    <script src="../js/IA.js" defer></script>
 </head>
 
 <body>
