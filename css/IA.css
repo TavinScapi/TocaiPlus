@@ -397,6 +397,7 @@ footer {
 
     .input-container {
         padding: 12px;
+        bottom: 0;
     }
 
     #pergunta {
