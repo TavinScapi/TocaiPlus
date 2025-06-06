@@ -35,16 +35,6 @@
             "imagem": "https://i.pinimg.com/736x/9b/83/e9/9b83e9490e9a8e3a7a93e3139127a079.jpg"
         },
         {
-            "id": "johncoltrane",
-            "nome": "John Coltrane",
-            "descricao": "Lendário saxofonista que revolucionou o jazz",
-            "generos": [
-                "jazz",
-                "blues"
-            ],
-            "imagem": "https://i.pinimg.com/736x/cf/ca/01/cfca01bcc292c3c6724c4e4cde0d860e.jpg"
-        },
-        {
             "id": "caetanoveloso",
             "nome": "Caetano Veloso",
             "descricao": "Ícone da música popular brasileira",

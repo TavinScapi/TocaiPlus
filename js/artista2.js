@@ -177,7 +177,7 @@ const artistsData = {
     jorgemateus: {
         name: "Jorge & Mateus",
         genres: "Sertanejo • Sertanejo Universitário • Pop",
-        avatar: "https://upload.wikimedia.org/wikipedia/commons/4/4b/Jorge_%26_Mateus_-_2019.jpg",
+        avatar: "https://i.pinimg.com/736x/6e/9c/75/6e9c75298aa0bb41b9a7f8a23d694c70.jpg",
         stats: {
             songs: 150,
             albums: 12,
@@ -271,85 +271,164 @@ const artistsData = {
         biography: "Jorge & Mateus é uma dupla brasileira de música sertaneja, formada em Itumbiara, Goiás, em 2005. Composta por Jorge Barcelos (vocal) e Mateus Liduário (vocal e guitarra), a dupla é considerada uma das mais influentes do sertanejo universitário. Desde o lançamento do álbum de estreia 'Ao Vivo em Goiânia' em 2007, conquistaram grande sucesso com hits como 'Duas Metades', 'Logo Eu' e 'Propaganda'. Ao longo da carreira, venderam mais de 10 milhões de cópias e foram indicados ao Grammy Latino de Melhor Álbum de Música Sertaneja em várias ocasiões. Em 2018, venceram o Prêmio Multishow de Música Brasileira na categoria Melhor Dupla. Atualmente, continuam ativos, lançando novos trabalhos e realizando turnês pelo Brasil e exterior."
     },
 
-    johncoltrane: {
-        name: "John Coltrane",
-        genres: "Jazz • Bebop • Hard Bop • Free Jazz",
-        avatar: "https://upload.wikimedia.org/wikipedia/commons/4/4e/John_Coltrane_1963.jpg",
+    caetanoveloso: {
+        name: "Caetano Veloso",
+        genres: "MPB • Tropicália • Rock • Pop • Samba",
+        avatar: "https://i.pinimg.com/736x/5d/84/e7/5d84e7dd8fee98f0d2fc375b2f62acac.jpg",
         stats: {
-            songs: 150,
-            albums: 45,
-            listeners: "5M"
+            songs: 500,
+            albums: 50,
+            listeners: "15M"
         },
         popularTracks: [
-            { name: "My Favorite Things", album: "My Favorite Things", year: "1961", duration: "13:41" },
-            { name: "Giant Steps", album: "Giant Steps", year: "1960", duration: "4:43" }
+            { name: "Sozinho", album: "Prenda Minha", year: "1998", duration: "3:47" },
+            { name: "Sampa", album: "Muito - Dentro da Estrela Azulada", year: "1978", duration: "3:40" },
         ],
         discography: [
             {
-                title: "Blue Train",
-                year: "1958",
-                cover: "https://upload.wikimedia.org/wikipedia/en/9/9c/John_Coltrane_-_Blue_Train.jpg",
-                type: "Álbum"
-            },
-            {
-                title: "Giant Steps",
-                year: "1960",
-                cover: "https://upload.wikimedia.org/wikipedia/en/6/6c/John_Coltrane_-_Giant_Steps.jpg",
-                type: "Álbum"
-            },
-            {
-                title: "My Favorite Things",
-                year: "1961",
-                cover: "https://upload.wikimedia.org/wikipedia/en/9/9b/My_Favorite_Things_%28John_Coltrane_album%29.jpg",
-                type: "Álbum"
-            },
-            {
-                title: "Coltrane",
-                year: "1962",
-                cover: "https://upload.wikimedia.org/wikipedia/en/2/2b/Coltrane_%281962_album%29.jpg",
-                type: "Álbum"
-            },
-            {
-                title: "Ballads",
-                year: "1963",
-                cover: "https://upload.wikimedia.org/wikipedia/en/6/6e/Ballads_%28John_Coltrane_album%29.jpg",
-                type: "Álbum"
-            },
-            {
-                title: "Impressions",
-                year: "1963",
-                cover: "https://upload.wikimedia.org/wikipedia/en/1/1a/Impressions_%28John_Coltrane_album%29.jpg",
-                type: "Álbum"
-            },
-            {
-                title: "A Love Supreme",
-                year: "1965",
-                cover: "https://upload.wikimedia.org/wikipedia/en/9/9c/A_Love_Supreme.jpg",
-                type: "Álbum"
-            },
-            {
-                title: "Ascension",
-                year: "1966",
-                cover: "https://upload.wikimedia.org/wikipedia/en/2/2b/Ascension_%28John_Coltrane_album%29.jpg",
-                type: "Álbum"
-            },
-            {
-                title: "Expression",
+                title: "Domingo",
                 year: "1967",
-                cover: "https://upload.wikimedia.org/wikipedia/en/4/4d/Expression_%28John_Coltrane_album%29.jpg",
-                type: "Álbum"
+                cover: "https://upload.wikimedia.org/wikipedia/pt/7/7c/Domingo_-_Caetano_e_Gal.jpg",
+                type: "Álbum de Estúdio"
             },
             {
-                title: "Interstellar Space",
-                year: "1974",
-                cover: "https://upload.wikimedia.org/wikipedia/en/7/7e/Interstellar_Space.jpg",
-                type: "Álbum"
+                title: "Caetano Veloso",
+                year: "1968",
+                cover: "https://upload.wikimedia.org/wikipedia/pt/7/7c/Caetano_Veloso_1968.jpg",
+                type: "Álbum de Estúdio"
+            },
+            {
+                title: "Tropicália: ou Panis et Circensis",
+                year: "1968",
+                cover: "https://upload.wikimedia.org/wikipedia/pt/4/4a/Tropic%C3%A1lia_-_ou_Panis_et_Circencis.jpg",
+                type: "Álbum Coletivo"
+            },
+            {
+                title: "Transa",
+                year: "1972",
+                cover: "https://upload.wikimedia.org/wikipedia/pt/8/8d/Transa_-_Caetano_Veloso.jpg",
+                type: "Álbum de Estúdio"
+            },
+            {
+                title: "Bicho",
+                year: "1977",
+                cover: "https://upload.wikimedia.org/wikipedia/pt/7/7e/Bicho_-_Caetano_Veloso.jpg",
+                type: "Álbum de Estúdio"
+            },
+            {
+                title: "Cores, Nomes",
+                year: "1982",
+                cover: "https://upload.wikimedia.org/wikipedia/pt/3/3d/Cores%2C_Nomes.jpg",
+                type: "Álbum de Estúdio"
+            },
+            {
+                title: "Velô",
+                year: "1984",
+                cover: "https://upload.wikimedia.org/wikipedia/pt/8/8b/Vel%C3%B4_-_Caetano_Veloso.jpg",
+                type: "Álbum de Estúdio"
+            },
+            {
+                title: "Estrangeiro",
+                year: "1989",
+                cover: "https://upload.wikimedia.org/wikipedia/pt/3/3e/Estrangeiro_-_Caetano_Veloso.jpg",
+                type: "Álbum de Estúdio"
+            },
+            {
+                title: "Circuladô",
+                year: "1991",
+                cover: "https://upload.wikimedia.org/wikipedia/pt/5/5c/Circulad%C3%B4_-_Caetano_Veloso.jpg",
+                type: "Álbum de Estúdio"
+            },
+            {
+                title: "Fina Estampa",
+                year: "1994",
+                cover: "https://upload.wikimedia.org/wikipedia/pt/1/1e/Fina_Estampa_-_Caetano_Veloso.jpg",
+                type: "Álbum de Estúdio"
+            },
+            {
+                title: "Livro",
+                year: "1997",
+                cover: "https://upload.wikimedia.org/wikipedia/pt/3/3a/Livro_-_Caetano_Veloso.jpg",
+                type: "Álbum de Estúdio"
+            },
+            {
+                title: "Noites do Norte",
+                year: "2000",
+                cover: "https://upload.wikimedia.org/wikipedia/pt/2/2b/Noites_do_Norte_-_Caetano_Veloso.jpg",
+                type: "Álbum de Estúdio"
+            },
+            {
+                title: "Cê",
+                year: "2006",
+                cover: "https://upload.wikimedia.org/wikipedia/pt/9/9d/C%C3%AA_-_Caetano_Veloso.jpg",
+                type: "Álbum de Estúdio"
+            },
+            {
+                title: "Abraçaço",
+                year: "2012",
+                cover: "https://upload.wikimedia.org/wikipedia/pt/3/3e/Abra%C3%A7a%C3%A7o_-_Caetano_Veloso.jpg",
+                type: "Álbum de Estúdio"
             }
         ],
-        biography: "John William Coltrane (1926–1967) foi um saxofonista, compositor e líder de banda norte-americano, amplamente considerado uma das figuras mais influentes na história do jazz. Nascido na Carolina do Norte, Coltrane começou sua carreira tocando bebop e hard bop, mas rapidamente se tornou um pioneiro do jazz modal e do free jazz. Seu álbum 'A Love Supreme' (1965) é amplamente considerado uma obra-prima espiritual e musical. Ao longo de sua carreira, Coltrane colaborou com lendas como Miles Davis e Thelonious Monk, e liderou mais de 50 sessões de gravação. Seu estilo evoluiu para incorporar elementos espirituais e experimentais, deixando um legado duradouro no jazz e na música em geral."
+        biography: "Caetano Emanuel Viana Teles Veloso, conhecido como Caetano Veloso, é um músico, produtor, arranjador e escritor brasileiro. Nascido em 7 de agosto de 1942 em Santo Amaro da Purificação, Bahia, é considerado um dos artistas mais influentes da música brasileira desde os anos 1960. Foi um dos criadores do movimento tropicalista, que revolucionou a MPB nos anos 1960. Sua obra caracteriza-se pela diversidade de gêneros e pela constante reinvenção. Ao longo de sua carreira, lançou mais de 50 álbuns e vendeu milhões de cópias. Ganhou nove Grammy Latino e dois Grammy Awards. Além da música, é conhecido por seu ativismo político e por suas posições sobre questões sociais. Continua ativo na música, lançando novos trabalhos e realizando turnês pelo mundo."
     },
 
-
+    nirvana: {
+        name: "Nirvana",
+        genres: "Grunge • Alternative Rock • Punk Rock",
+        avatar: "https://i.pinimg.com/736x/73/0e/fd/730efdea3b8c4823fbcf8f7fdb1e4988.jpg",
+        stats: {
+            songs: 100,
+            albums: 4,
+            listeners: "50M+"
+        },
+        popularTracks: [
+            { name: "Smells Like Teen Spirit", album: "Nevermind", year: "1991", duration: "5:01" },
+            { name: "Come As You Are", album: "Nevermind", year: "1991", duration: "3:39" },
+            { name: "Heart-Shaped Box", album: "In Utero", year: "1993", duration: "4:41" },
+            { name: "Lithium", album: "Nevermind", year: "1991", duration: "4:17" },
+            { name: "About a Girl", album: "Bleach", year: "1989", duration: "2:48" }
+        ],
+        discography: [
+            {
+                title: "Bleach",
+                year: "1989",
+                cover: "https://upload.wikimedia.org/wikipedia/en/7/70/Nirvana-Bleach.jpg",
+                type: "Álbum de Estúdio"
+            },
+            {
+                title: "Nevermind",
+                year: "1991",
+                cover: "https://upload.wikimedia.org/wikipedia/en/b/b7/NirvanaNevermindalbumcover.jpg",
+                type: "Álbum de Estúdio"
+            },
+            {
+                title: "In Utero",
+                year: "1993",
+                cover: "https://upload.wikimedia.org/wikipedia/en/e/e5/In_Utero_-_Nirvana.jpg",
+                type: "Álbum de Estúdio"
+            },
+            {
+                title: "MTV Unplugged in New York",
+                year: "1994",
+                cover: "https://upload.wikimedia.org/wikipedia/en/8/8f/Nirvana-Unplugged.jpg",
+                type: "Álbum Ao Vivo"
+            },
+            {
+                title: "From the Muddy Banks of the Wishkah",
+                year: "1996",
+                cover: "https://upload.wikimedia.org/wikipedia/en/4/4c/Nirvana_-_From_the_Muddy_Banks_of_the_Wishkah.jpg",
+                type: "Álbum Ao Vivo"
+            },
+            {
+                title: "Nirvana",
+                year: "2002",
+                cover: "https://upload.wikimedia.org/wikipedia/en/6/64/Nirvanaalbum.jpg",
+                type: "Compilação"
+            }
+        ],
+        biography: "Nirvana foi uma banda de rock americana formada em Aberdeen, Washington, em 1987. Fundada pelo vocalista e guitarrista Kurt Cobain e pelo baixista Krist Novoselic, a banda passou por uma sucessão de bateristas, sendo Dave Grohl o mais notável, que se juntou em 1990. O Nirvana é amplamente considerado como a banda seminal da década de 1990 e o principal expoente do movimento grunge. Seu álbum 'Nevermind' (1991) marcou o início de uma mudança musical do mainstream rock para o rock alternativo, graças ao sucesso do single 'Smells Like Teen Spirit'. A banda vendeu mais de 75 milhões de discos em todo o mundo. O Nirvana foi induzido no Rock and Roll Hall of Fame em 2014, no primeiro ano de sua elegibilidade. A banda se dissolveu após a morte de Cobain em 1994, mas sua música continua influente e popular."
+    }
 };
 
 
@@ -410,10 +489,12 @@ function loadArtistData() {
 
     // Adicionar evento de clique para cada música popular
     document.querySelectorAll('.track-item').forEach(item => {
-        item.addEventListener('click', () => {  
+        item.addEventListener('click', () => {
             const songName = item.getAttribute('data-song');
+            const artistId = getQueryParam('artist'); // pega o artista da URL
             localStorage.setItem('selectedSong', songName);
-            window.location.href = '../pages/musica.html'; // ajuste o caminho se necessário
+            localStorage.setItem('selectedArtist', artistId); // <-- ESSA LINHA É FUNDAMENTAL
+            window.location.href = '../pages/musica.html';
         });
     });
 
