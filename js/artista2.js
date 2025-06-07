@@ -433,7 +433,7 @@ const artistsData = {
     metallica: {
         name: "Metallica",
         genres: "Heavy Metal • Thrash Metal • Hard Rock",
-        avatar: "https://i.pinimg.com/originals/7b/6f/ff/7b6fff6238d3bfe48f716244dfc2e4c6.jpg",
+        avatar: "https://i.pinimg.com/736x/5b/15/ae/5b15ae8fc382d0362dcfbb86aafb0dfc.jpg",
         stats: {
             songs: 150,
             albums: 11,
