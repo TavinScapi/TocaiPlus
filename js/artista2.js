@@ -428,7 +428,95 @@ const artistsData = {
             }
         ],
         biography: "Nirvana foi uma banda de rock americana formada em Aberdeen, Washington, em 1987. Fundada pelo vocalista e guitarrista Kurt Cobain e pelo baixista Krist Novoselic, a banda passou por uma sucessão de bateristas, sendo Dave Grohl o mais notável, que se juntou em 1990. O Nirvana é amplamente considerado como a banda seminal da década de 1990 e o principal expoente do movimento grunge. Seu álbum 'Nevermind' (1991) marcou o início de uma mudança musical do mainstream rock para o rock alternativo, graças ao sucesso do single 'Smells Like Teen Spirit'. A banda vendeu mais de 75 milhões de discos em todo o mundo. O Nirvana foi induzido no Rock and Roll Hall of Fame em 2014, no primeiro ano de sua elegibilidade. A banda se dissolveu após a morte de Cobain em 1994, mas sua música continua influente e popular."
+    },
+
+    metallica: {
+        name: "Metallica",
+        genres: "Heavy Metal • Thrash Metal • Hard Rock",
+        avatar: "https://i.pinimg.com/originals/7b/6f/ff/7b6fff6238d3bfe48f716244dfc2e4c6.jpg",
+        stats: {
+            songs: 150,
+            albums: 11,
+            listeners: "60M+"
+        },
+        popularTracks: [
+            { name: "Enter Sandman", album: "Metallica", year: "1991", duration: "5:32" },
+            { name: "Nothing Else Matters", album: "Metallica", year: "1991", duration: "6:29" },
+            { name: "One", album: "...And Justice for All", year: "1988", duration: "7:27" },
+            { name: "Master of Puppets", album: "Master of Puppets", year: "1986", duration: "8:36" },
+            { name: "Fade to Black", album: "Ride the Lightning", year: "1984", duration: "6:57" }
+        ],
+        discography: [
+            {
+                title: "Kill 'Em All",
+                year: "1983",
+                cover: "https://upload.wikimedia.org/wikipedia/en/5/5c/Metallica_-_Kill_%27Em_All_cover.jpg",
+                type: "Álbum de Estúdio"
+            },
+            {
+                title: "Ride the Lightning",
+                year: "1984",
+                cover: "https://upload.wikimedia.org/wikipedia/pt/f/fc/Ride_the_Lightning.jpg",
+                type: "Álbum de Estúdio"
+            },
+            {
+                title: "Master of Puppets",
+                year: "1986",
+                cover: "https://upload.wikimedia.org/wikipedia/en/b/b2/Metallica_-_Master_of_Puppets_cover.jpg",
+                type: "Álbum de Estúdio"
+            },
+            {
+                title: "...And Justice for All",
+                year: "1988",
+                cover: "https://upload.wikimedia.org/wikipedia/pt/thumb/3/34/...And_Justice_for_All.jpg/250px-...And_Justice_for_All.jpg",
+                type: "Álbum de Estúdio"
+            },
+            {
+                title: "Metallica (The Black Album)",
+                year: "1991",
+                cover: "https://upload.wikimedia.org/wikipedia/en/2/2c/Metallica_-_Metallica_cover.jpg",
+                type: "Álbum de Estúdio"
+            },
+            {
+                title: "Load",
+                year: "1996",
+                cover: "https://upload.wikimedia.org/wikipedia/pt/thumb/3/32/Load.jpg/250px-Load.jpg",
+                type: "Álbum de Estúdio"
+            },
+            {
+                title: "Reload",
+                year: "1997",
+                cover: "https://upload.wikimedia.org/wikipedia/pt/b/b8/ReLoad.jpg",
+                type: "Álbum de Estúdio"
+            },
+            {
+                title: "St. Anger",
+                year: "2003",
+                cover: "https://upload.wikimedia.org/wikipedia/pt/7/77/St-anger_album.jpg",
+                type: "Álbum de Estúdio"
+            },
+            {
+                title: "Death Magnetic",
+                year: "2008",
+                cover: "https://upload.wikimedia.org/wikipedia/pt/9/94/Death_Magnetic.jpg",
+                type: "Álbum de Estúdio"
+            },
+            {
+                title: "Hardwired... to Self-Destruct",
+                year: "2016",
+                cover: "https://upload.wikimedia.org/wikipedia/pt/3/3b/Metallica_-_Hardwired%E2%80%A6To_Self-Destruct_-_2016.jpg",
+                type: "Álbum de Estúdio"
+            },
+            {
+                title: "72 Seasons",
+                year: "2023",
+                cover: "https://upload.wikimedia.org/wikipedia/pt/1/1f/Metallica_-_72_Seasons.jpg",
+                type: "Álbum de Estúdio"
+            }
+        ],
+        biography: "Metallica é uma banda americana de heavy metal formada em Los Angeles, Califórnia, em 1981, por James Hetfield e Lars Ulrich. Considerada uma das bandas mais influentes e bem-sucedidas do heavy metal, Metallica foi pioneira do thrash metal ao lado de Slayer, Megadeth e Anthrax. Com álbuns marcantes como 'Master of Puppets' e o autointitulado 'Metallica' (conhecido como Black Album), a banda alcançou enorme sucesso comercial e crítica. O Metallica vendeu mais de 125 milhões de discos em todo o mundo e foi introduzido no Rock and Roll Hall of Fame em 2009. A banda continua ativa, realizando turnês globais e lançando novos álbuns, mantendo-se como uma das maiores potências do rock e metal contemporâneo."
     }
+
 };
 
 
