@@ -30,6 +30,10 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+footer{
+    display: none;
+}
+
 body {
     background-color: var(--dark);
     color: var(--light);
@@ -361,3 +365,102 @@ body {
 .show-chords-btn:hover {
     background: #1ed760;
 }
+
+.video-section {
+    margin-bottom: 3rem;
+}
+
+.video-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* Proporção 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #000;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+@media (max-width: 768px) {
+    .video-section {
+        margin-bottom: 2rem;
+    }
+
+    .video-section h3 {
+        font-size: 1.3rem;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Container das abas */
+.tabs-section {
+    background: rgba(40, 40, 40, 0.5);
+    border-radius: 8px;
+    overflow: hidden;
+    height: 690px;
+    /* Altura fixa */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Container do conteúdo das abas */
+.tab-content {
+    display: none;
+    flex: 1;
+    padding: 0;
+    /* Removemos o padding aqui */
+    overflow: hidden;
+    /* Desabilita scroll aqui */
+}
+
+.tab-content.active {
+    display: flex;
+    /* Usamos flex para o container */
+    flex-direction: column;
+}
+
+/* Container do texto (único com scroll) */
+.chords-container,
+.lyrics-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+    padding-right: 0.8rem;
+    /* Espaço para a barra de scroll */
+}
+
+/* Personalização da barra de scroll */
+.chords-container::-webkit-scrollbar,
+.lyrics-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Restante do CSS permanece igual */

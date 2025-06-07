@@ -67,6 +67,25 @@ function displaySongDetails(songName, artistData, songDetails) {
         }
     }
 
+    // Vídeo do YouTube
+    const videoIframe = document.getElementById("song-video");
+    if (songDetails.videoUrl) {
+        // Extrai o ID do vídeo se for uma URL completa
+        let videoId = songDetails.videoUrl;
+        if (songDetails.videoUrl.includes('youtube.com') || songDetails.videoUrl.includes('youtu.be')) {
+            videoId = extractYouTubeId(songDetails.videoUrl);
+        }
+
+        if (videoId) {
+            videoIframe.src = `https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0`;
+            document.querySelector('.video-section').style.display = 'block';
+        } else {
+            document.querySelector('.video-section').style.display = 'none';
+        }
+    } else {
+        document.querySelector('.video-section').style.display = 'none';
+    }
+
     // Letra
     const lyricsContainer = document.getElementById("song-lyrics");
     if (songDetails.lyrics) {
@@ -86,6 +105,13 @@ function displaySongDetails(songName, artistData, songDetails) {
 
     setupTabs();
 
+}
+
+// Função para extrair ID do YouTube
+function extractYouTubeId(url) {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
 }
 
 function formatChords(chordText) {
