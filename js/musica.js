@@ -77,6 +77,12 @@ function displaySongDetails(songName, artistData, songDetails) {
     document.getElementById("song-year").textContent = songDetails.year || "Ano desconhecido";
     document.getElementById("song-duration").textContent = formatDuration(songDetails.duration) || "--:--";
 
+    // Informações adicionais
+    document.getElementById("song-title").textContent = songName;
+    document.getElementById("song-artist").textContent = artistData.displayName || currentArtistKey;
+    document.title = `${songName} | Tocaí`;
+
+
     // Capa do álbum
     const coverImg = document.getElementById("song-cover-img");
     coverImg.src = songDetails.coverUrl || artistData.artistImage || "../images/default-cover.jpg";
