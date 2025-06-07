@@ -1,7 +1,41 @@
+// =====================
+// Variáveis Globais
+// =====================
 let songData = {};
 let currentArtistKey = null;
+let scrollInterval;
+let currentSpeed = 1;
+let isScrolling = false;
 
-// Função para carregar os dados da música selecionada
+// =====================
+// Inicialização
+// =====================
+document.addEventListener('DOMContentLoaded', () => {
+    loadSelectedSong();
+
+    // Botões de controle
+    document.querySelector('.play-btn')?.addEventListener('click', () => {
+        console.log('Reproduzindo música...');
+    });
+
+    document.querySelector('.like-btn')?.addEventListener('click', function () {
+        this.classList.toggle('liked');
+    });
+
+    document.querySelector('.add-btn')?.addEventListener('click', () => {
+        console.log('Adicionar à playlist...');
+    });
+
+    document.querySelector('.share-btn')?.addEventListener('click', () => {
+        console.log('Compartilhar música...');
+    });
+});
+
+// =====================
+// Funções Principais
+// =====================
+
+// Carrega os dados da música selecionada
 function loadSelectedSong() {
     const selectedSong = localStorage.getItem("selectedSong");
     const selectedArtist = localStorage.getItem("selectedArtist");
@@ -36,7 +70,7 @@ function loadSelectedSong() {
 function displaySongDetails(songName, artistData, songDetails) {
     // Informações básicas
     document.getElementById("song-title").textContent = songName;
-    document.getElementById("song-artist").textContent = artistData.displayName || selectedArtist;
+    document.getElementById("song-artist").textContent = artistData.displayName || currentArtistKey;
 
     // Metadados
     document.getElementById("song-album").textContent = songDetails.album || "Álbum desconhecido";
@@ -48,7 +82,7 @@ function displaySongDetails(songName, artistData, songDetails) {
     coverImg.src = songDetails.coverUrl || artistData.artistImage || "../images/default-cover.jpg";
     coverImg.alt = `Capa do álbum ${songDetails.album || ''}`;
 
-    // Cifra (agora aparece primeiro)
+    // Cifra
     const chordsContainer = document.getElementById("song-chords");
     if (songDetails.cifra) {
         chordsContainer.innerHTML = formatChords(songDetails.cifra);
@@ -59,7 +93,6 @@ function displaySongDetails(songName, artistData, songDetails) {
             <p class="not-available">Cifra não disponível</p>
             ${songDetails.lyrics ? `<button class="show-lyrics-btn">Mostrar Letra</button>` : ''}
         `;
-
         if (songDetails.lyrics) {
             chordsContainer.querySelector('.show-lyrics-btn').addEventListener('click', () => {
                 document.querySelector('.tab-button[data-tab="lyrics"]').click();
@@ -70,12 +103,7 @@ function displaySongDetails(songName, artistData, songDetails) {
     // Vídeo do YouTube
     const videoIframe = document.getElementById("song-video");
     if (songDetails.videoUrl) {
-        // Extrai o ID do vídeo se for uma URL completa
-        let videoId = songDetails.videoUrl;
-        if (songDetails.videoUrl.includes('youtube.com') || songDetails.videoUrl.includes('youtu.be')) {
-            videoId = extractYouTubeId(songDetails.videoUrl);
-        }
-
+        let videoId = extractYouTubeId(songDetails.videoUrl);
         if (videoId) {
             videoIframe.src = `https://www.youtube.com/embed/${videoId}?modestbranding=1&rel=0`;
             document.querySelector('.video-section').style.display = 'block';
@@ -95,7 +123,6 @@ function displaySongDetails(songName, artistData, songDetails) {
             <p class="not-available">Letra não disponível</p>
             ${songDetails.cifra ? `<button class="show-chords-btn">Mostrar Cifra</button>` : ''}
         `;
-
         if (songDetails.cifra) {
             lyricsContainer.querySelector('.show-chords-btn').addEventListener('click', () => {
                 document.querySelector('.tab-button[data-tab="chords"]').click();
@@ -104,61 +131,10 @@ function displaySongDetails(songName, artistData, songDetails) {
     }
 
     setupTabs();
-
+    initAutoscrollControls();
 }
 
-// Função para extrair ID do YouTube
-function extractYouTubeId(url) {
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = url.match(regExp);
-    return (match && match[2].length === 11) ? match[2] : null;
-}
-
-function formatChords(chordText) {
-    // Processamento mais sofisticado para cifras
-    return chordText
-        .split('\n')
-        .map(line => {
-            // Linhas só com acordes
-            if (line.match(/^(\[[^\]]+\]|\s)+$/)) {
-                return `<div class="chord-line">${line.replace(/\[([^\]]+)\]/g, '<span class="chord">$1</span>')}</div>`;
-            }
-            // Linhas mistas (acordes e letra)
-            return line
-                .replace(/\[([^\]]+)\]/g, '<span class="chord">$1</span>')
-                .replace(/(\s{2,})/g, '<span class="space">$1</span>');
-        })
-        .join('<br>');
-}
-
-// Função para controlar as abas
-function setupTabs() {
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const tabContents = document.querySelectorAll('.tab-content');
-
-    tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            // Remove classe active de todos
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            tabContents.forEach(content => content.classList.remove('active'));
-
-            // Adiciona classe active ao selecionado
-            button.classList.add('active');
-            const tabId = button.getAttribute('data-tab') + '-tab';
-            document.getElementById(tabId).classList.add('active');
-        });
-    });
-}
-
-// Formata a duração em segundos para MM:SS
-function formatDuration(seconds) {
-    if (!seconds) return "0:00";
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
-}
-
-// Carrega músicas relacionadas (do mesmo artista)
+// Carrega músicas relacionadas
 function loadRelatedSongs(artistKey, currentSong) {
     const relatedTracksContainer = document.getElementById("related-tracks");
     relatedTracksContainer.innerHTML = '';
@@ -168,8 +144,6 @@ function loadRelatedSongs(artistKey, currentSong) {
         .then(artistData => {
             if (artistData.músicas) {
                 const songs = Object.keys(artistData.músicas);
-
-                // Limita a 5 músicas relacionadas, excluindo a atual
                 const relatedSongs = songs.filter(song => song !== currentSong).slice(0, 5);
 
                 if (relatedSongs.length === 0) {
@@ -191,7 +165,7 @@ function loadRelatedSongs(artistKey, currentSong) {
         });
 }
 
-// Cria um elemento de música relacionada
+// Cria elemento de música relacionada
 function createRelatedTrackElement(songName, songDetails, artistData) {
     const trackElement = document.createElement('div');
     trackElement.className = 'related-track';
@@ -212,13 +186,13 @@ function createRelatedTrackElement(songName, songDetails, artistData) {
         localStorage.setItem("selectedSong", songName);
         localStorage.setItem("selectedArtist", currentArtistKey);
         loadSelectedSong();
-        window.scrollTo(0, 0); // Rolagem para o topo
+        window.scrollTo(0, 0);
     });
 
     return trackElement;
 }
 
-// Mostra mensagem de erro
+// Exibe mensagem de erro
 function showError(message) {
     document.getElementById("song-title").textContent = message;
     document.getElementById("artist-name").textContent = "";
@@ -229,31 +203,141 @@ function showError(message) {
     coverImg.alt = "Música não encontrada";
 }
 
-// Event listeners para os botões
-document.addEventListener('DOMContentLoaded', () => {
-    loadSelectedSong();
+// =====================
+// Sistema de Auto Rolagem
+// =====================
+function startAutoscroll() {
+    if (isScrolling) return;
 
-    // Botão de reprodução
-    document.querySelector('.play-btn').addEventListener('click', function () {
-        // Aqui você pode implementar a lógica de reprodução
-        console.log('Reproduzindo música...');
-    });
+    const activeTab = document.querySelector('.tab-content.active');
+    const container = activeTab.querySelector('.chords-container, .lyrics-container');
+    if (!container) return;
 
-    // Botão de favorito
-    document.querySelector('.like-btn').addEventListener('click', function () {
-        this.classList.toggle('liked');
-        // Aqui você pode implementar a lógica para favoritar a música
-    });
+    isScrolling = true;
+    const scrollStep = 1;
+    const maxScroll = container.scrollHeight - container.clientHeight;
 
-    // Botão de adicionar a playlist
-    document.querySelector('.add-btn').addEventListener('click', function () {
-        // Aqui você pode implementar a lógica para adicionar a playlist
-        console.log('Adicionar à playlist...');
-    });
+    scrollInterval = setInterval(() => {
+        if (container.scrollTop >= maxScroll) {
+            stopAutoscroll();
+            return;
+        }
+        container.scrollTop += scrollStep * currentSpeed;
+    }, 50);
+}
 
-    // Botão de compartilhar
-    document.querySelector('.share-btn').addEventListener('click', function () {
-        // Aqui você pode implementar a lógica de compartilhamento
-        console.log('Compartilhar música...');
+function stopAutoscroll() {
+    clearInterval(scrollInterval);
+    isScrolling = false;
+    updateAutoscrollButtons();
+}
+
+function updateAutoscrollButtons() {
+    const playBtn = document.querySelector('.autoscroll-btn.play');
+    const stopBtn = document.querySelector('.autoscroll-btn.stop');
+
+    if (playBtn && stopBtn) {
+        playBtn.disabled = isScrolling;
+        stopBtn.disabled = !isScrolling;
+    }
+}
+
+function initAutoscrollControls() {
+    const playBtn = document.querySelector('.autoscroll-btn.play');
+    const stopBtn = document.querySelector('.autoscroll-btn.stop');
+    const speedBtns = document.querySelectorAll('.speed-btn');
+
+    if (playBtn && stopBtn) {
+        playBtn.addEventListener('click', () => {
+            startAutoscroll();
+            updateAutoscrollButtons();
+        });
+
+        stopBtn.addEventListener('click', () => {
+            stopAutoscroll();
+        });
+    }
+
+    if (speedBtns) {
+        speedBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                speedBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentSpeed = parseFloat(btn.dataset.speed);
+
+                if (isScrolling) {
+                    stopAutoscroll();
+                    startAutoscroll();
+                    updateAutoscrollButtons();
+                }
+            });
+        });
+    }
+
+    // Pausa ao interagir com o scroll manual
+    const containers = document.querySelectorAll('.chords-container, .lyrics-container');
+    containers.forEach(container => {
+        container.addEventListener('wheel', () => {
+            if (isScrolling) {
+                stopAutoscroll();
+            }
+        });
     });
-});
+}
+
+// =====================
+// Funções Auxiliares
+// =====================
+
+// Extrai o ID do vídeo do YouTube
+function extractYouTubeId(url) {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+}
+
+// Formata cifra/tabs para HTML
+function formatChords(chordText) {
+    return chordText
+        .split('\n')
+        .map(line => {
+            if (line.match(/^(\[[^\]]+\]|\s)+$/)) {
+                return `<div class="chord-line">${line.replace(/\[([^\]]+)\]/g, '<span class="chord">$1</span>')}</div>`;
+            }
+            return line
+                .replace(/\[([^\]]+)\]/g, '<span class="chord">$1</span>')
+                .replace(/(\s{2,})/g, '<span class="space">$1</span>');
+        })
+        .join('<br>');
+}
+
+// Configura as abas de cifra/letra
+function setupTabs() {
+    const tabButtons = document.querySelectorAll('.tab-button');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Para o autoscroll ao trocar de aba
+            stopAutoscroll();
+
+            // Ativa a aba selecionada
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+            button.classList.add('active');
+            const tabId = button.getAttribute('data-tab') + '-tab';
+            document.getElementById(tabId).classList.add('active');
+
+            // Atualiza controles para a nova aba
+            initAutoscrollControls();
+        });
+    });
+}
+
+// Formata duração em segundos para mm:ss
+function formatDuration(seconds) {
+    if (!seconds) return "0:00";
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+}
