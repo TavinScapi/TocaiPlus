@@ -539,27 +539,55 @@ function loadArtistData() {
 
     // Atualizar header
     document.getElementById('artist-header').innerHTML = `
-                <img src="${artist.avatar}" alt="${artist.name}" class="artist-avatar">
-                <div class="artist-info">
-                    <h1 class="artist-name">${artist.name}</h1>
-                    <p class="artist-genre">${artist.genres}</p>
-                    <div class="artist-stats">
-                        <div class="stat-item">
-                            <span>🎵</span>
-                            <span>${artist.stats.songs} músicas</span>
-                        </div>
-                        <div class="stat-item">
-                            <span>📀</span>
-                            <span>${artist.stats.albums} álbuns</span>
-                        </div>
-                        <div class="stat-item">
-                            <span>👥</span>
-                            <span>${artist.stats.listeners} ouvintes</span>
-                        </div>
-                    </div>
-                    <button class="btn">Seguir</button>
-                </div>
-            `;
+    <img src="${artist.avatar}" alt="${artist.name}" class="artist-avatar">
+    <div class="artist-info">
+        <h1 class="artist-name">${artist.name}</h1>
+        <p class="artist-genre">${artist.genres}</p>
+        <div class="artist-stats">
+            <div class="stat-item">
+                <span>🎵</span>
+                <span>${artist.stats.songs} músicas</span>
+            </div>
+            <div class="stat-item">
+                <span>📀</span>
+                <span>${artist.stats.albums} álbuns</span>
+            </div>
+            <div class="stat-item">
+                <span>👥</span>
+                <span>${artist.stats.listeners} ouvintes</span>
+            </div>
+        </div>
+        <button class="btn" id="follow-btn"></button>
+    </div>
+`;
+
+    // Atualizar botão de seguir
+    const followed = JSON.parse(localStorage.getItem('followedArtists') || '[]');
+    const followBtn = document.getElementById('follow-btn');
+    function updateFollowBtn() {
+        if (followed.includes(artistId)) {
+            followBtn.innerHTML = '<i class="fas fa-check"></i> Seguindo';
+            followBtn.classList.add('following');
+        } else {
+            followBtn.innerHTML = 'Seguir';
+            followBtn.classList.remove('following');
+        }
+    }
+    updateFollowBtn();
+
+    followBtn.onclick = function () {
+        let followed = JSON.parse(localStorage.getItem('followedArtists') || '[]');
+        const index = followed.indexOf(artistId);
+        if (index === -1) {
+            // Seguir
+            followed.unshift(artistId);
+        } else {
+            // Deixar de seguir
+            followed.splice(index, 1);
+        }
+        localStorage.setItem('followedArtists', JSON.stringify(followed));
+        updateFollowBtn();
+    };
 
     // Atualizar músicas populares
     const popularTracksHTML = artist.popularTracks.map((track, index) => `

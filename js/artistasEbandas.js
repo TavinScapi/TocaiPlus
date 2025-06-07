@@ -66,9 +66,20 @@ function displayArtists(artists, page) {
     const listaArtistas = document.querySelector('.lista-artistas');
     listaArtistas.innerHTML = '';
 
+    const followed = JSON.parse(localStorage.getItem('followedArtists') || '[]');
+
+    // Ordenar: seguidos primeiro
+    const sortedArtists = [...artists].sort((a, b) => {
+        const aFollowed = followed.includes(a.id);
+        const bFollowed = followed.includes(b.id);
+        if (aFollowed && !bFollowed) return -1;
+        if (!aFollowed && bFollowed) return 1;
+        return 0;
+    });
+
     const startIndex = (page - 1) * artistsPerPage;
     const endIndex = startIndex + artistsPerPage;
-    const paginatedArtists = artists.slice(startIndex, endIndex);
+    const paginatedArtists = sortedArtists.slice(startIndex, endIndex);
 
     if (paginatedArtists.length === 0) {
         listaArtistas.innerHTML = '<p class="no-results">Nenhum artista encontrado.</p>';
@@ -76,6 +87,7 @@ function displayArtists(artists, page) {
     }
 
     paginatedArtists.forEach(artista => {
+        const isFollowed = followed.includes(artista.id);
         const card = document.createElement('div');
         card.className = 'card-vinil';
         card.setAttribute('data-genre', artista.generos.join(' '));
@@ -100,7 +112,7 @@ function displayArtists(artists, page) {
                     <div class="bottom"></div>
                 </div>
             </div>
-            <h3>${artista.nome}</h3>
+            <h3>${artista.nome} ${isFollowed ? '<span class="seguindo-icon" title="Seguindo"><i class="fas fa-check-circle" style="color: #2ecc71;"></i></span>' : ''}</h3>
             <p>${artista.descricao}</p>
             <button class="button">Ver Mais</button>
         `;
