@@ -33,6 +33,17 @@
 
     <script type="module" src="../js/musica.js"></script>
     <script type="module" src="../js/load-components.js"></script>
+    <style>
+        #chord-popup {
+            background: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 2px 2px 8px #0002;
+            padding: 8px;
+            
+            border-radius: 8px;
+            color: black;
+        }
+    </style>
 </head>
 
 <body>
@@ -121,7 +132,9 @@
                     </div>
                 </div>
             </div>
+            <div id="chord-popup" style="display:none; position:absolute; z-index:1000;"></div>
         </div>
+        <!-- Adicione ao final do body -->
     </div>
 </body>
 

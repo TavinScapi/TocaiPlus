@@ -30,8 +30,8 @@
         "B"
     ],
     "suffixes": [
-        "major",
-        "minor",
+        "Maior",
+        "m",
         "dim",
         "dim7",
         "sus",
@@ -121,7 +121,7 @@
         "C": [
             {
                 "key": "C",
-                "suffix": "major",
+                "suffix": "Maior",
                 "positions": [
                     {
                         "frets": [
@@ -243,7 +243,7 @@
             },
             {
                 "key": "C",
-                "suffix": "minor",
+                "suffix": "m",
                 "positions": [
                     {
                         "frets": [
@@ -8396,7 +8396,7 @@
         "Csharp": [
             {
                 "key": "C#",
-                "suffix": "major",
+                "suffix": "Maior",
                 "positions": [
                     {
                         "frets": [
@@ -8523,16 +8523,16 @@
             },
             {
                 "key": "C#",
-                "suffix": "minor",
+                "suffix": "m",
                 "positions": [
                     {
                         "frets": [
-                            -1,
-                            4,
-                            2,
                             1,
+                            1,
+                            3,
+                            3,
                             2,
-                            -1
+                            1
                         ],
                         "fingers": [
                             0,
@@ -8542,8 +8542,8 @@
                             3,
                             0
                         ],
-                        "baseFret": 1,
-                        "barres": [],
+                        "baseFret": 4,
+                        "barres": [1],
                         "midi": [
                             49,
                             52,
@@ -16568,7 +16568,7 @@
         "D": [
             {
                 "key": "D",
-                "suffix": "major",
+                "suffix": "Maior",
                 "positions": [
                     {
                         "frets": [
@@ -16691,7 +16691,7 @@
             },
             {
                 "key": "D",
-                "suffix": "minor",
+                "suffix": "m",
                 "positions": [
                     {
                         "frets": [
@@ -24769,7 +24769,7 @@
         "Eb": [
             {
                 "key": "Eb",
-                "suffix": "major",
+                "suffix": "Maior",
                 "positions": [
                     {
                         "frets": [
@@ -24889,7 +24889,7 @@
             },
             {
                 "key": "Eb",
-                "suffix": "minor",
+                "suffix": "m",
                 "positions": [
                     {
                         "frets": [
@@ -33002,7 +33002,7 @@
         "E": [
             {
                 "key": "E",
-                "suffix": "major",
+                "suffix": "Maior",
                 "positions": [
                     {
                         "frets": [
@@ -33122,7 +33122,7 @@
             },
             {
                 "key": "E",
-                "suffix": "minor",
+                "suffix": "m",
                 "positions": [
                     {
                         "frets": [
@@ -41286,7 +41286,7 @@
         "F": [
             {
                 "key": "F",
-                "suffix": "major",
+                "suffix": "Maior",
                 "positions": [
                     {
                         "frets": [
@@ -41437,7 +41437,7 @@
             },
             {
                 "key": "F",
-                "suffix": "minor",
+                "suffix": "m",
                 "positions": [
                     {
                         "frets": [
@@ -49537,7 +49537,7 @@
         "Fsharp": [
             {
                 "key": "F#",
-                "suffix": "major",
+                "suffix": "Maior",
                 "positions": [
                     {
                         "frets": [
@@ -49666,7 +49666,7 @@
             },
             {
                 "key": "F#",
-                "suffix": "minor",
+                "suffix": "m",
                 "positions": [
                     {
                         "frets": [
@@ -57879,7 +57879,7 @@
         "G": [
             {
                 "key": "G",
-                "suffix": "major",
+                "suffix": "Maior",
                 "positions": [
                     {
                         "frets": [
@@ -58029,7 +58029,7 @@
             },
             {
                 "key": "G",
-                "suffix": "minor",
+                "suffix": "m",
                 "positions": [
                     {
                         "frets": [
@@ -66191,7 +66191,7 @@
         "Ab": [
             {
                 "key": "Ab",
-                "suffix": "major",
+                "suffix": "Maior",
                 "positions": [
                     {
                         "frets": [
@@ -66319,7 +66319,7 @@
             },
             {
                 "key": "Ab",
-                "suffix": "minor",
+                "suffix": "m",
                 "positions": [
                     {
                         "frets": [
@@ -74405,7 +74405,7 @@
         "A": [
             {
                 "key": "A",
-                "suffix": "major",
+                "suffix": "Maior",
                 "positions": [
                     {
                         "frets": [
@@ -74526,7 +74526,7 @@
             },
             {
                 "key": "A",
-                "suffix": "minor",
+                "suffix": "m",
                 "positions": [
                     {
                         "frets": [
@@ -82641,7 +82641,7 @@
         "Bb": [
             {
                 "key": "Bb",
-                "suffix": "major",
+                "suffix": "Maior",
                 "positions": [
                     {
                         "frets": [
@@ -82768,7 +82768,7 @@
             },
             {
                 "key": "Bb",
-                "suffix": "minor",
+                "suffix": "m",
                 "positions": [
                     {
                         "frets": [
@@ -90914,7 +90914,7 @@
         "B": [
             {
                 "key": "B",
-                "suffix": "major",
+                "suffix": "Maior",
                 "positions": [
                     {
                         "frets": [
@@ -91041,7 +91041,7 @@
             },
             {
                 "key": "B",
-                "suffix": "minor",
+                "suffix": "m",
                 "positions": [
                     {
                         "frets": [

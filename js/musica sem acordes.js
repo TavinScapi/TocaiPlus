@@ -92,15 +92,13 @@ function displaySongDetails(songName, artistData, songDetails) {
     const chordsContainer = document.getElementById("song-chords");
     if (songDetails.cifra) {
         chordsContainer.innerHTML = formatChords(songDetails.cifra);
-        addChordHoverPopups(); // <-- Adicione aqui
     } else if (songDetails.tabs) {
         chordsContainer.innerHTML = formatChords(songDetails.tabs);
-        addChordHoverPopups(); // <-- Adicione aqui
     } else {
         chordsContainer.innerHTML = `
-        <p class="not-available">Cifra não disponível</p>
-        ${songDetails.lyrics ? `<button class="show-lyrics-btn">Mostrar Letra</button>` : ''}
-    `;
+            <p class="not-available">Cifra não disponível</p>
+            ${songDetails.lyrics ? `<button class="show-lyrics-btn">Mostrar Letra</button>` : ''}
+        `;
         if (songDetails.lyrics) {
             chordsContainer.querySelector('.show-lyrics-btn').addEventListener('click', () => {
                 document.querySelector('.tab-button[data-tab="lyrics"]').click();
@@ -140,8 +138,6 @@ function displaySongDetails(songName, artistData, songDetails) {
 
     setupTabs();
     initAutoscrollControls();
-    addChordHoverPopups();
-
 }
 
 // Carrega músicas relacionadas
@@ -306,25 +302,17 @@ function extractYouTubeId(url) {
     return (match && match[2].length === 11) ? match[2] : null;
 }
 
+// Formata cifra/tabs para HTML
 function formatChords(chordText) {
-    // Regex para acordes: C, Dm, F#, E/G#, C#m7(9), B4, E7M, etc
-    // Só marca se for isolado (espaço, início/fim de linha, pontuação)
-    const chordRegex = /(?<=^|[\s\(\)\[\]\{\},;:\/\\|'"“”‘’\-])([A-G](#|b)?m?(maj7|7M|m7|7|6|9|11|13|sus2|sus4|add9|dim|aug|4|5)?(\([^\)]*\))?(\/[A-G](#|b)?)?)(?=[\s\(\)\[\]\{\},;:\/\\|'"“”‘’\-]|$)/g;
-
     return chordText
         .split('\n')
         .map(line => {
-            // Marca acordes entre colchetes
-            let formatted = line.replace(/\[([^\]]+)\]/g, '<span class="chord">$1</span>');
-            // Marca acordes soltos (não dentro de tags já)
-            formatted = formatted.replace(/(<span class="chord">.*?<\/span>)|(?<=^|[\s\(\)\[\]\{\},;:\/\\|'"“”‘’\-])([A-G](#|b)?m?(maj7|7M|m7|7|6|9|11|13|sus2|sus4|add9|dim|aug|4|5)?(\([^\)]*\))?(\/[A-G](#|b)?)?)(?=[\s\(\)\[\]\{\},;:\/\\|'"“”‘’\-]|$)/g, (match, chordTag, chord) => {
-                if (chordTag) return chordTag; // já está marcado
-                // Só marca se for acorde isolado OU tiver mais de 1 caractere
-                if (chord && (chord.length > 1 || /^[A-G]$/.test(chord))) return `<span class="chord">${chord}</span>`;
-                return match;
-            });
-            // Mantém espaçamento visual
-            return formatted.replace(/(\s{2,})/g, '<span class="space">$1</span>');
+            if (line.match(/^(\[[^\]]+\]|\s)+$/)) {
+                return `<div class="chord-line">${line.replace(/\[([^\]]+)\]/g, '<span class="chord">$1</span>')}</div>`;
+            }
+            return line
+                .replace(/\[([^\]]+)\]/g, '<span class="chord">$1</span>')
+                .replace(/(\s{2,})/g, '<span class="space">$1</span>');
         })
         .join('<br>');
 }
@@ -358,179 +346,4 @@ function formatDuration(seconds) {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
-}
-
-function addChordHoverPopups() {
-    const chordElements = document.querySelectorAll('#song-chords .chord');
-    chordElements.forEach(el => {
-        el.addEventListener('mouseenter', async (e) => {
-            const chordName = el.textContent.trim();
-            const popup = document.getElementById('chord-popup');
-            popup.innerHTML = await getChordDiagramSVG(chordName);
-            popup.style.display = 'block';
-            // Posição do mouse
-            popup.style.left = (e.pageX + 10) + 'px';
-            popup.style.top = (e.pageY + 10) + 'px';
-        });
-        el.addEventListener('mousemove', (e) => {
-            const popup = document.getElementById('chord-popup');
-            popup.style.left = (e.pageX + 10) + 'px';
-            popup.style.top = (e.pageY + 10) + 'px';
-        });
-        el.addEventListener('mouseleave', () => {
-            document.getElementById('chord-popup').style.display = 'none';
-        });
-    });
-}
-
-function normalizeKey(key) {
-    // Converte F# para Fsharp, Bb para Asharp, etc.
-    if (/^[A-G]#/.test(key)) return key[0] + 'sharp';
-    if (/^[A-G]b/.test(key)) {
-        return ({
-            'Db': 'Csharp',
-            'Eb': 'Dsharp',
-            'Gb': 'Fsharp',
-            'Ab': 'Gsharp',
-            'Bb': 'Asharp'
-        })[key] || key[0] + 'flat';
-    }
-    return key;
-}
-
-async function getChordDiagramSVG(chordName) {
-    const response = await fetch('../data/guitar.json');
-    const data = await response.json();
-
-    const match = chordName.match(/^([A-G](#|b)?)(.*)$/);
-    if (!match) return '<div style="padding:8px;">Acorde não reconhecido</div>';
-
-    let key = match[1]; // Ex: C, C#, Bb
-    let rawSuffix = match[3].trim();
-
-    // Remove extensões entre parênteses para busca do diagrama
-    let cleanSuffix = rawSuffix.replace(/\([^\)]*\)/g, '').trim();
-
-    let jsonKey = normalizeKey(key);
-
-    let suffix = '';
-    if (cleanSuffix === '' || cleanSuffix === 'M' || cleanSuffix === 'maj') {
-        suffix = 'Maior';
-    } else if (cleanSuffix === 'm') {
-        suffix = 'm';
-    } else if (cleanSuffix === '7M' || cleanSuffix === 'maj7') {
-        suffix = 'maj7';
-    } else if (cleanSuffix === 'm7') {
-        suffix = 'm7';
-    } else if (cleanSuffix === 'm6') {
-        suffix = 'm6';
-    } else if (cleanSuffix === 'm9') {
-        suffix = 'm9';
-    } else if (cleanSuffix === 'm11') {
-        suffix = 'm11';
-    } else if (cleanSuffix === 'm13') {
-        suffix = 'm13';
-    } else if (cleanSuffix === 'sus4') {
-        suffix = 'sus4';
-    } else if (cleanSuffix === 'sus2') {
-        suffix = 'sus2';
-    } else if (cleanSuffix === '4') {
-        suffix = 'sus4';
-    } else {
-        suffix = cleanSuffix;
-    }
-
-    let baseSuffix = suffix.split('/')[0];
-
-    let chordList = data.chords[jsonKey];
-    if (!chordList) return '<div style="padding:8px;">Acorde não encontrado</div>';
-
-    // Debug
-    // console.log('jsonKey:', jsonKey, 'suffix:', suffix, 'disponíveis:', chordList.map(c => c.suffix));
-
-    let chord = chordList.find(c => c.suffix === suffix || c.suffix === baseSuffix);
-    if (!chord || !chord.positions || !chord.positions.length)
-        return '<div style="padding:8px;">Diagrama não disponível</div>';
-
-    return gerarSVG(chord.positions[0]).outerHTML;
-}
-
-
-function gerarSVG(posicao) {
-    const { frets, barres = [], baseFret = 1 } = posicao;
-    const casaInicial = Math.min(...frets.filter(f => f > 0)) || 1;
-    // diminua o padding
-    const paddingLeft = 10;
-    const largura = 100 + paddingLeft, altura = 140;
-    const espacamento = 20;
-    const raio = 5;
-
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("width", largura);
-    svg.setAttribute("height", altura);
-
-    for (let i = 0; i < 5; i++) {
-        svg.appendChild(criarLinha(10 + paddingLeft, 30 + i * espacamento, 90 + paddingLeft, 30 + i * espacamento));
-    }
-
-    for (let i = 0; i < 6; i++) {
-        const x = 10 + paddingLeft + i * (100 - 20) / 5;
-        svg.appendChild(criarLinha(x, 30, x, 30 + 4 * espacamento));
-    }
-
-    // Exibir número da casa inicial se for maior que 1
-    if (baseFret > 1) {
-        svg.appendChild(criarTexto(baseFret, paddingLeft - 2, 45)); // ajuste fino para o novo padding
-    }
-
-    // Pestanas
-    barres.forEach(barreCasa => {
-        const y = 30 + (barreCasa - casaInicial + 0.5) * espacamento;
-        svg.appendChild(criarLinha(10 + paddingLeft, y, 90 + paddingLeft, y, 6));
-    });
-
-    // Posições normais (círculos, X e O)
-    frets.forEach((fret, i) => {
-        const x = 10 + paddingLeft + i * (100 - 20) / 5;
-        if (fret > 0 && !barres.includes(fret)) {
-            const y = 30 + (fret - casaInicial + 0.5) * espacamento;
-            svg.appendChild(criarCirculo(x, y, raio));
-        } else if (fret === 0) {
-            svg.appendChild(criarTexto("O", x, 20));
-        } else if (fret === -1) {
-            svg.appendChild(criarTexto("X", x, 20));
-        }
-    });
-
-    return svg;
-}
-
-function criarLinha(x1, y1, x2, y2, strokeWidth = 1) {
-    const l = document.createElementNS("http://www.w3.org/2000/svg", "line");
-    l.setAttribute("x1", x1);
-    l.setAttribute("y1", y1);
-    l.setAttribute("x2", x2);
-    l.setAttribute("y2", y2);
-    l.setAttribute("stroke", "#000");
-    l.setAttribute("stroke-width", strokeWidth);
-    return l;
-}
-
-function criarCirculo(cx, cy, r) {
-    const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    c.setAttribute("cx", cx);
-    c.setAttribute("cy", cy);
-    c.setAttribute("r", r);
-    c.setAttribute("fill", "black");
-    return c;
-}
-
-function criarTexto(txt, x, y) {
-    const t = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    t.setAttribute("x", x);
-    t.setAttribute("y", y);
-    t.setAttribute("text-anchor", "middle");
-    t.setAttribute("font-size", "12");
-    t.textContent = txt;
-    return t;
 }
