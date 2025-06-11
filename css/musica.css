@@ -448,6 +448,9 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
+    .tabs-section {
+        width: 1000px;
+    }
     .home-section {
         left: 0;
         width: 100%;
