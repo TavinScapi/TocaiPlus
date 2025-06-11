@@ -54,10 +54,9 @@ document.addEventListener("click", function (event) {
     }
 });
 
-// Salva o artista selecionado e redireciona
-function selectArtist(artist) {
-    localStorage.setItem("selectedArtist", artist);
-    window.location.href = "../pages/artista.html";
+function selectArtist(artistId) {
+    // Mude para passar por URL em vez de localStorage
+    window.location.href = `../pages/artista.html?artist=${artistId}`;
 }
 
 // Dados dos artistas (pode ser movido para um arquivo JSON se preferir)
