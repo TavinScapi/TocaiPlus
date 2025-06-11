@@ -448,9 +448,6 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
-    .tabs-section {
-        width: 1000px;
-    }
     .home-section {
         left: 0;
         width: 100%;
@@ -503,11 +500,58 @@ footer {
     }
 }
 
+@media (max-width: 768px) {
+    .chords-container {
+        font-size: 14.6px;
+        line-height: 2;
+        font-weight: 600;
+        color: #fff;
+        text-shadow: 0 1px 2px #000a;
+        font-family: monospace;
+        white-space: pre;
+        overflow-x: auto;
+        background: #181818;
+        border-radius: 8px;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+}
+
 @media (max-width: 400px) {
     .chords-container {
-        font-size: 14px;
-        line-height: 1.8;
+        font-size: 14.6px;
+        line-height: 2;
+        font-weight: 700;
+        color: #fff;
+        text-shadow: 0 1px 2px #000a;
+        font-family: monospace;
+        white-space: pre;
+        overflow-x: auto;
+        background: #181818;
+        border-radius: 8px;
     }
+}
+
+.tabs-section {
+    /* ...existing code... */
+    overflow: hidden;
+    /* já existe, mantém */
+    position: relative;
+    /* garante contexto para overflow */
+    max-width: 100%;
+    /* impede vazamento lateral */
+}
+
+.chords-container {
+    /* ...existing code... */
+    max-width: 100%;
+    /* impede que ultrapasse o container */
+    overflow-x: auto;
+    /* rolagem horizontal se necessário */
+    white-space: pre;
+    /* mantém alinhamento da tab */
+    box-sizing: border-box;
+    /* garante padding dentro do limite */
 }
 
 #chord-popup {
