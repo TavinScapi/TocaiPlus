@@ -500,6 +500,13 @@ footer {
     }
 }
 
+@media (max-width: 400px) {
+    .chords-container {
+        font-size: 10px;
+        line-height: 1.8;
+    }
+}
+
 #chord-popup {
     background: #fff;
     border: 1px solid #ccc;
