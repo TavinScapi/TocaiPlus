@@ -31,13 +31,15 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js" defer></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js" defer></script>
 
-    <script type="module" src="../js/artista2.js"></script>
+    <script type="module" src="../js/artista.js"></script>
     <script type="module" src="../js/load-components.js"></script>
 </head>
 
 <body>
     <div class="home-section">
-        <button class="back-btn" onclick="window.history.back()">← Voltar</button>
+        <button class="back-btn" id="back-to-artist-btn" onclick="window.history.back()">
+            <i class=" fas fa-arrow-left"></i> Voltar
+        </button>
 
         <header class="artist-header" id="artist-header">
             <!-- Conteúdo será preenchido pelo JavaScript -->
@@ -58,7 +60,7 @@
                 </div>
             </section>
 
-            <section class="biography" id="biography"> 
+            <section class="biography" id="biography">
                 <!-- Conteúdo será preenchido pelo JavaScript -->
             </section>
         </div>

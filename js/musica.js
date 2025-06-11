@@ -29,6 +29,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.share-btn')?.addEventListener('click', () => {
         console.log('Compartilhar música...');
     });
+    
+    document.getElementById('back-to-artist-btn')?.addEventListener('click', () => {
+        const artistKey = localStorage.getItem('selectedArtist');
+        if (artistKey) {
+            window.location.href = `artista.html?artist=${encodeURIComponent(artistKey)}`;
+        } else {
+            window.history.back();
+        }
+    });
 });
 
 // =====================

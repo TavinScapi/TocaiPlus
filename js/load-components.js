@@ -1,8 +1,20 @@
-import { artistsData } from './artista.js';
+let artistsData = {};
 
 document.addEventListener('DOMContentLoaded', function () {
-    // =============== CARREGAMENTO DE COMPONENTES ===============
-    // Carrega a sidebar
+    // Carrega o JSON dos artistas antes de tudo
+    fetch('../data/infoARTISTAS.json')
+        .then(response => {
+            if (!response.ok) throw new Error('JSON de artistas não encontrado');
+            return response.json();
+        })
+        .then(data => {
+            artistsData = data;
+            iniciarApp();
+        })
+        .catch(error => console.error('Erro ao carregar infoARTISTAS.json:', error));
+});
+
+function iniciarApp() {
     fetch('../components/sidebar.html')
         .then(response => {
             if (!response.ok) throw new Error('Sidebar não encontrada');
@@ -179,11 +191,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Função para pesquisar músicas em todos os artistas
     function searchSongs(query) {
         // Normaliza a query: remove acentos e coloca em minúsculas
         const normalize = (str) => {
-            return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+            return str ? str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : "";
         };
 
         query = normalize(query.trim());
@@ -195,16 +206,22 @@ document.addEventListener('DOMContentLoaded', function () {
         for (const artistKey in artistsData) {
             const artist = artistsData[artistKey];
 
-            // Filtra as músicas que correspondem à pesquisa
-            const matchingSongs = artist.songs.filter(song =>
+            // Verifica se o nome do artista corresponde à busca
+            const artistMatch = normalize(artist.name).includes(query);
+
+            // Busca músicas que correspondem à busca
+            const matchingSongs = (artist.popularTracks || []).filter(song =>
                 normalize(song.name).includes(query)
             );
 
-            if (matchingSongs.length > 0) {
+            // Se encontrou músicas ou o nome do artista bate, adiciona ao resultado
+            if (artistMatch || matchingSongs.length > 0) {
                 results.push({
                     artist: artist.name,
                     artistKey: artistKey,
-                    songs: matchingSongs
+                    songs: artistMatch && matchingSongs.length === 0
+                        ? (artist.popularTracks || []) // Se só bateu o artista, mostra todas as músicas
+                        : matchingSongs
                 });
             }
         }
@@ -228,9 +245,29 @@ document.addEventListener('DOMContentLoaded', function () {
         searchResultsContainer.style.maxHeight = '500px';
         searchResultsContainer.style.overflowY = 'auto';
         searchResultsContainer.style.width = '350px';
-        searchResultsContainer.style.padding = '0';  // Removido padding geral para controle individual
-        searchResultsContainer.style.fontFamily = "'Circular', 'Helvetica Neue', sans-serif";  // Fontes do Spotify
+        searchResultsContainer.style.padding = '0';
+        searchResultsContainer.style.fontFamily = "'Circular', 'Helvetica Neue', sans-serif";
         searchResultsContainer.style.border = '1px solid #282828';
+
+        // Estilização do scroll (moderno/dark)
+        searchResultsContainer.style.scrollbarWidth = 'thin'; // Firefox
+        searchResultsContainer.style.scrollbarColor = '#1db954 #181818'; // Firefox
+
+        // Adiciona CSS para Webkit (Chrome, Edge, Safari)
+        const style = document.createElement('style');
+        style.innerHTML = `
+        #search-results-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        #search-results-container::-webkit-scrollbar-thumb {
+            background: #1db954;
+            border-radius: 8px;
+        }
+        #search-results-container::-webkit-scrollbar-track {
+            background: #181818;
+        }
+    `;
+        document.head.appendChild(style);
 
         if (results.length === 0) {
             searchResultsContainer.innerHTML = `
@@ -253,7 +290,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 ">
                     <h4 style="
                         margin: 0 0 8px 0;
-                        color: #1db954;  // Verde Spotify
+                        color: #1db954;
                         font-size: 14px;
                         font-weight: 700;
                         letter-spacing: 0.5px;
@@ -305,7 +342,6 @@ document.addEventListener('DOMContentLoaded', function () {
             searchResultsContainer.innerHTML = html;
         }
 
-
         // Remove o container anterior se existir
         const existingContainer = document.getElementById('search-results-container');
         if (existingContainer) {
@@ -329,4 +365,4 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
-});
+}

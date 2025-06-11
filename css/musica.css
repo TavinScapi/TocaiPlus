@@ -493,4 +493,53 @@ footer {
     .video-section h3 {
         font-size: 1.3rem;
     }
+
+    .chords-container {
+        font-size: 14.6px;
+        line-height: 1.8;
+    }
+}
+
+#chord-popup {
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 8px #0002;
+    padding: 8px;
+
+    border-radius: 8px;
+    color: black;
+}
+
+/* Estilo do botão Voltar no estilo Spotify */
+.back-btn {
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 500px;
+    /* Valor alto para criar o efeito "pill" */
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+    background-color: #282828;
+    transform: scale(1.03);
+}
+
+.back-btn:active {
+    transform: scale(0.98);
+}
+
+/* Ou usando um ícone do Font Awesome (se estiver disponível) */
+.back-btn .fa-arrow-left {
+    font-size: 16px;
 }

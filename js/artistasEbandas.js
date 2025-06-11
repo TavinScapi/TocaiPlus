@@ -5,21 +5,61 @@ let allArtists = [];
 let filteredArtists = [];
 let currentPage = 1;
 const artistsPerPage = 12;
+let infoArtistas = {}; // Novo objeto para armazenar os detalhes
 
 // ===================
 // Carregar Dados JSON
 // ===================
+
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('../data/cardArtistas.json')
+    fetch('../data/infoARTISTAS.json')
         .then(response => response.json())
         .then(data => {
-            allArtists = data.artistas;
+            infoArtistas = data;
+            allArtists = Object.keys(data).map(id => ({
+                id,
+                ...data[id]
+            }));
             filteredArtists = [...allArtists];
             displayArtists(filteredArtists, currentPage);
             setupPagination(filteredArtists);
+            renderGenreDropdown(getAllGenres(allArtists)); // <-- Chama aqui!
         })
         .catch(error => console.error('Erro ao carregar artistas:', error));
 });
+
+// Função para extrair todos os gêneros únicos dos artistas
+function getAllGenres(artists) {
+    const genresSet = new Set();
+    artists.forEach(artist => {
+        if (artist.genres) {
+            artist.genres.split(/[•,]/).forEach(g => {
+                const genre = g.trim().toLowerCase();
+                if (genre) genresSet.add(genre);
+            });
+        }
+    });
+    return Array.from(genresSet).sort();
+}
+
+function renderGenreDropdown(genres) {
+    const dropdown = document.getElementById("dropdown");
+    dropdown.innerHTML = `<input type="text" id="searchGenre" placeholder="Digite o gênero musical..." onkeyup="filterGenres()">`;
+
+    // Gêneros que já estão como botões fixos
+    const fixedGenres = ['rock', 'pop', 'jazz', 'sertanejo', 'mpb'];
+
+    genres
+        .filter(genre => !fixedGenres.includes(genre.toLowerCase()))
+        .forEach(genre => {
+            const item = document.createElement('div');
+            item.className = 'dropdown-item';
+            item.innerText = genre.charAt(0).toUpperCase() + genre.slice(1);
+            item.onclick = () => selectGenre(genre);
+            dropdown.appendChild(item);
+        });
+}
+
 
 // ===================
 // Filtros
@@ -28,7 +68,7 @@ function filterByGenre(selectedGenre) {
     filteredArtists = (selectedGenre === 'todos')
         ? [...allArtists]
         : allArtists.filter(artist =>
-            artist.generos.some(genre => genre.toLowerCase() === selectedGenre.toLowerCase())
+            artist.genres.toLowerCase().includes(selectedGenre.toLowerCase())
         );
 
     currentPage = 1;
@@ -49,9 +89,9 @@ function searchArtists() {
     }
 
     const searchedArtists = filteredArtists.filter(artist =>
-        artist.nome.toLowerCase().includes(searchTerm) ||
-        artist.descricao.toLowerCase().includes(searchTerm) ||
-        artist.generos.some(genre => genre.toLowerCase().includes(searchTerm))
+        artist.name.toLowerCase().includes(searchTerm) ||
+        (artist.biography && artist.biography.toLowerCase().includes(searchTerm)) ||
+        (artist.genres && artist.genres.toLowerCase().includes(searchTerm))
     );
 
     currentPage = 1;
@@ -88,23 +128,24 @@ function displayArtists(artists, page) {
 
     paginatedArtists.forEach(artista => {
         const isFollowed = followed.includes(artista.id);
+
         const card = document.createElement('div');
         card.className = 'card-vinil';
-        card.setAttribute('data-genre', artista.generos.join(' '));
+        card.setAttribute('data-genre', artista.genres);
         card.onclick = () => selectArtist(artista.id);
 
         card.innerHTML = `
             <div class="record_case">
-                <div class="genre-label">${artista.generos.join(' / ')}</div>
+                <div class="genre-label">${artista.genres}</div>
                 <div class="record recorddefault">
                     <div class="front">
-                        <img src="${artista.imagem}" alt="${artista.nome}">
+                        <img src="${artista.capa}" alt="${artista.name}">
                         <div class="cover"></div>
                         <div class="cover-back"></div>
                     </div>
                     <div class="vinyl"></div>
                     <div class="back">
-                        <img src="${artista.imagem}" alt="${artista.nome}">
+                        <img src="${artista.capa}" alt="${artista.name}">
                     </div>
                     <div class="right"></div>
                     <div class="left"></div>
@@ -112,8 +153,8 @@ function displayArtists(artists, page) {
                     <div class="bottom"></div>
                 </div>
             </div>
-            <h3>${artista.nome} ${isFollowed ? '<span class="seguindo-icon" title="Seguindo"><i class="fas fa-check-circle" style="color: #2ecc71;"></i></span>' : ''}</h3>
-            <p>${artista.descricao}</p>
+            <h3>${artista.name} ${isFollowed ? '<span class="seguindo-icon" title="Seguindo"><i class="fas fa-check-circle" style="color: #2ecc71;"></i></span>' : ''}</h3>
+            <p>${artista.biography ? artista.biography.split('.')[0] + '.' : ''}</p>
             <button class="button">Ver Mais</button>
         `;
 
