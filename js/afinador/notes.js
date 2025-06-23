@@ -74,18 +74,19 @@ Notes.prototype.clearActive = function () {
 };
 
 Notes.prototype.update = function (note) {
+  // Remove 'in-tune' de todas as notas antes de adicionar na correta
+  this.$notes.forEach(($n) => $n.classList.remove("in-tune"));
+
   if (note.value in this.$notesMap) {
     this.active(this.$notesMap[note.value]);
     this.$frequency.childNodes[0].textContent = parseFloat(
       note.frequency
     ).toFixed(1);
 
-    // Adiciona/remover classe 'in-tune' conforme a afinação
+    // Adiciona classe 'in-tune' somente se estiver afinada
     const $noteElem = this.$notesMap[note.value];
     if (Math.abs(note.cents) <= 5) {
       $noteElem.classList.add("in-tune");
-    } else {
-      $noteElem.classList.remove("in-tune");
     }
   }
 };
