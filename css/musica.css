@@ -500,59 +500,39 @@ footer {
     }
 }
 
-@media (max-width: 768px) {
-    .chords-container {
-        font-size: 14.6px;
-        line-height: 2;
-        font-weight: 600;
-        color: #fff;
-        text-shadow: 0 1px 2px #000a;
-        font-family: monospace;
-        white-space: pre;
-        overflow-x: auto;
-        background: #181818;
-        border-radius: 8px;
-        max-width: 100%;
-        box-sizing: border-box;
-    }
-}
-
 @media (max-width: 400px) {
     .chords-container {
         font-size: 14.6px;
-        line-height: 2;
-        font-weight: 700;
-        color: #fff;
-        text-shadow: 0 1px 2px #000a;
-        font-family: monospace;
-        white-space: pre;
-        overflow-x: auto;
-        background: #181818;
-        border-radius: 8px;
+        line-height: 1.8;
     }
 }
 
-.tabs-section {
-    /* ...existing code... */
-    overflow: hidden;
-    /* já existe, mantém */
-    position: relative;
-    /* garante contexto para overflow */
-    max-width: 100%;
-    /* impede vazamento lateral */
+/* ...existing code... */
+
+/* Estilo para tablaturas */
+.tab-block,
+pre.tab-block {
+    font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', monospace;
+    font-size: 1rem;
+    white-space: pre-wrap;
+    /* Permite quebra de linha automática */
+    word-break: break-all;
+    /* Quebra palavras longas */
+    overflow-x: auto;
+    background: #181818;
+    border-radius: 6px;
+    padding: 12px 10px;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    color: #fff;
 }
 
-.chords-container {
-    /* ...existing code... */
-    max-width: 100%;
-    /* impede que ultrapasse o container */
-    overflow-x: auto;
-    /* rolagem horizontal se necessário */
-    white-space: pre;
-    /* mantém alinhamento da tab */
-    box-sizing: border-box;
-    /* garante padding dentro do limite */
+/* Opcional: destaca as linhas das cordas */
+.tab-block .string {
+    color: #1db954;
+    font-weight: bold;
 }
+
 
 #chord-popup {
     background: #fff;
