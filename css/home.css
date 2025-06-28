@@ -757,19 +757,23 @@ body {
     }
 }
 
+/* Estúdio - Título estilizado */
+.estudio-section h2 {
+    font-family: 'Rubik', 'Pirata One', 'Luckiest Guy', cursive, sans-serif;
+    font-size: 2.3rem;
+    color: #fff;
+    letter-spacing: 2px;
+    margin-bottom: 38px;
+    text-shadow: 0 2px 12px #0006;
+    background: linear-gradient(90deg, #fff 60%, #bbb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
 
-
-
-
-
-
-
-
-
-/* Estúdio Cards */
-
+/* Cards do Estúdio - preto, branco e cinza */
 .estudio-section {
-    background-color: #2d2d2d;
+    background: #2d2d2d;
     text-align: center;
     padding: 40px 20px;
 }
@@ -783,22 +787,23 @@ body {
 }
 
 .estudio-card {
-    background: linear-gradient(135deg, #e0e3ea 60%, #b6b9c2 100%);
-    border-radius: 22px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.13);
-    padding: 36px 22px 28px;
+    background: linear-gradient(135deg, #fff 70%, #e0e0e0 100%);
+    border-radius: 26px;
+    box-shadow: 0 6px 28px 0 #0002, 0 2px 24px 0 #0001;
+    padding: 40px 26px 32px;
     display: flex;
     flex-direction: column;
     align-items: center;
     transition:
-        transform 0.25s cubic-bezier(.4, 2, .6, 1),
-        box-shadow 0.25s cubic-bezier(.4, 2, .6, 1),
-        border 0.2s;
+        transform 0.22s cubic-bezier(.4,2,.6,1),
+        box-shadow 0.22s cubic-bezier(.4,2,.6,1),
+        border 0.18s;
     position: relative;
     overflow: hidden;
     text-decoration: none;
     cursor: pointer;
     border: 0 solid transparent;
+    min-height: 320px;
 }
 
 .estudio-card::before {
@@ -806,8 +811,9 @@ body {
     position: absolute;
     top: -60px;
     right: -60px;
-    width: 120px;
-    height: 120px;
+    width: 130px;
+    height: 130px;
+    background: radial-gradient(circle, #bbb8 0%, transparent 80%);
     z-index: 0;
     pointer-events: none;
     transition: opacity 0.3s;
@@ -816,9 +822,9 @@ body {
 
 .estudio-card:hover,
 .estudio-card:focus {
-    transform: translateY(-12px) scale(1.04) rotate(-1deg);
-    box-shadow: 0 8px 32px #ffb30055, 0 2px 24px rgba(0, 0, 0, 0.18);
-    border: 2px solid #ffb300;
+    transform: translateY(-10px) scale(1.035) rotate(-1deg);
+    box-shadow: 0 12px 36px #0005, 0 2px 24px #2224;
+    border: 2.5px solid #232323;
     outline: none;
 }
 
@@ -827,69 +833,73 @@ body {
 }
 
 .estudio-icon {
-    font-size: 2.8rem;
-    color: #ffb300;
-    margin-bottom: 20px;
-    filter: drop-shadow(0 0 8px #ffb30088);
+    font-size: 3.2rem;
+    color: #232323;
+    margin-bottom: 22px;
+    filter: drop-shadow(0 0 12px #bbb8);
     transition: filter 0.2s;
     z-index: 1;
 }
 
 .estudio-card:hover .estudio-icon {
-    filter: drop-shadow(0 0 16px #ffb300cc) brightness(1.2);
+    filter: drop-shadow(0 0 22px #232323cc) brightness(1.2);
 }
 
 .estudio-card h3 {
-    font-size: 1.25rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-    margin-bottom: 12px;
+    font-size: 1.35rem;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    margin-bottom: 14px;
     z-index: 1;
-    color: #181818;
+    color: #111;
+    text-shadow: 0 2px 8px #bbb2;
 }
 
 .estudio-card p {
-    font-size: 1.05rem;
+    font-size: 1.08rem;
     color: #232323;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
     text-align: center;
     z-index: 1;
 }
 
-.estudio-card .button,
 .estudio-link {
-    background: linear-gradient(90deg, #ffb300 60%, #ff9800 100%);
+    margin-top: 20px;
+    background: linear-gradient(90deg, #232323 60%, #444 100%);
     color: #fff;
-    border-radius: 8px;
-    padding: 10px 22px;
-    font-size: 1.05rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    box-shadow: 0 2px 8px #ffb30033;
+    border-radius: 10px;
+    padding: 12px 28px;
+    font-size: 1.08rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    box-shadow: 0 2px 12px #0002;
     transition: background 0.2s, box-shadow 0.2s, color 0.2s;
     display: inline-block;
     text-decoration: none;
     z-index: 1;
+    text-shadow: 0 1px 4px #0005;
 }
 
-.estudio-card:hover .button,
 .estudio-card:hover .estudio-link {
-    background: #181818;
-    color: #ffb300;
-    box-shadow: 0 4px 16px #ffb30055;
-}
-
-.estudio-link {
-    margin-top: 18px;
+    background: #fff;
+    color: #232323;
+    box-shadow: 0 4px 18px #23232333;
+    text-decoration: none;
 }
 
 @media (max-width: 600px) {
+    .estudio-section h2 {
+        font-size: 1.5rem;
+    }
     .estudio-cards {
         grid-template-columns: 1fr;
         gap: 1.2rem;
     }
-
     .estudio-card {
         padding: 24px 10px 18px;
+        min-height: 220px;
+    }
+    .estudio-icon {
+        font-size: 2.2rem;
     }
 }
