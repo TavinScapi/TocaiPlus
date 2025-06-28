@@ -221,3 +221,51 @@ if (window.location.pathname.includes("artista.html")) {
         });
     }
 }
+
+// ...existing code...
+
+document.addEventListener('DOMContentLoaded', async function () {
+    const listaArtistas = document.querySelector('.lista-artistas');
+    if (!listaArtistas) return;
+
+    // Carrega o JSON dos artistas
+    const response = await fetch('../data/infoARTISTAS.json');
+    const data = await response.json();
+
+    // Pega os 4 últimos artistas (ordem de inserção no objeto)
+    const allArtists = Object.entries(data).map(([id, artist]) => ({ id, ...artist }));
+    const lastFour = allArtists.slice(-4);
+
+    // Limpa o container
+    listaArtistas.innerHTML = '';
+
+    lastFour.forEach(artist => {
+        listaArtistas.innerHTML += `
+            <div class="card-vinil" data-genre="${artist.genres ? artist.genres.toLowerCase().replace(/ • /g, ' ') : ''}" onclick="selectArtist('${artist.id}')">
+                <div class="record_case">
+                    <div class="genre-label">${artist.genres || ''}</div>
+                    <div class="record recorddefault">
+                        <div class="front">
+                            <img src="${artist.capa || ''}" alt="${artist.name || ''}">
+                            <div class="cover"></div>
+                            <div class="cover-back"></div>
+                        </div>
+                        <div class="vinyl"></div>
+                        <div class="back">
+                            <img src="${artist.capa || ''}" alt="${artist.name || ''}">
+                        </div>
+                        <div class="right"></div>
+                        <div class="left"></div>
+                        <div class="top"></div>
+                        <div class="bottom"></div>
+                    </div>
+                </div>
+                <h3>${artist.name || ''}</h3>
+                <p>${artist.biography ? artist.biography.split('.')[0] + '.' : ''}</p>
+                <button class="button">Ver Mais</button>
+            </div>
+        `;
+    });
+});
+
+// ...existing code...
